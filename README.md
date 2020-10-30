@@ -83,10 +83,10 @@ https://yadi.sk/d/uSVUFP_qllOD9w
 
 2. Исполняемые и дополнительные файлы храняться на диске в папке `C:\ProgramData\Softium`
 
-- C:\ProgramData\Softium\Chrome.reg - назначает Chrome Браузером по умолчанию
-- C:\ProgramData\Softium\Wallpaper.jpg - обои рабочего стола
-- C:\ProgramData\Softium\PinnedTaskbar.reg - настройки панели быстрого запуска
-- C:\ProgramData\Softium\lnk_create.js - вспомогательный  скрипт для создания ярлыков
+- `C:\ProgramData\Softium\Chrome.reg` - назначает Chrome Браузером по умолчанию
+- `C:\ProgramData\Softium\Wallpaper.jpg` - обои рабочего стола
+- `C:\ProgramData\Softium\PinnedTaskbar.reg` - настройки панели быстрого запуска
+- `C:\ProgramData\Softium\lnk_create.js` - вспомогательный  скрипт для создания ярлыков
 - 
 
 ## Полезные ссылки
