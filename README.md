@@ -81,13 +81,20 @@ https://yadi.sk/d/uSVUFP_qllOD9w
 
 1. Во время работы скрипт создаёт пользователя `Softium` с паролем `321` и активирует учётную запись встроенного администратора, задав ему пароль `AdminPass`
 
-2. Исполняемые и дополнительные файлы храняться на диске в папке `C:\ProgramData\Softium`
+2. Исполняемые и дополнительные файлы создаются в каталоге `C:\ProgramData\Softium`
 
+- `C:\ProgramData\Softium\Softium.exe` - программа Softium
 - `C:\ProgramData\Softium\Chrome.reg` - назначает Chrome Браузером по умолчанию
 - `C:\ProgramData\Softium\Wallpaper.jpg` - обои рабочего стола
 - `C:\ProgramData\Softium\PinnedTaskbar.reg` - настройки панели быстрого запуска
 - `C:\ProgramData\Softium\lnk_create.js` - вспомогательный  скрипт для создания ярлыков
-- 
+- `C:\ProgramData\Softium\file_delete.js`  - вспомогательный  скрипт для удаления ярлыков и файлов
+- 'C:\ProgramData\Softium\computer.lnk' - ссылка на "Компьютер"
+- 'C:\ProgramData\Softium\step 3 - user - CleanUp.bat' - скрипт очистки профиля пользователя
+
+3. Скрипты автоматически выполняемые при входе пользователя расположены в "common startup", т.е. в каталоге `%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\`
+
+4. Ярлыки на запуск учебных программ располежены в "common desktop" для того, чтобы дети не могли их удалить или переименовать ради забавы.
 
 ## Полезные ссылки
 
