@@ -89,8 +89,8 @@ https://yadi.sk/d/uSVUFP_qllOD9w
 - `C:\ProgramData\Softium\PinnedTaskbar.reg` - настройки панели быстрого запуска
 - `C:\ProgramData\Softium\lnk_create.js` - вспомогательный  скрипт для создания ярлыков
 - `C:\ProgramData\Softium\file_delete.js`  - вспомогательный  скрипт для удаления ярлыков и файлов
-- 'C:\ProgramData\Softium\computer.lnk' - ссылка на "Компьютер"
-- 'C:\ProgramData\Softium\step 3 - user - CleanUp.bat' - скрипт очистки профиля пользователя
+- `C:\ProgramData\Softium\computer.lnk` - ссылка на "Компьютер"
+- `C:\ProgramData\Softium\step 3 - user - CleanUp.bat` - скрипт очистки профиля пользователя
 
 3. Скрипты автоматически выполняемые при входе пользователя расположены в "common startup", т.е. в каталоге `%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\`
 
