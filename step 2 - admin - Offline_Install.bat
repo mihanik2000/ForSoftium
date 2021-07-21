@@ -67,7 +67,8 @@ set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.7.9.Installer.x64.exe"
 
 set PathToconstruct="%ScriptPath%Distr\noarch\construct2-r279-setup.exe"
 
-set PathToPlayer="%ScriptPath%Distr\noarch\SWF.max-2.2.exe"
+set PathToPlayer="%ScriptPath%Distr\noarch\SWF.max-2.3.exe"
+set PathToFlashOCX="%ScriptPath%Distr\noarch\Flash.ocx"
 
 set PathToAnimate="%ScriptPath%Distr\noarch\animate.swf"
 set PathToAnimateIco="%ScriptPath%Distr\noarch\animate.ico"
@@ -85,7 +86,7 @@ Rem активируем встроенного Администратора
 net user Администратор "AdminPass" /active:yes /expires:never
 
 Rem Создадим пользователя Softium с паролем 321
-net user Softium 321 /add /expires:never
+net user Softium "321" /add /expires:never
 
 Rem ****************************************************************************************
 Rem Настроим некоторые необходимые параметры 
@@ -280,6 +281,11 @@ ECHO .
 ECHO Install SWF_Player...
 ECHO .
 	start "Title" /wait %PathToPlayer% /silent
+	If exist "%SystemDrive%\Program Files (x86)" (
+			copy /y %PathToFlashOCX% "C:\Program Files (x86)\SWF.max\Media\Binary\Flash.ocx"
+	 ) else (
+			copy /y %PathToFlashOCX% "C:\Program Files\SWF.max\Media\Binary\Flash.ocx"
+	)
 
 ECHO .
 ECHO Install Animate...
@@ -390,11 +396,33 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Ti
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableScanOnRealtimeEnable /t REG_DWORD /d 0 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableIOAVProtection /t REG_DWORD /d 0 /f
 
-Rem Включим службу обновления системы
-sc config wuauserv start= delayed-auto
+rem Отключим автоматическое обновление системы
+sc config wuauserv start= disabled
 
 Rem Отключаем автоматическое обновление
 reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
+
+rem ****************************************************************************************
+rem Удаляем Edge Chromium
+rem ****************************************************************************************
+
+ If exist "%programfiles(x86)%" (
+		cd "C:\Program Files (x86)\Microsoft\Edge\Application"
+	) else (
+		cd "C:\Program Files\Microsoft\Edge\Application"
+	)
+
+dir /b | findstr [0-9] > ver.txt
+SET /p myvar= < ver.txt
+cd %myvar%\Installer
+setup.exe -uninstall -system-level -verbose-logging -force-uninstall
+
+ping -n 10 127.0.0.1 > nul
+
+rem ****************************************************************************************
+rem Запрещаем обновляться до Edge Chromium
+rem ****************************************************************************************
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\EdgeUpdate" /v DoNotUpdateToEdgeWithChromium /t REG_DWORD /d 1 /f
 
 Rem Установим имя компьютера
 set /p MyHostname="Укажите имя компьютера: "

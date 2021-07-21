@@ -1,0 +1,585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<startdlg>
+  <template filename="[empty]">
+    <name>Новый пустой проект</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект с настройками по умолчанию.</description>
+  </template>
+  <template filename="RetroStyleTemplate.capx">
+    <name>Новый проект в стиле ретро</name>
+    <image>0</image>
+    <description>Создание платформы нейтрального проекта с настройками и объектов, подходящих для стиля ретро-игр</description>
+  </template>
+  <template filename="StandardLandscape4-3.capx">
+    <name>Новый пустой SD пейзаж 4: 3 проекта</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект со стандартным определением 4: 3 пейзаж экран.</description>
+  </template>
+  <template filename="StandardPortrait4-3.capx">
+    <name>Новый портрет пустой SD 4: 3 проекта</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект со стандартным определением 4: 3 альбомной ориентации экрана.</description>
+  </template>
+  <template filename="StandardLandscape16-9.capx">
+    <name>Новый пустой SD пейзаж 16: 9 Проект</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект со стандартным определением формата 16: 9 экран пейзаж.</description>
+  </template>
+  <template filename="StandardPortrait16-9.capx">
+    <name>Новый портрет пустой SD 16: 9 проекта</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект со стандартным определением формата 16: 9 альбомной ориентации экрана.</description>
+  </template>
+  <template filename="Landscape720p.capx">
+    <name>Новый проект ландшафта 720p HD пустой</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект с разрешением 720p высокой четкости (16: 9) пейзаж экрана.</description>
+  </template>
+  <template filename="Portrait720p.capx">
+    <name>Новый проект портрет 720p пустой HD</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект с разрешением 720p высокой четкости (16: 9) альбомной ориентации экрана.</description>
+  </template>
+  <template filename="Landscape1080p.capx">
+    <name>Новый проект ландшафта 1080p HD пустой</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект с 1080p высокой четкости (16: 9) пейзаж экрана.</description>
+  </template>
+  <template filename="Portrait1080p.capx">
+    <name>Новый проект портрет 1080p HD пустой</name>
+    <image>0</image>
+    <description>Создайте новый пустой проект с 1080p высокой четкости (16: 9) альбомной ориентации экрана.</description>
+  </template>
+  <template filename="Template-Platformer.capx">
+    <name>Шаблон: платформер</name>
+    <image>7</image>
+    <description>Проект с базовой настройки игровой платформы подготовлен.</description>
+  </template>
+  <template filename="Template-TopDownShooter.capx">
+    <name>Шаблон: сверху вниз шутер</name>
+    <image>7</image>
+    <description>Проект с базовой настройки сверху вниз шутер подготовлен.</description>
+  </template>
+  <template filename="Template-VerticalShooter.capx">
+    <name>Шаблон: Вертикальный космический шутер</name>
+    <image>7</image>
+    <description>Проект с основной вертикальной космический шутер установки игры подготовлены.</description>
+  </template>
+  <template filename="Template-DrivingGame.capx">
+    <name>Шаблон: гоночная игра</name>
+    <image>7</image>
+    <description>Проект с базовой настройки игры вождения подготовлены.</description>
+  </template>
+  <template filename="Template-TurretDefense.capx">
+    <name>Шаблон: револьверный обороны</name>
+    <image>7</image>
+    <description>Проект с основной башни обороны установки игры подготовлены.</description>
+  </template>
+  <template filename="Template-InfiniteJumping.capx">
+    <name>Шаблон: Бесконечные прыжки</name>
+    <image>7</image>
+    <description>Проект с основной бесконечной прыгающей установки платформер подготовлен, с подвижной опорой управления.</description>
+  </template>
+  <template filename="Template-Autorunner.capx">
+    <name>Шаблон: Авто-бегун</name>
+    <image>7</image>
+    <description>Проект с основным боком всегда движущиеся установки платформер подготовлены, с подвижной опорой управления.</description>
+  </template>
+  <template filename="Template-FlappingBird.capx">
+    <name>Шаблон: Хлопающие птица</name>
+    <image>7</image>
+    <description>Вариация на летающей шаблоне, где вы управляете птицу, которая должна летать через зазоры.</description>
+  </template>
+  <template filename="Template-Flying.capx">
+    <name>Шаблон: Полет вдоль</name>
+    <image>7</image>
+    <description>Классический вертолет / увернуться от препятствия летающих шаблон игра, с поддержкой мобильного управления.</description>
+  </template>
+  <template filename="Template-PhysicsPuzzle.capx">
+    <name>Шаблон: Физика головоломка</name>
+    <image>7</image>
+    <description>Проект с основной основанная на физике игра-головоломка подготовлена, с сенсорным поддержки.</description>
+  </template>
+  <template filename="Template-PhysicsCatapult.capx">
+    <name>Шаблон: Физика катапульта</name>
+    <image>7</image>
+    <description>Проект с базовой физики на основе игры катапульты подготовлен, с сенсорной поддержки.</description>
+  </template>
+  <template filename="Template-RTS.capx">
+    <name>Шаблон: Стратегия в реальном времени (RTS)</name>
+    <image>7</image>
+    <description>Расширенный шаблон, показывающий, как создать игру RTS стиле с пользователем Заданная единиц, цель и пожар на врагов.</description>
+  </template>
+  <demo filename="Ghost Shooter (tutorial version).capx">
+    <name>Призрак Шутер (учебник версия)</name>
+    <description>Руководство: учебник "Полное собрание" для начинающих, с некоторыми дополнениями.</description>
+  </demo>
+  <demo filename="Ghost Shooter ('Rain demo' version).capx">
+    <name>Призрак Шутер ("Rain демо" версия)</name>
+    <description>Переработанная версия Призрака Шутер учебник, что делает интенсивное использование визуальных эффектов.</description>
+  </demo>
+  <demo filename="Space Blaster game.capx">
+    <name>Космический бластер</name>
+    <description>Пример пространство стрелять-игра, которая также использует сенсорным управлением для работы на мобильных устройствах.</description>
+  </demo>
+  <example filename="8 direction 1 (simple movement).capx">
+    <name>8 поведении направлением (часть 1)</name>
+    <level>0</level>
+    <description>Тривиальный пример движения 8 направлении.</description>
+  </example>
+  <example filename="8 direction 2 (no rotate).capx">
+    <name>8 поведении направление (часть 2)</name>
+    <level>0</level>
+    <description>Остановите проигрыватель вращающийся путем изменения настройки поведении.</description>
+  </example>
+  <example filename="8 direction 3 (look at mouse).capx">
+    <name>8 поведении направление (часть 3)</name>
+    <level>0</level>
+    <description>Добавляет событие, чтобы заставить игрока смотреть на мышь.</description>
+  </example>
+  <example filename="8 direction 4 (bound to layout).capx">
+    <name>8 поведении направление (часть 4)</name>
+    <level>0</level>
+    <description>Добавляет другое поведение, чтобы предотвратить игрок, покидающий макет.</description>
+  </example>
+  <example filename="8 direction 5 (shooting bullets).capx">
+    <name>8 поведении направлении (часть 5)</name>
+    <level>0</level>
+    <description>Теперь у игрока стреляет пулю, когда игрок нажимает кнопку мыши.</description>
+  </example>
+  <example filename="8 direction 6 (spawn position).capx">
+    <name>8 поведении направление (часть 6)</name>
+    <level>0</level>
+    <description>Используя точку изображения, чтобы изменить местоположение пули икры.</description>
+  </example>
+  <example filename="9-patch demo.capx">
+    <name>Объект 9-патч</name>
+    <level>1</level>
+    <description>Показывает, как использовать объект 9-патч, чтобы рисовать изображения, которые только растянуть их среднюю часть.</description>
+  </example>
+  <example filename="Ambient Light.capx">
+    <name>Окружающий свет</name>
+    <level>0</level>
+    <description>Показывает, как использовать объект пользователя медиа, чтобы получить рассеянный свет чтения в лк, если эта функция поддерживается.</description>
+  </example>
+  <example filename="Audio analyser.capx">
+    <name>Аудио анализатор</name>
+    <level>2</level>
+    <description>Показывает, как для отображения живой график частотной информации от воспроизведения качественного звука поддерживается.</description>
+  </example>
+  <example filename="Audio effects.capx">
+    <name>Звуковые эффекты</name>
+    <level>1</level>
+    <description>Звуковой эффект накладка, показывающий различные эффекты, которые могут быть добавлены, если Расширенный Возможности Аудио Поддерживается.</description>
+  </example>
+  <example filename="Blend modes.capx">
+    <name>Режим смешивания</name>
+    <level>0</level>
+    <description>Показывает, что каждая настройка режима наложения в объекте спрайт делает.</description>
+  </example>
+  <example filename="Bouncing balls.capx">
+    <name>Прыгающие шарики</name>
+    <level>0</level>
+    <description>Используйте поведение пули, чтобы создать прыгающий движение шара.</description>
+  </example>
+  <example filename="Bouncing bullets.capx">
+    <name>Прыгающие пули</name>
+    <level>0</level>
+    <description>Показывает, как пули могут отскакивать от твердых веществ.</description>
+  </example>
+  <example filename="Canvas recording.capx">
+    <name>Запись холста</name>
+    <level>0</level>
+    <description>Демонстрирует, как использовать объект пользователя носителя для записи видео холста (где поддерживается).</description>
+  </example>
+  <example filename="Car behavior.capx">
+    <name>Поведении автомобиля</name>
+    <level>0</level>
+    <description>Простой демо движения автомобиля.</description>
+  </example>
+  <example filename="Custom movement (asteroids).capx">
+    <name>Пользовательские движения (астероиды)</name>
+    <level>1</level>
+    <description>Движение типа астероиды с помощью поведения пользовательского движения.</description>
+  </example>
+  <example filename="Detect input method.capx">
+    <name>Определение метода ввода</name>
+    <level>1</level>
+    <description>Как создать титульный экран, который автоматически определяет, имеются ли клавиатура / мышь или сенсорным управлением, и переключатели управления соответствующим образом.</description>
+  </example>
+  <example filename="Falling blocks.capx">
+    <name>Падающие блоки</name>
+    <level>2</level>
+    <description>Усовершенствованный пример использования рекурсивных функций, чтобы определить, какие блоки соединены с землей, и позволяя тем, которые не падать вниз.</description>
+  </example>
+  <example filename="Families.capx">
+    <name>Семьи</name>
+    <level>1</level>
+    <description>Простой пример того, как семьи могут быть использованы, чтобы избежать повторения событий.</description>
+  </example>
+  <example filename="Fullscreen - scaling to window size.capx">
+    <name>Полное масштабирование экрана</name>
+    <level>1</level>
+    <description>Демонстрирует, как использовать полноэкранный режим для заполнения окна браузера.</description>
+  </example>
+  <example filename="Gamepad control.capx">
+    <name>Управление Геймпадам</name>
+    <level>0</level>
+    <description>Простая демо о том, как использовать плагин Геймпад в качестве альтернативного входа для управления игрой.</description>
+  </example>
+  <example filename="Geolocation.capx">
+    <name>Геолокация</name>
+    <level>1</level>
+    <description>Простой пример того, как использовать плагин геолокация и показать полученную позицию на Google Maps.</description>
+  </example>
+  <example filename="Instance Variables.capx">
+    <name>Переменные экземпляра</name>
+    <level>0</level>
+    <description>Показывает, как каждый экземпляр объекта может хранить свои собственные ценности, такие, как для здоровья.</description>
+  </example>
+  <example filename="Lighting.capx">
+    <name>Осветительные приборы</name>
+    <level>1</level>
+    <description>Используйте слои и режимы наложения для создания эффекта освещения.</description>
+  </example>
+  <example filename="Line-of-sight.capx">
+    <name>Поле зрения</name>
+    <level>0</level>
+    <description>Используя поведении линии прямой видимости (LOS), чтобы определить, есть ли объекты могут "видеть" друг друга.</description>
+  </example>
+  <example filename="Microphone input.capx">
+    <name>Вход микрофона</name>
+    <level>2</level>
+    <description>Пример использования объекта пользователя медиа, чтобы получить живой аудио вход к аудиообъект через микрофон.</description>
+  </example>
+  <example filename="Move to mouse.capx">
+    <name>Переместить мышь</name>
+    <level>0</level>
+    <description>Нажмите, чтобы переместить объект в положение.</description>
+  </example>
+  <example filename="Multiplayer chat.capx">
+    <name>Мультиплеер - чат</name>
+    <level>1</level>
+    <description>Пример чата с помощью плагина мультиплеер. Это наиболее простой демонстрацией того, как использовать функции объекта Мультиплеер.</description>
+  </example>
+  <example filename="Multiplayer game.capx">
+    <name>Мультиплеер - в реальном времени игры</name>
+    <level>2</level>
+    <description>Шутер призрак адаптированы к реальному времени многопользовательской стрелять-эм-до. Подробнее смотрите в учебник для получения дополнительной информации.</description>
+  </example>
+  <example filename="Multiplayer pong.capx">
+    <name>Мультиплеер - понг</name>
+    <level>2</level>
+    <description>Очень простой многопользовательской игры, с двумя игроками управления веслом каждый.</description>
+  </example>
+  <example filename="Particle effect demo.capx">
+    <name>Эффект частиц</name>
+    <level>0</level>
+    <description>Примером эффекта частиц полноэкранным.</description>
+  </example>
+  <example filename="Particle single fountain.capx">
+    <name>Частица одиночный фонтан</name>
+    <level>0</level>
+    <description>Фонтан эффект, созданный с объектом Частицы.</description>
+  </example>
+  <example filename="Particle double fountain.capx">
+    <name>Частица двойной фонтан</name>
+    <level>0</level>
+    <description>Два фонтанов, созданных с частицами объекта.</description>
+  </example>
+  <example filename="Particle explosions.capx">
+    <name>Взрывы частиц</name>
+    <level>0</level>
+    <description>Используйте объекты частиц один выстрел, чтобы создать эффект взрыва.</description>
+  </example>
+  <example filename="Particle fire.capx">
+    <name>Огонь частиц</name>
+    <level>0</level>
+    <description>Использование частиц объекта для создания эффекта огня.</description>
+  </example>
+  <example filename="Particle thruster.capx">
+    <name>Подруливающее частицы</name>
+    <level>1</level>
+    <description>Использование частиц объекта для создания контролируемого космического корабля подруливающим эффектом.</description>
+  </example>
+  <example filename="Pathfinding.capx">
+    <name>Поиск пути демо</name>
+    <level>2</level>
+    <description>Пример того, как поведение Поиск пути может вернуться путь вокруг препятствий и перемещения объекта вдоль него.</description>
+  </example>
+  <example filename="Pathfinding - path cost.capx">
+    <name>Стоимость Поиск пути дорожка</name>
+    <level>2</level>
+    <description>Показывает, как использование объектов для повышения стоимости пути может сделать поведение принять объезды. Полезно для моделирования различных типов ландшафта.</description>
+  </example>
+  <example filename="Persistent layouts.capx">
+    <name>Стойкие макеты</name>
+    <level>1</level>
+    <description>Показывает, как использовать Персист поведении, чтобы сделать макеты, которые помнят свое состояние, когда вы вернетесь к ним позже.</description>
+  </example>
+  <example filename="Physics - basics.capx">
+    <name>Основы физики</name>
+    <level>0</level>
+    <description>Простая демо, как работает поведение физики.</description>
+  </example>
+  <example filename="Physics - force point.capx">
+    <name>Сосредоточенная сила физики</name>
+    <level>1</level>
+    <description>Показывает, как движение влияет изменение точки сила приложена с.</description>
+  </example>
+  <example filename="Physics - distance joint.capx">
+    <name>Расстояние Физика сустава</name>
+    <level>1</level>
+    <description>Подключение двух объектов физики с расстоянием сустава.</description>
+  </example>
+  <example filename="Physics - revolute joint.capx">
+    <name>Физика Вращательное сочленение</name>
+    <level>1</level>
+    <description>Шарнир вместе двух объектов физики с Вращательное сочленение.</description>
+  </example>
+  <example filename="Physics - vehicle.capx">
+    <name>Физика автомобиля</name>
+    <level>1</level>
+    <description>Показывает, как сделать хитрые, как этот автомобиль с помощью нескольких суставов физики.</description>
+  </example>
+  <example filename="Physics - ragdoll.capx">
+    <name>Физика рэгдолл</name>
+    <level>2</level>
+    <description>Создать эффект рэгдолл с помощью ряда физики суставов.</description>
+  </example>
+  <example filename="Physics - rolling platformer.capx">
+    <name>Физика прокатки платформер</name>
+    <level>2</level>
+    <description>Воссоздание движение платформы в стиле с использованием прокатного объекта и поведение физики.</description>
+  </example>
+  <example filename="Pick Nearest.capx">
+    <name>Выберите ближайший</name>
+    <level>0</level>
+    <description>Показывает, как выделить объект, ближайший к мыши с помощью подборщик ближайшего условия.</description>
+  </example>
+  <example filename="Pin behavior.capx">
+    <name>Поведении Pin</name>
+    <level>0</level>
+    <description>Демонстрирует поведение Pin которое может быть использован для подключения объектов.</description>
+  </example>
+  <example filename="Pin chain style.capx">
+    <name>В стиле Pin цепи</name>
+    <level>2</level>
+    <description>Создать жесткую цепочку объектов закрепив вместе линию спрайтов.</description>
+  </example>
+  <example filename="Pin rope style.capx">
+    <name>Pin в стиле веревка</name>
+    <level>2</level>
+    <description>Создайте свободную "веревку" объектов закрепив вместе линию спрайтов.</description>
+  </example>
+  <example filename="Platform 1 (simple movement).capx">
+    <name>Поведении платформы (часть 1)</name>
+    <level>0</level>
+    <description>Простая демо поведения движения платформы.</description>
+  </example>
+  <example filename="Platform 2 (scrolling).capx">
+    <name>Поведении платформы (часть 2)</name>
+    <level>0</level>
+    <description>Добавить прокрутку к предыдущему примеру.</description>
+  </example>
+  <example filename="Platform 3 (UI).capx">
+    <name>Поведении платформы (часть 3)</name>
+    <level>0</level>
+    <description>Использование нулевого параллакса слоев для отображения объектов на фиксированном месте на экране.</description>
+  </example>
+  <example filename="Platform 4 (custom controls).capx">
+    <name>Поведении платформы (часть 4)</name>
+    <level>0</level>
+    <description>Как изменить, какие кнопки используются для управления поведении.</description>
+  </example>
+  <example filename="Platform 5 (fullscreen).capx">
+    <name>Поведении платформы (часть 5)</name>
+    <level>0</level>
+    <description>В предыдущем примере, но теперь показывается в полном окне браузера.</description>
+  </example>
+  <example filename="Platform 6 (slopes and moving platforms).capx">
+    <name>Поведении платформы (часть 6)</name>
+    <level>0</level>
+    <description>Демонстрирует поведение платформы может обрабатывать склоны и движущихся платформ.</description>
+  </example>
+  <example filename="Platform 7 (parallax).capx">
+    <name>Поведении платформы (часть 7)</name>
+    <level>0</level>
+    <description>Как использовать слои для создания эффекта параллакса прокруткой.</description>
+  </example>
+  <example filename="Platform 8 (shake).capx">
+    <name>Поведении платформы (часть 8)</name>
+    <level>0</level>
+    <description>Как встряхнуть экран с поведением выберите.</description>
+  </example>
+  <example filename="Platform 9 (jump-thru).capx">
+    <name>Поведении платформы (часть 9)</name>
+    <level>0</level>
+    <description>Демонстрирует, как игрок может перейти к объектам из-под с "перепрыжка через" поведении.</description>
+  </example>
+  <example filename="Positioned audio.capx">
+    <name>Позиционируется аудио</name>
+    <level>1</level>
+    <description>Пример макета с несколькими источниками звука расположены в нем, где звук панорамирование и звука регулируется в зависимости от местоположения.</description>
+  </example>
+  <example filename="Rotating platformer.capx">
+    <name>Вращающийся платформер</name>
+    <level>1</level>
+    <description>Использование вращающихся слоев и изменение угла тяжести, чтобы сделать игровой платформы, которая спиралей по кругу.</description>
+  </example>
+  <example filename="Savegames.capx">
+    <name>Сохранить игры</name>
+    <level>1</level>
+    <description>Призрак Шутер учебник изменен, чтобы поддержать полный состояние сохранения игр с помощью объекта System 'Сохранить' и 'Load' действия.</description>
+  </example>
+  <example filename="Sine behavior - types.capx">
+    <name>Синус типа поведении</name>
+    <level>0</level>
+    <description>Демонстрирует каждого типа Синус движения поведение обеспечивает.</description>
+  </example>
+  <example filename="Shadows - colors.capx">
+    <name>Тени - цвета</name>
+    <level>1</level>
+    <description>Используя три фары с непрозрачностью и разных цветов теней для век, чтобы создать красочный множественный световой эффект.</description>
+  </example>
+  <example filename="Shadows - height.capx">
+    <name>Тени - высота света</name>
+    <level>0</level>
+    <description>Примером эффекта тени в реальном времени с помощью объекта Тень Легкая и поведение Тень заклинателя.</description>
+  </example>
+  <example filename="Shadows - penumbra.capx">
+    <name>Тени - мягкие полутени</name>
+    <level>0</level>
+    <description>Еще одна тень пример, который использует легкий радиус, чтобы бросить размытых тени полутени в режиме WebGL.</description>
+  </example>
+  <example filename="Sine behavior - grass.capx">
+    <name>Синус поведении эффект травы</name>
+    <level>0</level>
+    <description>Простое использование Синус поведении для развевающиеся эффекта травы.</description>
+  </example>
+  <example filename="Speech recognition.capx">
+    <name>Распознавание речи</name>
+    <level>1</level>
+    <description>Как использовать объект пользователя медиа распознавать слова, произнесенные пользователем, чтобы микрофон.</description>
+  </example>
+  <example filename="Speech synthesis.capx">
+    <name>Синтез речи</name>
+    <level>1</level>
+    <description>Как использовать объект пользовательского медиа считывать текст (также известный как преобразование текста в речь или TTS).</description>
+  </example>
+  <example filename="Taking screenshots.capx">
+    <name>Принимая скриншоты</name>
+    <level>1</level>
+    <description>Как использовать холст снимки и объект браузера, чтобы делать скриншоты и загружать их в виде файлов изображений.</description>
+  </example>
+  <example filename="The 'Wait' action.capx">
+    <name>Действие Подождите</name>
+    <level>0</level>
+    <description>Простой пример того, как использовать действие системы ждать, чтобы планировать действия.</description>
+  </example>
+  <example filename="Tilemap.capx">
+    <name>Tilemaps</name>
+    <level>0</level>
+    <description>Простой пример того, как плитки на основе игры могут быть более легко разработаны с использованием объекта Tilemap.</description>
+  </example>
+  <example filename="Touch - panning.capx">
+    <name>Touch - панорамирование</name>
+    <level>0</level>
+    <description>Как перемещаться по раскладку с помощью сенсорного ввода для панорамирования вида.</description>
+  </example>
+  <example filename="Touch - zooming.capx">
+    <name>Touch - масштабирование</name>
+    <level>1</level>
+    <description>Как и прокрутки и масштабирования макета на основе одиночных и двойных штрихов.</description>
+  </example>
+  <example filename="Touch - rotate.capx">
+    <name>Touch - вращающийся</name>
+    <level>1</level>
+    <description>Как и прокрутки и вращать макет, основанный на одиночных и двойных штрихов.</description>
+  </example>
+  <example filename="Turret behavior.capx">
+    <name>Поведении турель</name>
+    <level>1</level>
+    <description>Простой пример использования поведении Турель, чтобы прицелиться и стрелять по объектам в радиусе действия.</description>
+  </example>
+  <example filename="Turret predictive aim.capx">
+    <name>Турель предсказанием цель</name>
+    <level>2</level>
+    <description>Использование турели поведении предсказательной функции нацелены на цель более точно по движущимся целям.</description>
+  </example>
+  <example filename="Unique IDs (UIDs).capx">
+    <name>Уникальные идентификаторы (UUID,)</name>
+    <level>2</level>
+    <description>Введение в кислотах, которые могут быть использованы для хранения информации ссылка отдельные экземпляры.</description>
+  </example>
+  <example filename="Vibrate.capx">
+    <name>Вибрировать</name>
+    <level>0</level>
+    <description>Пример обозревателя объектов действия ' вибрировать' вибрировать мобильное устройство.</description>
+  </example>
+  <example filename="Webcam.capx">
+    <name>Веб-камера</name>
+    <level>1</level>
+    <description>Получить веб-канал с камеры пользователя с помощью объекта пользователя медиа.</description>
+  </example>
+  <example filename="Webcam effects.capx">
+    <name>Веб-камера эффекты</name>
+    <level>1</level>
+    <description>Демонстрационный применения эффектов к объекту пользователя медиа.</description>
+  </example>
+  <example filename="Webcam - face shape.capx">
+    <name>Веб-камера форма лица</name>
+    <level>2</level>
+    <description>Вырежьте фигуру из питания веб-камеры с использованием маски слоя с объектом пользователя медиа.</description>
+  </example>
+  <example filename="WebGL shader effects.capx">
+    <name>Эффект затенения WebGL</name>
+    <level>0</level>
+    <description>Простой пример передовых визуальных эффектов с помощью WebGL шейдеров.</description>
+  </example>
+  <example filename="WebGL shader 'old TV' effect.capx">
+    <name>WebGL старый телевизор эффект</name>
+    <level>0</level>
+    <description>Использование нескольких WebGL шейдеров для создания старый внешний вид телевизора.</description>
+  </example>
+  <example filename="WebGL shader 'haze' effect.capx">
+    <name>Эффект дымки WebGL</name>
+    <level>1</level>
+    <description>Тонкий тепловой эффект матовости с помощью WebGL шейдеров.</description>
+  </example>
+  <example filename="WebGL screen blend with fallback.capx">
+    <name>WebGL экран смеси и запасной вариант</name>
+    <level>1</level>
+    <description>Применение эффектов WebGL для продвинутого смешивания с обходной путь для систем, которые не поддерживают его.</description>
+  </example>
+  <example filename="WebGL shader luminance transition.capx">
+    <name>Переход яркости WebGL</name>
+    <level>2</level>
+    <description>Расширенный яркости на основе перехода на основе WebGL эффектов.</description>
+  </example>
+  <example filename="WebGL shader 'pixellate' transition.capx">
+    <name>WebGL Пикселизация переход</name>
+    <level>2</level>
+    <description>Расширенный мозаичное переход на основе WebGL эффектов.</description>
+  </example>
+  <example filename="WebGL shader 'ripple' transition.capx">
+    <name>WebGL пульсация переход</name>
+    <level>2</level>
+    <description>Расширенный переход пульсация на основе WebGL эффектов.</description>
+  </example>
+  <example filename="WebGL shader 'swirl' transition.capx">
+    <name>Вихревой переход WebGL</name>
+    <level>2</level>
+    <description>Усовершенствованный вихревой переход на основе WebGL эффектов.</description>
+  </example>
+  <example filename="WebGL shader 'water' transition.capx">
+    <name>Переход WebGL воды</name>
+    <level>2</level>
+    <description>Расширенный переход воды на основе WebGL эффектов.</description>
+  </example>
+  <example filename="XML.capx">
+    <name>XML</name>
+    <level>2</level>
+    <description>Использование XPath для получения данных из XML-документов.</description>
+  </example>
+</startdlg>
