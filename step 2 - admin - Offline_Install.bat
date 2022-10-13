@@ -33,7 +33,7 @@ Rem ****************************************************************************
 set ScriptPath=%~dp0
 
 set PathToWallpaper="%ScriptPath%Distr\noarch\Wallpaper.jpg"
-set PathToSoftium="%ScriptPath%Distr\noarch\Softium.exe"
+set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
 set PathToRegTaskbar="%ScriptPath%Distr\noarch\PinnedTaskbar.reg"
 set PathToUserTaskBar="%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
 set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
@@ -47,7 +47,7 @@ set PathTolnk="%ScriptPath%Distr\noarch\lnk_create.js"
 set PathTo7Zip="%ScriptPath%Distr\x32\7z1900.msi"
 set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z1900-x64.msi"
 
-set PathToAdobeAIR="%ScriptPath%Distr\noarch\AdobeAIRInstaller.exe"
+set PathToAdobeAIR="%ScriptPath%Distr\noarch\AdobeAIR.exe"
 
 set PathToScratch="%ScriptPath%Distr\noarch\Scratch-461.exe"
 
@@ -77,6 +77,8 @@ set PathToxnafx="%ScriptPath%Distr\noarch\xnafx40_redist.msi"
 set PathToKodu="%ScriptPath%Distr\noarch\KoduSetup.msi"
 
 set PathToPython3="%ScriptPath%Distr\noarch\python-3.8.6.exe"
+
+set PathToSetuserFTA="%ScriptPath%Distr\noarch\SetUserFTA\*"
 
 Rem ****************************************************************************************
 Rem Настраиваем учётные записи пользователей на компьютере
@@ -134,6 +136,18 @@ Rem ****************************************************************************
 
 Rem Переходим на системный диск
 %SystemDrive%
+
+Rem Начинаем ставить утилиты и программы
+
+Rem SetuserFTA - Программа для управления защищёнными настройками Windows 10.
+Rem Сайт разработчика: http://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
+Rem По русски: https://ru.desktopsupportpanel.com/izmenit-prilozheniya-po-umolchaniyu-brauzer-ili-sopostavleni
+
+ECHO Install SetuserFTA...
+ECHO .
+mkdir  "%ProgramFiles%\SetuserFTA\"
+
+copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\"
 
 Rem Curl - не обязательный компонет. Можно не ставить.
 ECHO Install curl...
@@ -238,7 +252,10 @@ ECHO .
  	)
 	
 Rem Сделаем Chrome браузером по-умолчанию.
-regedit.exe /s "C:\ProgramData\Softium\Chrome.reg"
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  http ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  https ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .htm ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .html ChromeHTML
 
 ECHO .
 ECHO Install BABYTYPE2000...
@@ -322,8 +339,9 @@ Rem Создадим ссылку на IDLE
 
 Rem Скопируем дополнительные файлы
 	mkdir "C:\ProgramData\Softium"
+	mkdir "C:\Softium"
 	copy /y %PathToWallpaper% "C:\ProgramData\Softium\Wallpaper.jpg"
-	copy /y %PathToSoftium% "C:\ProgramData\Softium\Softium.exe"
+	copy /y %PathToSoftium% "C:\Softium\softiumscan.exe"
 	copy /y %PathToRegTaskbar% "C:\ProgramData\Softium\PinnedTaskbar.reg"
 	copy /y %PathToComputerLNK% "C:\ProgramData\Softium\computer.lnk"
 	copy /y %PathToChromeDefault% "C:\ProgramData\Softium\Chrome.reg"
@@ -334,7 +352,7 @@ Rem Скопируем дополнительные файлы
 
 Rem Создадим недостающие ярлыки
 Rem + Softium
-	cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\ProgramData\Softium\Softium.exe" "C:\ProgramData\Softium" "Софтиум" "C:\ProgramData\Softium\Softium.exe" "Софтиум"
+	cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\Softium\softiumscan.exe" "C:\Softium\" "Софтиум" "C:\Softium\softiumscan.exe" "Софтиум"
 
 Rem + Блокнот
 	cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%windir%\system32\notepad.exe" "%HOMEDRIVE%%HOMEPATH%" "Блокнот" "%windir%\system32\notepad.exe" "Текстовый редактор Блокнот"
@@ -351,17 +369,6 @@ Rem Запретим в дальнейшем создавать ярлык для Microsoft Edge на рабочем столе
 	
 Rem - SWF.max Flash Player
 	cscript /nologo /e:jscript "C:\ProgramData\Softium\file_delete.js" "Desktop" "\SWF.max Flash Player.lnk"
-
-Rem Удалим One Drive
-taskkill /f /im OneDrive.exe
-	If exist "%SystemDrive%\Program Files (x86)" (
-		start "Title" /wait %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
-	 ) else (
- 		start "Title" /wait %SystemRoot%\System32\OneDriveSetup.exe /uninstall
- 	)
-
-Rem включим режим электропитания "Экономия энергии"
-	powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
 
 Rem Отключаем режим планшета
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f
@@ -389,19 +396,6 @@ Rem Применим настройки
 TASKKILL /F /IM explorer.exe
 start explorer.exe
 
-Rem Включим защитника Windows
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableBehaviorMonitoring /t REG_DWORD /d 0 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableOnAccessProtection /t REG_DWORD /d 0 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableScanOnRealtimeEnable /t REG_DWORD /d 0 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableIOAVProtection /t REG_DWORD /d 0 /f
-
-rem Отключим автоматическое обновление системы
-sc config wuauserv start= disabled
-
-Rem Отключаем автоматическое обновление
-reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
-
 rem ****************************************************************************************
 rem Удаляем Edge Chromium
 rem ****************************************************************************************
@@ -417,12 +411,39 @@ SET /p myvar= < ver.txt
 cd %myvar%\Installer
 setup.exe -uninstall -system-level -verbose-logging -force-uninstall
 
-ping -n 10 127.0.0.1 > nul
+ECHO Ждём пока закончится удаление Edge Chromium 10 секунд...
+timeout 10 /nobreak
 
 rem ****************************************************************************************
 rem Запрещаем обновляться до Edge Chromium
 rem ****************************************************************************************
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\EdgeUpdate" /v DoNotUpdateToEdgeWithChromium /t REG_DWORD /d 1 /f
+
+Rem Удалим One Drive
+taskkill /f /im OneDrive.exe
+	If exist "%SystemDrive%\Program Files (x86)" (
+		start "Title" /wait %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
+	 ) else (
+ 		start "Title" /wait %SystemRoot%\System32\OneDriveSetup.exe /uninstall
+ 	)
+
+Rem Включим защитника Windows
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableBehaviorMonitoring /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableOnAccessProtection /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableScanOnRealtimeEnable /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableIOAVProtection /t REG_DWORD /d 0 /f
+
+powershell -command "Set-MpPreference -DisableRealtimeMonitoring $false"
+
+rem Отключим автоматическое обновление системы
+sc config wuauserv start= disabled
+
+Rem Отключаем автоматическое обновление
+reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
+
+Rem включим режим электропитания "Экономия энергии"
+	powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
 
 Rem Установим имя компьютера
 set /p MyHostname="Укажите имя компьютера: "
@@ -435,7 +456,7 @@ wmic computersystem where name="%computername%" call rename name="%MyHostname%"
 	ECHO Перезагрузка через 10 секунд...
 :END
 
-ping -n 10 127.0.0.1 >> nu
+timeout 10 /nobreak
 
 shutdown -r -f -t 00
 
