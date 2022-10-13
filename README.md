@@ -77,7 +77,8 @@ xnafx40_redist.msi
 
 Архив со скриптами и установочными дистрибутивами можно скачать тут: 
 
-https://yadi.sk/d/uSVUFP_qllOD9w
+https://disk.yandex.ru/d/jh3yifjIYZP9PQ
+
 
 ## Некоторые пояснения/замечания
 
