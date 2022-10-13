@@ -105,7 +105,3 @@ https://disk.yandex.ru/d/jh3yifjIYZP9PQ
 
 ftp://ftp.irbis.su/%23fw.tablets.windows/
 
-Настройками Google Chrome можно управлять через реестр.
-
-Подробности тут: https://getadmx.com/?Category=Chrome&Policy=Google.Policies.Chrome::PasswordManagerEnabled&Language=ru-ru
-
