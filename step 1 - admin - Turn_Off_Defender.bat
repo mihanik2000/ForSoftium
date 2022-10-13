@@ -1,15 +1,5 @@
 @echo off
 
-Rem Скрипт установки пакета программ компьютеры Softium
-
-rem Windows XP не поддерживается!!!
-ver | find "5.1."
-
-If %errorlevel%==0  (
-	Echo Windows XP unsupported!!!
-	Exit /b 1
- ) 
-
 rem ****************************************************************************************
 rem Проверяем наличие у пользователя админских прав...
 rem ****************************************************************************************
@@ -25,6 +15,8 @@ IF NOT %HasAdminRights%==1 (
 	ECHO .
 	GOTO END
 )
+
+powershell -command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
 REM Отключим защитника Windows
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
@@ -42,7 +34,7 @@ sc config wuauserv start= disabled
 	ECHO .
 	ECHO Перезагрузка через 10 секунд...
 
-ping -n 10 127.0.0.1 >> nul
+timeout 10 > nul
 
 shutdown -r -f -t 00
 	

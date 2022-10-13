@@ -9,7 +9,10 @@ Rem ****************************************************************************
 set PathToUserTaskBar="%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
 
 Rem Сделаем Chrome браузером по-умолчанию.
-regedit.exe /s "C:\ProgramData\Softium\Chrome.reg"
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  http ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  https ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .htm ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .html ChromeHTML
 
 Rem включим режим электропитания "Экономия энергии"
 powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
