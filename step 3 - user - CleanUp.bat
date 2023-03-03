@@ -42,6 +42,14 @@ regedit.exe /s "C:\ProgramData\Softium\PinnedTaskbar.reg"
 Rem Отбражаем Мой компьютер
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
 
+REM Удалим программы Яндекса
+
+wmic product where name="Голосовой помощник Алиса" call uninstall /nointeractive
+
+FORFILES /P "%LOCALAPPDATA%\Yandex\YandexBrowser\Application" /S /M setup.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
+
+FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
+
 Rem Применим настройки
 REM TASKKILL /F /IM explorer.exe
 
