@@ -63,6 +63,8 @@ del "%USERPROFILE%\Pictures\*" /q /s
 rem del "%USERPROFILE%\Saved Games\*" /q /s
 del "%USERPROFILE%\Searches\*" /q /s
 del "%USERPROFILE%\Videos\*" /q /s
+del "%USERPROFILE%\AppData\Local\Temp\*" /q /s
+del "%USERPROFILE%\AppData\LocalLow\Temp\*" /q /s
 
 :CONTINUE
 	ECHO .
