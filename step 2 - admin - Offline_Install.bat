@@ -98,6 +98,10 @@ Rem Отключим автоматическое обновление системы
 net stop wuauserv
 sc config wuauserv start= disabled
 
+Rem Отключим службу поиска Windows
+net stop WSearch
+sc config WSearch start= disabled
+
 Rem Включим на время работы скрипта режим электропитания "Высокая производительность"
 powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 
