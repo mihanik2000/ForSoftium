@@ -153,42 +153,7 @@ mkdir  "%ProgramFiles%\SetuserFTA\"
 
 copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\"
 
-Rem Curl - не обязательный компонет. Можно не ставить.
-ECHO Install curl...
-ECHO .
-mkdir  "%ProgramFiles%\curl\"
-
-Rem Добавляем утилиту certutil.exe в исключения брандмауера Windows
-	netsh advfirewall firewall del rule name="Certutil"
-	netsh firewall add allowedprogram "C:\Windows\System32\certutil.exe" Certutil
-	netsh advfirewall firewall add rule name="Certutil" dir=in action=allow program="C:\Windows\System32\certutil.exe"
-
-If exist "%SystemDrive%\Program Files (x86)" (
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win64/libcurl-x64.dll" "%ProgramFiles%\curl\libcurl-x64.dll"
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win64/curl.exe" "%ProgramFiles%\curl\curl.exe"
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win64/curl-ca-bundle.crt" "%ProgramFiles%\curl\curl-ca-bundle.crt"
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win64/libcurl-x64.def" "%ProgramFiles%\curl\libcurl-x64.def"
-
- ) else (
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win32/libcurl.dll" "%ProgramFiles%\curl\libcurl.dll"
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win32/curl.exe" "%ProgramFiles%\curl\curl.exe"
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win32/curl-ca-bundle.crt" "%ProgramFiles%\curl\curl-ca-bundle.crt"
-	certutil -urlcache -split -f "http://repo.mihanik.net/curl/win32/libcurl.def" "%ProgramFiles%\curl\libcurl.def"
-)
-
-Rem Установим скачанный сертификат для всех пользователей
-certutil -f -addstore "My" "%ProgramFiles%\curl\curl-ca-bundle.crt"
-
-Rem Добавим путь к curl в path
-	setx PATH "%ProgramFiles%\curl\;%Path%"
-	PATH=%ProgramFiles%\curl\;%Path%
-
-Rem Добавляем утилиту curl.exe в исключения брандмауера Windows
-	netsh advfirewall firewall del rule name="curl"
-	netsh firewall add allowedprogram "%ProgramFiles%\curl\curl.exe" curl
-	netsh advfirewall firewall add rule name="curl" dir=in action=allow program="%ProgramFiles%\curl\curl.exe"
-
-Rem Wget - не обязательный компонет. Можно не ставить.
+Rem Wget - не обязательный компонет. Можно не ставить. Но может пригодиться!!!
 ECHO .
 ECHO Install wget...
 ECHO .
