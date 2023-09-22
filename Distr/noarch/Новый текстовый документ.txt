@@ -1,0 +1,107 @@
+%APPDATA%\Microsoft\Internet Explorer\Quick Launch
+%windir%\System32\GroupPolicy
+
+"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathToBABYTYPE2000% -oc:
+"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathTosnap% -o"%ProgramFiles%\SNAP"
+
+
+REM Выполняем скрипт только для пользователя Softium!!!
+
+whoami | find "Softium"
+
+If %errorlevel%==1  (
+	Echo Для этого пользователя запуск скрипта не нужен!
+	timeout 5 /nobreak
+	Exit /b 1
+ ) 
+
+Name                                        PackageFullName                                                                        NonRemovable
+----                                        ---------------                                                                        ------------
+Microsoft.AAD.BrokerPlugin                  Microsoft.AAD.BrokerPlugin_1000.19041.423.0_neutral_neutral_cw5n1h2txyewy                      True
+Microsoft.BioEnrollment                     Microsoft.BioEnrollment_10.0.19041.423_neutral__cw5n1h2txyewy                                  True
+Microsoft.Windows.CloudExperienceHost       Microsoft.Windows.CloudExperienceHost_10.0.19041.1265_neutral_neutral_cw5n1h2txyewy            True
+Microsoft.Windows.OOBENetworkCaptivePortal  Microsoft.Windows.OOBENetworkCaptivePortal_10.0.19041.423_neutral__cw5n1h2txyewy               True
+Microsoft.Windows.OOBENetworkConnectionFlow Microsoft.Windows.OOBENetworkConnectionFlow_10.0.19041.423_neutral__cw5n1h2txyewy              True
+MicrosoftWindows.Client.CBS                 MicrosoftWindows.Client.CBS_120.2212.31.0_x64__cw5n1h2txyewy                                   True
+MicrosoftWindows.UndockedDevKit             MicrosoftWindows.UndockedDevKit_10.0.19041.423_neutral_neutral_cw5n1h2txyewy                   True
+Microsoft.Windows.StartMenuExperienceHost   Microsoft.Windows.StartMenuExperienceHost_10.0.19041.610_neutral_neutral_cw5n1h2txyewy         True
+Microsoft.Windows.ShellExperienceHost       Microsoft.Windows.ShellExperienceHost_10.0.19041.610_neutral_neutral_cw5n1h2txyewy             True
+windows.immersivecontrolpanel               windows.immersivecontrolpanel_10.0.2.1000_neutral_neutral_cw5n1h2txyewy                        True
+Microsoft.Windows.Search                    Microsoft.Windows.Search_1.14.0.19041_neutral_neutral_cw5n1h2txyewy                            True
+Microsoft.549981C3F5F10                     Microsoft.549981C3F5F10_1.1911.21713.0_x64__8wekyb3d8bbwe                                     False
+Microsoft.VCLibs.140.00.UWPDesktop          Microsoft.VCLibs.140.00.UWPDesktop_14.0.27629.0_x64__8wekyb3d8bbwe                            False
+Microsoft.NET.Native.Framework.2.2          Microsoft.NET.Native.Framework.2.2_2.2.27405.0_x64__8wekyb3d8bbwe                             False
+Microsoft.NET.Native.Runtime.2.2            Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64__8wekyb3d8bbwe                               False
+Microsoft.MicrosoftEdge                     Microsoft.MicrosoftEdge_44.19041.423.0_neutral__8wekyb3d8bbwe                                  True
+Microsoft.Windows.ContentDeliveryManager    Microsoft.Windows.ContentDeliveryManager_10.0.19041.423_neutral_neutral_cw5n1h2txyewy          True
+Microsoft.VCLibs.140.00                     Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe                                       False
+Microsoft.UI.Xaml.2.0                       Microsoft.UI.Xaml.2.0_2.1810.18004.0_x64__8wekyb3d8bbwe                                       False
+Microsoft.Windows.Photos                    Microsoft.Windows.Photos_2019.19071.12548.0_x64__8wekyb3d8bbwe                                False
+Microsoft.Advertising.Xaml                  Microsoft.Advertising.Xaml_10.1808.3.0_x64__8wekyb3d8bbwe                                     False
+microsoft.windowscommunicationsapps         microsoft.windowscommunicationsapps_16005.11629.20316.0_x64__8wekyb3d8bbwe                    False
+Microsoft.NET.Native.Framework.1.7          Microsoft.NET.Native.Framework.1.7_1.7.25531.0_x64__8wekyb3d8bbwe                             False
+Microsoft.NET.Native.Runtime.1.7            Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64__8wekyb3d8bbwe                               False
+Microsoft.WindowsCamera                     Microsoft.WindowsCamera_2018.826.98.0_x64__8wekyb3d8bbwe                                      False
+Microsoft.WindowsStore                      Microsoft.WindowsStore_11910.1002.5.0_x64__8wekyb3d8bbwe                                      False
+Microsoft.DesktopAppInstaller               Microsoft.DesktopAppInstaller_1.0.30251.0_x64__8wekyb3d8bbwe                                  False
+Microsoft.XboxIdentityProvider              Microsoft.XboxIdentityProvider_12.50.6001.0_x64__8wekyb3d8bbwe                                False
+Microsoft.Windows.CallingShellApp           Microsoft.Windows.CallingShellApp_1000.19041.423.0_neutral_neutral_cw5n1h2txyewy               True
+Microsoft.Windows.XGpuEjectDialog           Microsoft.Windows.XGpuEjectDialog_10.0.19041.423_neutral_neutral_cw5n1h2txyewy                 True
+Windows.PrintDialog                         Windows.PrintDialog_6.2.1.0_neutral_neutral_cw5n1h2txyewy                                      True
+Windows.CBSPreview                          Windows.CBSPreview_10.0.19041.423_neutral_neutral_cw5n1h2txyewy                                True
+NcsiUwpApp                                  NcsiUwpApp_1000.19041.423.0_neutral_neutral_8wekyb3d8bbwe                                      True
+Microsoft.Windows.SecureAssessmentBrowser   Microsoft.Windows.SecureAssessmentBrowser_10.0.19041.423_neutral_neutral_cw5n1h2txyewy         True
+Microsoft.Win32WebViewHost                  Microsoft.Win32WebViewHost_10.0.19041.423_neutral_neutral_cw5n1h2txyewy                        True
+Microsoft.Windows.Apprep.ChxApp             Microsoft.Windows.Apprep.ChxApp_1000.19041.423.0_neutral_neutral_cw5n1h2txyewy                 True
+Microsoft.Windows.CapturePicker             Microsoft.Windows.CapturePicker_10.0.19041.423_neutral__cw5n1h2txyewy                          True
+Microsoft.Windows.ParentalControls          Microsoft.Windows.ParentalControls_1000.19041.423.0_neutral_neutral_cw5n1h2txyewy              True
+Microsoft.Windows.PinningConfirmationDialog Microsoft.Windows.PinningConfirmationDialog_1000.19041.423.0_neutral__cw5n1h2txyewy            True
+Microsoft.Windows.SecHealthUI               Microsoft.Windows.SecHealthUI_10.0.19041.423_neutral__cw5n1h2txyewy                            True
+Microsoft.MicrosoftEdgeDevToolsClient       Microsoft.MicrosoftEdgeDevToolsClient_1000.19041.423.0_neutral_neutral_8wekyb3d8bbwe           True
+Microsoft.Windows.PeopleExperienceHost      Microsoft.Windows.PeopleExperienceHost_10.0.19041.423_neutral_neutral_cw5n1h2txyewy            True
+Microsoft.XboxGameCallableUI                Microsoft.XboxGameCallableUI_1000.19041.423.0_neutral_neutral_cw5n1h2txyewy                    True
+Microsoft.Windows.AssignedAccessLockApp     Microsoft.Windows.AssignedAccessLockApp_1000.19041.423.0_neutral_neutral_cw5n1h2txyewy         True
+1527c705-839a-4832-9118-54d4Bd6a0c89        1527c705-839a-4832-9118-54d4Bd6a0c89_10.0.19041.423_neutral_neutral_cw5n1h2txyewy              True
+Microsoft.LockApp                           Microsoft.LockApp_10.0.19041.423_neutral__cw5n1h2txyewy                                        True
+c5e2524a-ea46-4f67-841f-6a9465d9d515        c5e2524a-ea46-4f67-841f-6a9465d9d515_10.0.19041.423_neutral_neutral_cw5n1h2txyewy              True
+E2A4F912-2574-4A75-9BB0-0D023378592B        E2A4F912-2574-4A75-9BB0-0D023378592B_10.0.19041.423_neutral_neutral_cw5n1h2txyewy              True
+F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE        F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE_10.0.19041.423_neutral_neutral_cw5n1h2txyewy              True
+Microsoft.AccountsControl                   Microsoft.AccountsControl_10.0.19041.423_neutral__cw5n1h2txyewy                                True
+Microsoft.AsyncTextService                  Microsoft.AsyncTextService_10.0.19041.423_neutral__8wekyb3d8bbwe                               True
+Microsoft.Windows.NarratorQuickStart        Microsoft.Windows.NarratorQuickStart_10.0.19041.423_neutral_neutral_8wekyb3d8bbwe              True
+Microsoft.ECApp                             Microsoft.ECApp_10.0.19041.423_neutral__8wekyb3d8bbwe                                          True
+Microsoft.CredDialogHost                    Microsoft.CredDialogHost_10.0.19041.423_neutral__cw5n1h2txyewy                                 True
+Microsoft.WindowsAlarms                     Microsoft.WindowsAlarms_10.1906.2182.0_x64__8wekyb3d8bbwe                                     False
+Microsoft.SkypeApp                          Microsoft.SkypeApp_14.53.77.0_x64__kzf8qxf38zg5c                                              False
+Microsoft.ZuneVideo                         Microsoft.ZuneVideo_10.19071.19011.0_x64__8wekyb3d8bbwe                                       False
+Microsoft.ZuneMusic                         Microsoft.ZuneMusic_10.19071.19011.0_x64__8wekyb3d8bbwe                                       False
+Microsoft.YourPhone                         Microsoft.YourPhone_0.19051.7.0_x64__8wekyb3d8bbwe                                            False
+Microsoft.XboxSpeechToTextOverlay           Microsoft.XboxSpeechToTextOverlay_1.17.29001.0_x64__8wekyb3d8bbwe                             False
+Microsoft.XboxGamingOverlay                 Microsoft.XboxGamingOverlay_2.34.28001.0_x64__8wekyb3d8bbwe                                   False
+Microsoft.XboxGameOverlay                   Microsoft.XboxGameOverlay_1.46.11001.0_x64__8wekyb3d8bbwe                                     False
+Microsoft.XboxApp                           Microsoft.XboxApp_48.49.31001.0_x64__8wekyb3d8bbwe                                            False
+Microsoft.Xbox.TCUI                         Microsoft.Xbox.TCUI_1.23.28002.0_x64__8wekyb3d8bbwe                                           False
+Microsoft.WindowsSoundRecorder              Microsoft.WindowsSoundRecorder_10.1906.1972.0_x64__8wekyb3d8bbwe                              False
+Microsoft.WindowsMaps                       Microsoft.WindowsMaps_5.1906.1972.0_x64__8wekyb3d8bbwe                                        False
+Microsoft.WindowsFeedbackHub                Microsoft.WindowsFeedbackHub_1.1907.3152.0_x64__8wekyb3d8bbwe                                 False
+Microsoft.WindowsCalculator                 Microsoft.WindowsCalculator_10.1906.55.0_x64__8wekyb3d8bbwe                                   False
+Microsoft.WebpImageExtension                Microsoft.WebpImageExtension_1.0.22753.0_x64__8wekyb3d8bbwe                                   False
+Microsoft.WebMediaExtensions                Microsoft.WebMediaExtensions_1.0.20875.0_x64__8wekyb3d8bbwe                                   False
+Microsoft.Wallet                            Microsoft.Wallet_2.4.18324.0_x64__8wekyb3d8bbwe                                               False
+Microsoft.VP9VideoExtensions                Microsoft.VP9VideoExtensions_1.0.22681.0_x64__8wekyb3d8bbwe                                   False
+Microsoft.StorePurchaseApp                  Microsoft.StorePurchaseApp_11811.1001.18.0_x64__8wekyb3d8bbwe                                 False
+Microsoft.ScreenSketch                      Microsoft.ScreenSketch_10.1907.2471.0_x64__8wekyb3d8bbwe                                      False
+Microsoft.People                            Microsoft.People_10.1902.633.0_x64__8wekyb3d8bbwe                                             False
+Microsoft.Office.OneNote                    Microsoft.Office.OneNote_16001.12026.20112.0_x64__8wekyb3d8bbwe                               False
+Microsoft.MSPaint                           Microsoft.MSPaint_6.1907.29027.0_x64__8wekyb3d8bbwe                                           False
+Microsoft.MixedReality.Portal               Microsoft.MixedReality.Portal_2000.19081.1301.0_x64__8wekyb3d8bbwe                            False
+Microsoft.Services.Store.Engagement         Microsoft.Services.Store.Engagement_10.0.18101.0_x64__8wekyb3d8bbwe                           False                                                      Microsoft.Services.Store.Engagement         Microsoft.Services.Store.Engagement_10.0.18101.0_x86__8wekyb3d8bbwe                           False                                                      Microsoft.MicrosoftStickyNotes              Microsoft.MicrosoftStickyNotes_3.6.73.0_x64__8wekyb3d8bbwe                                    False                                                      Microsoft.MicrosoftSolitaireCollection      Microsoft.MicrosoftSolitaireCollection_4.4.8204.0_x64__8wekyb3d8bbwe                          False                                                      Microsoft.MicrosoftOfficeHub                Microsoft.MicrosoftOfficeHub_18.1903.1152.0_x64__8wekyb3d8bbwe                                False                                                      Microsoft.Microsoft3DViewer                 Microsoft.Microsoft3DViewer_6.1908.2042.0_x64__8wekyb3d8bbwe                                  False
+Microsoft.HEIFImageExtension                Microsoft.HEIFImageExtension_1.0.22742.0_x64__8wekyb3d8bbwe                                   False
+Microsoft.Getstarted                        Microsoft.Getstarted_8.2.22942.0_x64__8wekyb3d8bbwe                                           False
+Microsoft.GetHelp                           Microsoft.GetHelp_10.1706.13331.0_x64__8wekyb3d8bbwe                                          False
+Microsoft.BingWeather                       Microsoft.BingWeather_4.25.20211.0_x64__8wekyb3d8bbwe                                         False
+Microsoft.MicrosoftEdge.Stable              Microsoft.MicrosoftEdge.Stable_117.0.2045.36_neutral__8wekyb3d8bbwe                           False
+
+
+Remove-AppxPackage
+

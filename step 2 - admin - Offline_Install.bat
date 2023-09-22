@@ -1,18 +1,10 @@
 @echo off
 
-Rem Скрипт установки пакета программ компьютеры Softium
+REM Скрипт установки пакета программ на компьютеры Softium
 
-Rem Windows XP не поддерживается!!!
-ver | find "5.1."
-
-If %errorlevel%==0  (
-	Echo Windows XP unsupported!!!
-	Exit /b 1
- ) 
-
-Rem ****************************************************************************************
-Rem Проверяем наличие у пользователя админских прав...
-Rem ****************************************************************************************
+REM ****************************************************************************************
+REM Проверяем наличие у пользователя админских прав...
+REM ****************************************************************************************
 
 SET HasAdminRights=0
 FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
@@ -26,46 +18,58 @@ IF NOT %HasAdminRights%==1 (
 	GOTO END
 )
 
-Rem ****************************************************************************************
-Rem Описываем переменные.
-Rem ****************************************************************************************
+REM ****************************************************************************************
+REM Описываем переменные.
+REM ****************************************************************************************
 
 set ScriptPath=%~dp0
 
 set PathToWallpaper="%ScriptPath%Distr\noarch\Wallpaper.jpg"
+
 set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
+
 set PathToRegTaskbar="%ScriptPath%Distr\noarch\PinnedTaskbar.reg"
+set PathToTaskbarFolder="%ScriptPath%Distr\noarch\QuickLaunch.zip"
+
+
 set PathToUserTaskBar="%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
 set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
 set PathToChromeDefault="%ScriptPath%Distr\noarch\Chrome.reg"
+
+set PathToRestrictRunReg="%ScriptPath%Distr\noarch\RestrictRun.reg"
+set PathToRestrictRunPs1="%ScriptPath%Distr\noarch\RestrictRun.ps1"
+
+set PathToGroupPolicy="%ScriptPath%Distr\noarch\GroupPolicy.zip"
+
+set PathToDelWindowsApps="%ScriptPath%Distr\noarch\DelWindowsApps.ps1"
 
 set PathToWget="%ScriptPath%Distr\x32\wget.exe"
 set PathToWget-x64="%ScriptPath%Distr\x64\wget.exe"
 
 set PathTolnk="%ScriptPath%Distr\noarch\lnk_create.js"
 
-set PathTo7Zip="%ScriptPath%Distr\x32\7z1900.msi"
-set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z1900-x64.msi"
+set PathTo7Zip="%ScriptPath%Distr\x32\7z2301.msi"
+set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z2301-x64.msi"
 
 set PathToAdobeAIR="%ScriptPath%Distr\noarch\AdobeAIR.exe"
 
 set PathToScratch="%ScriptPath%Distr\noarch\Scratch-461.exe"
 
-set PathToScratchDesktop="%ScriptPath%Distr\noarch\ScratchDesktopSetup3.15.0.exe"
+set PathToScratchDesktop="%ScriptPath%Distr\noarch\Scratch 3.29.1 Setup.exe"
 
-set PathToGIMP="%ScriptPath%Distr\noarch\gimp-2.10.20-setup-1.exe"
+set PathToGIMP="%ScriptPath%Distr\noarch\gimp-2.10.34-setup-2.exe"
 
-set PathToGoogleChrome="%ScriptPath%Distr\x32\googlechromestandaloneenterprise.msi"
-set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\googlechromestandaloneenterprise64.msi"
+set PathToGoogleChrome="%ScriptPath%Distr\x32\ChromeStandaloneSetup.exe"
+set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\ChromeStandaloneSetup64.exe"
 
 set PathToBABYTYPE2000="%ScriptPath%Distr\noarch\BABYTYPE2000.zip"
 
-set PathTosnap="%ScriptPath%Distr\noarch\Snap-6.1.4.zip"
+set PathTosnap="%ScriptPath%Distr\noarch\Snap-9.0.5.zip"
 
-set PathToNotepad="%ScriptPath%Distr\x32\npp.7.9.Installer.exe"
-set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.7.9.Installer.x64.exe"
+set PathToNotepad="%ScriptPath%Distr\x32\npp.8.5.7.Installer.exe"
+set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.8.5.7.Installer.x64.exe"
 
-set PathToconstruct="%ScriptPath%Distr\noarch\construct2-r279-setup.exe"
+set PathToconstruct="%ScriptPath%Distr\noarch\construct2-r280-setup.exe"
 
 set PathToPlayer="%ScriptPath%Distr\noarch\SWF.max-2.3.exe"
 set PathToFlashOCX="%ScriptPath%Distr\noarch\Flash.ocx"
@@ -74,78 +78,122 @@ set PathToAnimate="%ScriptPath%Distr\noarch\animate.swf"
 set PathToAnimateIco="%ScriptPath%Distr\noarch\animate.ico"
 
 set PathToxnafx="%ScriptPath%Distr\noarch\xnafx40_redist.msi"
-set PathToKodu="%ScriptPath%Distr\noarch\KoduSetup.msi"
+set PathToKodu="%ScriptPath%Distr\noarch\KoduSetup_1.6.18.0.msi"
 
-set PathToPython3="%ScriptPath%Distr\noarch\python-3.8.6.exe"
+set PathToPython3="%ScriptPath%Distr\noarch\python-3.11.5.exe"
+
+set PathToOOSU10="%ScriptPath%Distr\noarch\OOSU10.exe"
+set PathToOOSU10-CFG="%ScriptPath%Distr\noarch\ooshutup10.cfg"
 
 set PathToSetuserFTA="%ScriptPath%Distr\noarch\SetUserFTA\*"
 
-Rem ****************************************************************************************
-Rem Настраиваем учётные записи пользователей на компьютере
-Rem ****************************************************************************************
+REM Скопируем файлы на настраиваемый компьютер
 
-Rem активируем встроенного Администратора
+REM создаём скрытую папку для хранения важных файлов
+	mkdir "C:\ProgramData\Softium"
+
+	copy /y %PathToWallpaper% "C:\ProgramData\Softium\Wallpaper.jpg"
+	copy /y %PathToRegTaskbar% "C:\ProgramData\Softium\PinnedTaskbar.reg"
+	copy /y %PathToTaskbarFolder% "C:\ProgramData\Softium\QuickLaunch.zip"
+	copy /y %PathToGroupPolicy% "C:\ProgramData\Softium\GroupPolicy.zip"
+	copy /y %PathToDelWindowsApps% "C:\ProgramData\Softium\DelWindowsApps.ps1"
+	
+	copy /y %PathToComputerLNK% "C:\ProgramData\Softium\computer.lnk"
+	copy /y %PathToChromeDefault% "C:\ProgramData\Softium\Chrome.reg"
+	copy /y "%ScriptPath%Distr\noarch\lnk_create.js" "C:\ProgramData\Softium\lnk_create.js"
+	copy /y "%ScriptPath%Distr\noarch\file_delete.js" "C:\ProgramData\Softium\file_delete.js"
+	copy /y "%ScriptPath%step 3 - user - CleanUp.bat" "C:\ProgramData\Softium\step 3 - user - CleanUp.bat"
+
+REM Ограничение запуска программ. В разработке. Пока не используется.
+	copy /y %PathToRestrictRunReg%="C:\ProgramData\Softium\RestrictRun.reg"
+	copy /y %PathToRestrictRunPs1%="C:\ProgramData\Softium\RestrictRun.ps1"
+	
+REM создаём папку в корне диска для хранения рабочих файлов
+	mkdir "C:\Softium"
+
+REM Программа Softiun для обучающегося
+	copy /y %PathToSoftium% "C:\Softium\softiumscan.exe"
+
+REM Добавляем программу softiumscan в исключения брандмауера Windows
+	netsh advfirewall firewall del rule name="softiumscan"
+	netsh firewall add allowedprogram "C:\Softium\softiumscan.exe" softiumscan
+	netsh advfirewall firewall add rule name="softiumscan" dir=in action=allow program="C:\Softium\softiumscan.exe"
+
+REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
+	copy /y "%ScriptPath%step 3 - user - CleanUp.bat" "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat"
+
+REM ****************************************************************************************
+REM Настраиваем учётные записи пользователей на компьютере
+REM ****************************************************************************************
+
+REM активируем встроенного Администратора
 net user Администратор "AdminPass" /active:yes /expires:never
 
-Rem Создадим пользователя Softium с паролем 321
+REM Создадим пользователя Softium с паролем 321
 net user Softium "321" /add /expires:never
 
-Rem ****************************************************************************************
-Rem Настроим некоторые необходимые параметры 
-Rem ****************************************************************************************
+REM ****************************************************************************************
+REM Настроим некоторые необходимые параметры 
+REM ****************************************************************************************
 
-Rem Отключим автоматическое обновление системы
+REM Отключим автоматическое обновление системы
 net stop wuauserv
 sc config wuauserv start= disabled
 
-Rem Отключим службу поиска Windows
+REM Отключим службу поиска Windows
 net stop WSearch
 sc config WSearch start= disabled
 
-Rem Включим на время работы скрипта режим электропитания "Высокая производительность"
+REM Отключим автоматическое обновление системы
+sc config wuauserv start= disabled
+
+REM Отключаем автоматическое обновление
+reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
+
+REM Включим на время работы скрипта режим электропитания "Высокая производительность"
 powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 
-Rem Никогда не отключать дисплей при питании от сети
+REM Никогда не отключать дисплей при питании от сети
 powercfg /CHANGE -monitor-timeout-dc 0
 
-Rem Никогда не отключать диск при питании от сети
+REM Никогда не отключать диск при питании от сети
 powercfg /CHANGE -disk-timeout-dc 0
 
-Rem Никогда не уходить в режим ожидания при питании от сети
+REM Никогда не уходить в режим ожидания при питании от сети
 powercfg /CHANGE -standby-timeout-dc 0
 
-Rem Никогда не уходить в режим сна при питании от сети
+REM Никогда не уходить в режим сна при питании от сети
 powercfg /CHANGE -hibernate-timeout-dc 0
 
-Rem отключаем спящий режим
+REM отключаем спящий режим
 powercfg -hibernate off
 reg ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power /v HiberFileSizePercent /t REG_DWORD /d 0 /f
 reg ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0 /f
 
-Rem Запланируем на всякий случай ежедневное выключение в полночь
+REM Запланируем на всякий случай ежедневное выключение в полночь
 SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC DAILY /TN "Microsoft\Office\Office Shutdown" /TR  "\"C:\Windows\System32\shutdown.exe\" /s /f /t 00"  /ST 00:00 /RL HIGHEST
 
-Rem Включаем ADMIN шару
+REM Включаем ADMIN шару
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy /t reg_sz /d 1 /f
 
-Rem Включим межсетевой экран
+REM Включим межсетевой экран
 netsh advfirewall set allprofiles state on
 
-Rem Разрешим отвечать на ping 
+REM Разрешим отвечать на ping 
 netsh firewall set icmpsetting 8
 
-Rem ****************************************************************************************
-Rem Начинаем устанавливать все программы по очереди
-Rem ****************************************************************************************
+REM ****************************************************************************************
+REM Начинаем устанавливать все программы по очереди
+REM ****************************************************************************************
 
-Rem Переходим на системный диск
+REM Переходим на системный диск
 %SystemDrive%
 
-Rem Начинаем ставить утилиты и программы
+REM Начинаем ставить утилиты и программы
 
-Rem SetuserFTA - Программа для управления защищёнными настройками Windows 10.
-Rem Сайт разработчика: http://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
-Rem По русски: https://ru.desktopsupportpanel.com/izmenit-prilozheniya-po-umolchaniyu-brauzer-ili-sopostavleni
+REM SetuserFTA - Программа для управления защищёнными настройками Windows 10.
+REM Сайт разработчика: http://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
+REM По русски: https://ru.desktopsupportpanel.com/izmenit-prilozheniya-po-umolchaniyu-brauzer-ili-sopostavleni
 
 ECHO Install SetuserFTA...
 ECHO .
@@ -153,7 +201,7 @@ mkdir  "%ProgramFiles%\SetuserFTA\"
 
 copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\"
 
-Rem Wget - не обязательный компонет. Можно не ставить. Но может пригодиться!!!
+REM Wget - не обязательный компонет. Можно не ставить. Но может пригодиться!!!
 ECHO .
 ECHO Install wget...
 ECHO .
@@ -164,15 +212,16 @@ mkdir  "%ProgramFiles%\wget\"
 		copy /y %PathToWget% "%ProgramFiles%\wget\wget.exe"
 	)
 
-Rem Добавим путь к wget в path
+REM Добавим путь к wget в path
 	setx PATH "%ProgramFiles%\wget\;%Path%"
 	PATH=%ProgramFiles%\wget\;%Path%
 
-Rem Добавляем утилиту wget.exe в исключения брандмауера Windows
+REM Добавляем утилиту wget.exe в исключения брандмауера Windows
 	netsh advfirewall firewall del rule name="wget"
 	netsh firewall add allowedprogram "%ProgramFiles%\wget\wget.exe" wget
 	netsh advfirewall firewall add rule name="wget" dir=in action=allow program="%ProgramFiles%\wget\wget.exe"
 
+REM Устанавливаем программу-архиватор 7zip
 ECHO .
 ECHO Install 7-Zip...
 ECHO .
@@ -182,11 +231,13 @@ ECHO .
 		start "Title" /wait %PathTo7Zip% /passive /norestart
 	)
 
+REM Устанавливаем программу AdobeAIR
 ECHO .
 ECHO Install AdobeAIR...
 ECHO .
 	start "Title" /wait %PathToAdobeAIR% -silent
- 
+
+REM Устанавливаем программу Scratch 2
 ECHO .
 ECHO Install Scratch Offline...
 ECHO .
@@ -198,51 +249,57 @@ ECHO .
 		cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Scratch 2\Scratch 2.exe" "%USERPROFILE%" "Scratch 2" "%ProgramFiles%\Scratch 2\Scratch 2.exe" "Офлайн-редактор Scratch 2.0"
 	)
 
+REM Устанавливаем программу Scratch 3
 ECHO .
 ECHO Install Scratch Desktop...
 ECHO .
 	start "Title" /wait %PathToScratchDesktop% /S /allusers
 
+REM Устанавливаем программу GIMP
 ECHO .
 ECHO Install GIMP...
 ECHO .
-	start "Title" /wait %PathToGIMP% /SILENT /NORESTART /ALLUSERS
+	start "Install GIMP..." /wait %PathToGIMP% /SILENT /NORESTART /ALLUSERS
 
-Rem Создадим  ссылку на GIMP
+REM Создадим  ссылку на GIMP
 	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "%USERPROFILE%" "GIMP" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "Графический редактор GIMP"
 
+REM Устанавливаем программу Google Chrome
 ECHO .
 ECHO Install Google Chrome...
 ECHO .
 	If exist "%SystemDrive%\Program Files (x86)" (
-		start "Title" /wait %PathToGoogleChrome-x64% /passive /norestart
+		start "Install Google Chrome..." /wait %PathToGoogleChrome-x64% /silent /install
 	 ) else (
- 		start "Title" /wait %PathToGoogleChrome% /passive /norestart
+ 		start "Install Google Chrome..." /wait %PathToGoogleChrome% /silent /install
  	)
 	
-Rem Сделаем Chrome браузером по-умолчанию.
+REM Сделаем Chrome браузером по-умолчанию.
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  http ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  https ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .htm ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .html ChromeHTML
 
+REM Устанавливаем программу BABYTYPE2000
 ECHO .
 ECHO Install BABYTYPE2000...
 ECHO .
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathToBABYTYPE2000% -oc:
 
-Rem Создадим  ссылку на BABYTYPE
+REM Создадим  ссылку на BABYTYPE
 	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "C:\BABYTYPE2000\BABYTYPE.EXE" "C:\BABYTYPE2000" "BabyType" "%SystemRoot%\System32\SHELL32.dll,41" "Тренажер печати BabyType"
 
+REM Устанавливаем программу Snap
 ECHO .
 ECHO Install Snap...
 ECHO .
 	mkdir "%ProgramFiles%\SNAP"
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathTosnap% -o"%ProgramFiles%\SNAP"
 
-Rem Создадим  ссылку на Snap
-	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\SNAP\Snap-6.1.4\index.html" "%ProgramFiles%\SNAP\Snap-6.1.4" "Snap!" "%ProgramFiles%\SNAP\Snap-6.1.4\src\favicon.ico" "SNAP! Оффлайн версия"
+REM Создадим  ссылку на Snap
+	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\SNAP\Snap-9.0.5\index.html" "%ProgramFiles%\SNAP\Snap-9.0.5" "Snap!" "%ProgramFiles%\SNAP\Snap-9.0.5\src\favicon.ico" "SNAP! Оффлайн версия"
 
+REM Устанавливаем программу Notepad++
 ECHO .
 ECHO Install Notepad++...
 ECHO .
@@ -252,19 +309,24 @@ ECHO .
  		start "Title" /wait %PathToNotepad% /S
  	)
 
-Rem Создадим  ссылку на Notepad
+REM Создадим  ссылку на Notepad
 	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Notepad++\notepad++.exe" "%ProgramFiles%\Notepad++" "Notepad++" "%ProgramFiles%\Notepad++\notepad++.exe" "Текстовый редактор Notepad++"
 
+REM Устанавливаем программу Construct
 ECHO .
 ECHO Install Construct...
 ECHO .
 	start "Title" /wait %PathToconstruct% /verysilent
 
-Rem Создадим  ссылку на construct2
+REM Создадим  ссылку на construct2
 	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Construct 2\Construct2.exe" "%ProgramFiles%\Construct 2" "Construct2" "%ProgramFiles%\Construct 2\Construct2.exe" "The HTML5 game and app creator by Scirra."
 
+REM Устанавливаем программу SWF_Player
 ECHO .
 ECHO Install SWF_Player...
+ECHO ВАЖНО!!!
+ECHO Программу нужно устанавливать в ручном режиме.
+ECHO Нет возможности установить программу автоматически.
 ECHO .
 	start "Title" /wait %PathToPlayer% /silent
 	If exist "%SystemDrive%\Program Files (x86)" (
@@ -273,6 +335,10 @@ ECHO .
 			copy /y %PathToFlashOCX% "C:\Program Files\SWF.max\Media\Binary\Flash.ocx"
 	)
 
+REM Удалим с рабочего стола ярлык SWF.max Flash Player
+	cscript /nologo /e:jscript "C:\ProgramData\Softium\file_delete.js" "Desktop" "\SWF.max Flash Player.lnk"
+
+REM Устанавливаем программу Animate (Создай мульт)
 ECHO .
 ECHO Install Animate...
 ECHO .
@@ -280,18 +346,20 @@ ECHO .
 	copy /y %PathToAnimate% "%ProgramFiles%\Animate\animate.swf"
 	copy /y %PathToAnimateIco% "%ProgramFiles%\Animate\animate.ico"
 	
-Rem Создадим  ссылку на Animate
+REM Создадим  ссылку на Animate
 	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Animate\animate.swf" "%USERPROFILE%" "Сделай мульт" "%ProgramFiles%\Animate\animate.ico" "Animate (для начального уровня)."
 
+REM Устанавливаем программу Kodu с необходимыми зависимостями
 ECHO .
 ECHO Install Kodu...
 ECHO .
 	start "Title" /wait %PathToxnafx% /passive /norestart
 	start "Title" /wait %PathToKodu% /passive /norestart
 
-Rem Удалим лишнюю ссылку Kodu
+REM Удалим лишнюю ссылку Kodu
 	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\file_delete.js" "AllUsersDesktop" "\Configure Kodu Game Lab.lnk"
 
+REM Устанавливаем программу Python 3
 ECHO .
 ECHO Install Python 3...
 ECHO .
@@ -303,71 +371,40 @@ ECHO .
 	pip install pygame
 	pip install WMI
 
-Rem Создадим ссылку на IDLE
+REM Создадим ссылку на IDLE
 	cscript /nologo /e:jscript "%ScriptPath%Distr\noarch\lnk_create.js" "AllUsersDesktop"  ""  "C:\Python3\Lib\idlelib\idle.pyw" "C:\Python3" "Python IDLE" "C:\Python3\pythonw.exe" "Python IDLE"
 
-Rem Скопируем дополнительные файлы
-	mkdir "C:\ProgramData\Softium"
-	mkdir "C:\Softium"
-	copy /y %PathToWallpaper% "C:\ProgramData\Softium\Wallpaper.jpg"
-	copy /y %PathToSoftium% "C:\Softium\softiumscan.exe"
-	copy /y %PathToRegTaskbar% "C:\ProgramData\Softium\PinnedTaskbar.reg"
-	copy /y %PathToComputerLNK% "C:\ProgramData\Softium\computer.lnk"
-	copy /y %PathToChromeDefault% "C:\ProgramData\Softium\Chrome.reg"
-	copy /y "%ScriptPath%Distr\noarch\lnk_create.js" "C:\ProgramData\Softium\lnk_create.js"
-	copy /y "%ScriptPath%Distr\noarch\file_delete.js" "C:\ProgramData\Softium\file_delete.js"
-	copy /y "%ScriptPath%step 3 - user - CleanUp.bat" "C:\ProgramData\Softium\step 3 - user - CleanUp.bat"
-	copy /y "%ScriptPath%step 3 - user - CleanUp.bat" "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\step 3 - user - CleanUp.bat"
-
-Rem Создадим недостающие ярлыки
-Rem + Softium
+REM Создадим недостающие ярлыки
+REM + Softium
 	cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\Softium\softiumscan.exe" "C:\Softium\" "Софтиум" "C:\Softium\softiumscan.exe" "Софтиум"
 
-Rem + Блокнот
+REM + Блокнот
 	cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%windir%\system32\notepad.exe" "%HOMEDRIVE%%HOMEPATH%" "Блокнот" "%windir%\system32\notepad.exe" "Текстовый редактор Блокнот"
 
-Rem Отбражаем Мой компьютер
+REM Отбражаем Мой компьютер
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
 
-Rem Удалим лишние ярлыки
-Rem - Microsoft Edge
+REM Удалим лишние ярлыки
+REM - Microsoft Edge
 	cscript /nologo /e:jscript "C:\ProgramData\Softium\file_delete.js" "Desktop" "\Microsoft Edge.lnk"
-	
-Rem Запретим в дальнейшем создавать ярлык для Microsoft Edge на рабочем столе
+	cscript /nologo /e:jscript "C:\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\Microsoft Edge.lnk"
+
+REM Запретим в дальнейшем создавать ярлык для Microsoft Edge на рабочем столе
 	reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v "DisableEdgeDesktopShortcutCreation" /t REG_DWORD /d "1" /f
 	
-Rem - SWF.max Flash Player
-	cscript /nologo /e:jscript "C:\ProgramData\Softium\file_delete.js" "Desktop" "\SWF.max Flash Player.lnk"
-
-Rem Отключаем режим планшета
+REM Отключаем режим планшета
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v SignInMode /t REG_DWORD /d 2 /f
 
-Rem Устанавливаем обои рабочего стола
+REM Устанавливаем обои рабочего стола
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Desktop\General\BackUpWallpaper" /v Wallpaper /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Desktop\General\Wallpaper" /v Wallpaper /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Desktop\General\Wallpaper" /v WallpaperSource /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
 
-Rem Настроим панель задач
-del "%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*" /q /s
-cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" ""  %PathToUserTaskBar% "%ProgramFiles%\Google\Chrome\Application\chrome.exe" "%ProgramFiles%\Google\Chrome\Application" "Google Chrome" "%ProgramFiles%\Google\Chrome\Application\chrome.exe" "Доступ в Интернет"
-cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" ""  %PathToUserTaskBar% "%ProgramFiles%\Scratch Desktop\Scratch Desktop.exe" "%ProgramFiles%\Scratch Desktop" "Scratch Desktop" "%ProgramFiles%\Scratch Desktop\Scratch Desktop.exe" "Scratch Desktop"
-If exist "%SystemDrive%\Program Files (x86)" (
-	cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" "" %PathToUserTaskBar% "%ProgramFiles(x86)%\Scratch 2\Scratch 2.exe" "%USERPROFILE%" "Scratch 2" "%ProgramFiles(x86)%\Scratch 2\Scratch 2.exe" "Офлайн-редактор Scratch 2.0"
- ) else (
-	cscript /nologo /e:jscript "C:\ProgramData\Softium\lnk_create.js" ""  %PathToUserTaskBar% "%ProgramFiles%\Scratch 2\Scratch 2.exe" "%USERPROFILE%" "Scratch 2" "%ProgramFiles%\Scratch 2\Scratch 2.exe" "Офлайн-редактор Scratch 2.0"
-)
-copy /y "C:\ProgramData\Softium\computer.lnk" "%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\computer.lnk"
-regedit.exe /s "C:\ProgramData\Softium\PinnedTaskbar.reg"
-
-Rem Применим настройки
-TASKKILL /F /IM explorer.exe
-start explorer.exe
-
-rem ****************************************************************************************
-rem Удаляем Edge Chromium
-rem ****************************************************************************************
+REM ****************************************************************************************
+REM Удаляем Edge Chromium
+REM ****************************************************************************************
 
  If exist "%programfiles(x86)%" (
 		cd "C:\Program Files (x86)\Microsoft\Edge\Application"
@@ -383,12 +420,12 @@ setup.exe -uninstall -system-level -verbose-logging -force-uninstall
 ECHO Ждём пока закончится удаление Edge Chromium 10 секунд...
 timeout 10 /nobreak
 
-rem ****************************************************************************************
-rem Запрещаем обновляться до Edge Chromium
-rem ****************************************************************************************
+REM ****************************************************************************************
+REM Запрещаем обновляться до Edge Chromium
+REM ****************************************************************************************
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\EdgeUpdate" /v DoNotUpdateToEdgeWithChromium /t REG_DWORD /d 1 /f
 
-Rem Удалим One Drive
+REM Удалим One Drive
 taskkill /f /im OneDrive.exe
 	If exist "%SystemDrive%\Program Files (x86)" (
 		start "Title" /wait %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
@@ -396,27 +433,35 @@ taskkill /f /im OneDrive.exe
  		start "Title" /wait %SystemRoot%\System32\OneDriveSetup.exe /uninstall
  	)
 
-Rem Включим защитника Windows
+Rem Удалим лишние программы
+
+start "Title" /wait powershell -command "Set-ExecutionPolicy Bypass -Force"
+
+start "Title" /wait powershell -File  "C:\ProgramData\Softium\DelWindowsApps.ps1"
+
+REM Включим защитника Windows
+
+start "Title" /wait powershell -command "Set-MpPreference -DisableRealtimeMonitoring $false"
+
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableBehaviorMonitoring /t REG_DWORD /d 0 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableOnAccessProtection /t REG_DWORD /d 0 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableScanOnRealtimeEnable /t REG_DWORD /d 0 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableIOAVProtection /t REG_DWORD /d 0 /f
 
-powershell -command "Set-MpPreference -DisableRealtimeMonitoring $false"
-
-rem Отключим автоматическое обновление системы
-sc config wuauserv start= disabled
-
-Rem Отключаем автоматическое обновление
-reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
-
-Rem включим режим электропитания "Экономия энергии"
+REM включим режим электропитания "Экономия энергии"
 	powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
 
-Rem Установим имя компьютера
+REM Отключим некоторые функции Windows
+start "Title" /wait %PathToOOSU10% %PathToOOSU10-CFG% /quiet /nosrp
+
+REM Установим имя компьютера
 set /p MyHostname="Укажите имя компьютера: "
 wmic computersystem where name="%computername%" call rename name="%MyHostname%"
+
+Rem Установим параметры групповой политики
+
+"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathToGroupPolicy% -o"%windir%\System32"
 
 :CONTINUE
 	ECHO .
