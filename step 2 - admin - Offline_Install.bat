@@ -31,7 +31,6 @@ set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
 set PathToRegTaskbar="%ScriptPath%Distr\noarch\PinnedTaskbar.reg"
 set PathToTaskbarFolder="%ScriptPath%Distr\noarch\QuickLaunch.zip"
 
-
 set PathToUserTaskBar="%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
 set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
 set PathToChromeDefault="%ScriptPath%Distr\noarch\Chrome.reg"
@@ -111,7 +110,7 @@ REM Ограничение запуска программ. В разработке. Пока не используется.
 REM создаём папку в корне диска для хранения рабочих файлов
 	mkdir "C:\Softium"
 
-REM Программа Softiun для обучающегося
+REM Программа Softium для обучающегося
 	copy /y %PathToSoftium% "C:\Softium\softiumscan.exe"
 
 REM Добавляем программу softiumscan в исключения брандмауера Windows
@@ -137,18 +136,22 @@ REM Настроим некоторые необходимые параметры
 REM ****************************************************************************************
 
 REM Отключим автоматическое обновление системы
+
 net stop wuauserv
 sc config wuauserv start= disabled
+
+reg ADD HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate /v DoNotConnectToWindowsUpdateInternetLocations /t REG_DWORD /d 1 /f
+reg ADD HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate /v DisableWindowsUpdateAccess /t REG_DWORD /d 1 /f
+reg ADD HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate /v WUServer /t REG_SZ /d " " /f
+reg ADD HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate /v WUStatusServer /t REG_SZ /d " " /f
+reg ADD HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate /v UpdateServiceUrlAlternate /t REG_SZ /d " " /f
+reg ADD HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU /v UseWUServer /t REG_DWORD /d 1 /f
+
+reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
 
 REM Отключим службу поиска Windows
 net stop WSearch
 sc config WSearch start= disabled
-
-REM Отключим автоматическое обновление системы
-sc config wuauserv start= disabled
-
-REM Отключаем автоматическое обновление
-reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoUpdate /t REG_DWORD /d 1 /f
 
 REM Включим на время работы скрипта режим электропитания "Высокая производительность"
 powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
@@ -453,7 +456,7 @@ REM включим режим электропитания "Экономия энергии"
 	powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
 
 REM Отключим некоторые функции Windows
-start "Title" /wait %PathToOOSU10% %PathToOOSU10-CFG% /quiet /nosrp
+REM start "Title" /wait %PathToOOSU10% %PathToOOSU10-CFG% /quiet /nosrp
 
 REM Установим имя компьютера
 set /p MyHostname="Укажите имя компьютера: "
