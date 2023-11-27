@@ -71,10 +71,10 @@ REM Обновляем скрипт очистки профиля пользователя
 REM ****************************************************************************************
 
 REM Удаляем имеющийся файл
-del ""%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat" /q /f
+del "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat" /q /f
 
 REM Скачиваем новый файл
-wget.exe --no-check-certificate -O ""%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat" "https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/step-3-user-CleanUp.bat"
+wget.exe --no-check-certificate -O "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat" "https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/step-3-user-CleanUp.bat"
 
 :ENDSUB
 
