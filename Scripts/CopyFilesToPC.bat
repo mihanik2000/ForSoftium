@@ -41,7 +41,7 @@ REM ****************************************************************************
 	set PathToWallpaper="%ScriptPath%Distr\noarch\Wallpaper.jpg"
 	set PathToRegTaskbar="%ScriptPath%Distr\noarch\PinnedTaskbar.reg"
 	set PathToTaskbarFolder="%ScriptPath%Distr\noarch\QuickLaunch.zip"
-	set PathToGroupPolicy="%ScriptPath%Distr\noarch\GroupPolicy.zip"
+	set PathToGroupPolicy="%ScriptPath%Distr\noarch\GroupPolicy.7z"
 	set PathToDelWindowsApps="%ScriptPath%Distr\noarch\DelWindowsApps.ps1"
 	set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
 	set PathToChromeDefault="%ScriptPath%Distr\noarch\Chrome.reg"
@@ -53,7 +53,7 @@ REM создаём скрытую папку для хранения важных файлов
 	copy /y %PathToWallpaper% "%SystemDrive%\ProgramData\Softium\Wallpaper.jpg"
 	copy /y %PathToRegTaskbar% "%SystemDrive%\ProgramData\Softium\PinnedTaskbar.reg"
 	copy /y %PathToTaskbarFolder% "%SystemDrive%\ProgramData\Softium\QuickLaunch.zip"
-	copy /y %PathToGroupPolicy% "%SystemDrive%\ProgramData\Softium\GroupPolicy.zip"
+	copy /y %PathToGroupPolicy% "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z"
 	copy /y %PathToDelWindowsApps% "%SystemDrive%\ProgramData\Softium\DelWindowsApps.ps1"
 	
 	copy /y %PathToComputerLNK% "%SystemDrive%\ProgramData\Softium\computer.lnk"
