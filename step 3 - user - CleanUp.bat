@@ -42,12 +42,6 @@ Rem Отключаем режим планшета
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v SignInMode /t REG_DWORD /d 2 /f
 
-Rem Устанавливаем обои рабочего стола
-reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Desktop\General\BackUpWallpaper" /v Wallpaper /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Desktop\General\Wallpaper" /v Wallpaper /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Desktop\General\Wallpaper" /v WallpaperSource /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
-
 Rem Настроим панель задач
 del "%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*" /q /s /f
 
@@ -65,13 +59,6 @@ wmic product where name="Голосовой помощник Алиса" call uninstall /nointeractive
 FORFILES /P "%LOCALAPPDATA%\Yandex\YandexBrowser\Application" /S /M setup.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
 
 FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
-
-Rem Применим настройки
-REM TASKKILL /F /IM explorer.exe
-
-REM ping -n 5 127.0.0.1 >> nul
-
-REM start explorer.exe
 
 Rem Почистим папки
 rem del "%USERPROFILE%\3D Objects\*" /q /s /f
@@ -115,6 +102,21 @@ forfiles /P "%USERPROFILE%\AppData\Local\Temp" /C "cmd /c (if @isdir==TRUE rmdir
 
 del "%USERPROFILE%\AppData\LocalLow\Temp\*" /q /s /f
 forfiles /P "%USERPROFILE%\Desktop\AppData\LocalLow\Temp" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
+
+REM ****************************************************************************************
+REM Установим тему Softium
+REM ****************************************************************************************
+
+:: применяем тему
+::[*] rundll32 не умеет в определение текущей папки, поэтому если надо - придется подсунуть ему %cd%
+::[*] пути с кавычками не работают
+rundll32 themecpl.dll,OpenThemeAction %SystemDrive%\ProgramData\Softium\Softium.theme
+ 
+:: прибиваем настройки
+:killsettings_loop
+tasklist | find /i "SystemSettings.exe" > nul 2> nul
+if not %ERRORLEVEL%==0 goto killsettings_loop
+taskkill /f /im SystemSettings.exe > nul
 
 :CONTINUE
 	ECHO .
