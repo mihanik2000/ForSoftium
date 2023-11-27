@@ -313,7 +313,7 @@ wmic computersystem where name="%computername%" call rename name="%MyHostname%"
 
 Rem Установим параметры групповой политики
 
-"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.zip" -o"%windir%\System32"
+"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
 
 :CONTINUE
 	ECHO .
