@@ -38,16 +38,16 @@ REM ****************************************************************************
 REM Устанавливаем Google Chrome
 REM ****************************************************************************************
 
-set PathToGoogleChrome="%ScriptPath%Distr\x32\ChromeStandaloneSetup.exe"
-set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\ChromeStandaloneSetup64.exe"
+set PathToGoogleChrome="%ScriptPath%Distr\x32\GoogleChromeStandaloneEnterprise.msi"
+set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\GoogleChromeStandaloneEnterprise64.msi"
 
 ECHO .
 ECHO Install Google Chrome...
 ECHO .
 	If exist "%SystemDrive%\Program Files (x86)" (
-		start "Install Google Chrome..." /wait %PathToGoogleChrome-x64% /silent /install
+		start "Install Google Chrome..." /wait %PathToGoogleChrome-x64% /passive /norestart
 	 ) else (
- 		start "Install Google Chrome..." /wait %PathToGoogleChrome% /silent /install
+ 		start "Install Google Chrome..." /wait %PathToGoogleChrome% /passive /norestart
  	)
 	
 REM Сделаем Chrome браузером по-умолчанию.

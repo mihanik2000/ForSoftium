@@ -38,7 +38,7 @@ REM ****************************************************************************
 REM Устанавливаем GIMP
 REM ****************************************************************************************
 
-set PathToGIMP="%ScriptPath%Distr\noarch\gimp-2.10.34-setup-2.exe"
+set PathToGIMP="%ScriptPath%Distr\noarch\gimp-2.10.36-setup.exe"
 
 ECHO .
 ECHO Install GIMP...
