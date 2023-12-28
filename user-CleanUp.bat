@@ -1,9 +1,7 @@
-rem exit /b
+@echo off
 
 Rem Постараемся запускать приложения с привилегиями родительского процесса без запроса UAC, т.е. от имени запускающего пользователя
 set __COMPAT_LAYER=RUNASINVOKER
-
-@echo off
 
 REM Выполняем скрипт только для пользователя Softium!!!
 
@@ -61,47 +59,57 @@ FORFILES /P "%LOCALAPPDATA%\Yandex\YandexBrowser\Application" /S /M setup.exe /C
 FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
 
 Rem Почистим папки
-rem del "%USERPROFILE%\3D Objects\*" /q /s /f
 
+rem Контакты
 del "%USERPROFILE%\Contacts\*" /q /s /f
 forfiles /P "%USERPROFILE%\Contacts" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Рабочий стол
 del "%USERPROFILE%\Desktop\*" /q /s /f
 forfiles /P "%USERPROFILE%\Desktop" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem del "%USERPROFILE%\Documents\*" /q /s /f
+rem Загрузки
 del "%USERPROFILE%\Downloads\*" /q /s /f
 forfiles /P "%USERPROFILE%\Downloads" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Избранное
 del "%USERPROFILE%\Favorites\*" /q /s /f
 forfiles /P "%USERPROFILE%\Favorites" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Ссылки
 del "%USERPROFILE%\Links\*" /q /s /f
 forfiles /P "%USERPROFILE%\Links" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Музыка
 del "%USERPROFILE%\Music\*" /q /s /f
 forfiles /P "%USERPROFILE%\Music" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem OneDrive
 del "%USERPROFILE%\OneDrive\*" /q /s /f
 forfiles /P "%USERPROFILE%\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+del "%USERPROFILE%\AppData\Local\Microsoft\OneDrive\*" /q /s /f
+forfiles /P "%USERPROFILE%\AppData\Local\Microsoft\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
+
+rem Изображения
 del "%USERPROFILE%\Pictures\*" /q /s /f
 forfiles /P "%USERPROFILE%\Pictures" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Сохранения игр
 del "%USERPROFILE%\Saved Games\*" /q /s /f
 forfiles /P "%USERPROFILE%\Saved Games" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Поиски
 del "%USERPROFILE%\Searches\*" /q /s /f
 forfiles /P "%USERPROFILE%\Searches" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Видео
 del "%USERPROFILE%\Videos\*" /q /s /f
 forfiles /P "%USERPROFILE%\Videos" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
+rem Временные файлы
 del "%USERPROFILE%\AppData\Local\Temp\*" /q /s /f
 forfiles /P "%USERPROFILE%\AppData\Local\Temp" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
-
-del "%USERPROFILE%\AppData\LocalLow\Temp\*" /q /s /f
-forfiles /P "%USERPROFILE%\Desktop\AppData\LocalLow\Temp" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 REM ****************************************************************************************
 REM Установим тему Softium

@@ -48,7 +48,6 @@ REM Программа Softium для обучающегося
 
 REM Добавляем программу softiumscan в исключения брандмауера Windows
 	netsh advfirewall firewall del rule name="softiumscan"
-	netsh firewall add allowedprogram "%SystemDrive%\Softium\softiumscan.exe" softiumscan
 	netsh advfirewall firewall add rule name="softiumscan" dir=in action=allow program="%SystemDrive%\Softium\softiumscan.exe"
 
 REM + Softium

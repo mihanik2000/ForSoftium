@@ -42,7 +42,7 @@ REM Включим межсетевой экран
 netsh advfirewall set allprofiles state on
 
 REM Разрешим отвечать на ping 
-netsh firewall set icmpsetting 8
+netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol=icmpv4:8,any dir=in action=allow
 
 :ENDSUB
 
