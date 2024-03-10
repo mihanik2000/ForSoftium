@@ -1,5 +1,7 @@
 @echo off
 
+powershell -window minimized -command ""
+
 Rem Постараемся запускать приложения с привилегиями родительского процесса без запроса UAC, т.е. от имени запускающего пользователя
 set __COMPAT_LAYER=RUNASINVOKER
 

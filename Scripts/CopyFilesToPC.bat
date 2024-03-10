@@ -74,7 +74,10 @@ REM Скрипт выключения ПК
 
 REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
 	copy /y "%ScriptPath%user-CleanUp.bat" "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat"
+
+if %BClearSoftiumProfile%==1 (
 	copy /y "%ScriptPath%user-CleanUp.bat" "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat"
+	)
 
 :ENDSUB
 

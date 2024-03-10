@@ -25,114 +25,77 @@ REM ****************************************************************************
 REM Глобальная переменная. Используется во всей сессии CMD
 set ScriptPath=%~dp0
 
+REM set PathToWallpaper="%ScriptPath%Distr\noarch\Wallpaper.jpg"
+
+REM set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
+
+REM set PathToRegTaskbar="%ScriptPath%Distr\noarch\PinnedTaskbar.reg"
+REM set PathToTaskbarFolder="%ScriptPath%Distr\noarch\QuickLaunch.zip"
+
 REM PathToUserTaskBar, вероятно, не используется...
 set PathToUserTaskBar="%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
+
+REM set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
+REM set PathToChromeDefault="%ScriptPath%Distr\noarch\Chrome.reg"
+
+REM Не используется
+REM set PathToRestrictRunReg="%ScriptPath%Distr\noarch\RestrictRun.reg"
+REM set PathToRestrictRunPs1="%ScriptPath%Distr\noarch\RestrictRun.ps1"
+
+REM set PathToGroupPolicy="%ScriptPath%Distr\noarch\GroupPolicy.zip"
+
+REM set PathToDelWindowsApps="%ScriptPath%Distr\noarch\DelWindowsApps.ps1"
+
+rem set PathToWget="%ScriptPath%Distr\x32\wget.exe"
+rem set PathToWget-x64="%ScriptPath%Distr\x64\wget.exe"
+
+REM set PathTolnk="%SystemDrive%\ProgramData\Softium\lnk_create.js"
+
+REM set PathTo7Zip="%ScriptPath%Distr\x32\7z2301.msi"
+REM set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z2301-x64.msi"
+
+REM set PathToAdobeAIR="%ScriptPath%Distr\noarch\AdobeAIR.exe"
+
+REM set PathToScratch="%ScriptPath%Distr\noarch\Scratch-461.exe"
+
+REM set PathToScratchDesktop="%ScriptPath%Distr\noarch\Scratch 3.29.1 Setup.exe"
+
+REM set PathToGIMP="%ScriptPath%Distr\noarch\gimp-2.10.34-setup-2.exe"
+
+REM set PathToGoogleChrome="%ScriptPath%Distr\x32\ChromeStandaloneSetup.exe"
+REM set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\ChromeStandaloneSetup64.exe"
+
+REM set PathToBABYTYPE2000="%ScriptPath%Distr\noarch\BABYTYPE2000.zip"
+
+REM set PathTosnap="%ScriptPath%Distr\noarch\Snap-9.0.5.zip"
+
+REM set PathToNotepad="%ScriptPath%Distr\x32\npp.8.5.7.Installer.exe"
+REM set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.8.5.7.Installer.x64.exe"
+
+REM set PathToconstruct="%ScriptPath%Distr\noarch\construct2-r280-setup.exe"
+
+REM set PathToPlayer="%ScriptPath%Distr\noarch\SWF.max-2.3.exe"
+REM set PathToFlashOCX="%ScriptPath%Distr\noarch\Flash.ocx"
+
+REM set PathToAnimate="%ScriptPath%Distr\noarch\animate.swf"
+REM set PathToAnimateIco="%ScriptPath%Distr\noarch\animate.ico"
+
+REM set PathToxnafx="%ScriptPath%Distr\noarch\xnafx40_redist.msi"
+REM set PathToKodu="%ScriptPath%Distr\noarch\KoduSetup_1.6.18.0.msi"
+
+REM set PathToPython3="%ScriptPath%Distr\noarch\python-3.11.5.exe"
 
 set PathToOOSU10="%ScriptPath%Distr\noarch\OOSU10.exe"
 set PathToOOSU10-CFG="%ScriptPath%Distr\noarch\ooshutup10.cfg"
 
-REM Составляем основное меню программы
-
-set BUserAccounts=1
-set BDisWinUpdates=1
-set BDelWinApps=1
-set BGroupPolicy=1
-set BClerAllUsersDesktop=1
-set BClearSoftiumProfile=1
-
-mode 128,32
-cls
-
-:StartMenu
-
-echo Выберите параметры настройки рабочего места.
-echo .
-
-if %BUserAccounts%==1 (
-		echo 1 - Настроить аккаунты пользователей - Да
-	) else (
-		echo 1 - Настроить аккаунты пользователей - Нет
-	)
-
-if %BDisWinUpdates%==1 (
-		echo 2 - Отключить обновление Windows - Да
-	) else (
-		echo 2 - Отключить обновление Windows - Нет
-	)
-
-if %BDelWinApps%==1 (
-		echo 3 - Удалить "лишние" программы Windows - Да
-	) else (
-		echo 3 - Удалить "лишние" программы Windows - Нет
-	)
-
-if %BGroupPolicy%==1 (
-		echo 4 - Ограничить запуск программ - Да
-	) else (
-		echo 4 - Ограничить запуск программ - Нет
-	)
-
-if %BClerAllUsersDesktop%==1 (
-		echo 5 - Очистить общий рабочий стол - Да
-	) else (
-		echo 5 - Очистить общий рабочий стол - Нет
-	)
-
-if %BClearSoftiumProfile%==1 (
-		echo 6 - Установить скрипт очистки профиля ребёнка - Да
-	) else (
-		echo 6 - Установить скрипт очистки профиля ребёнка - Нет
-	)
-
-echo 7 - Выполнить скрипт с указанными ограничениями
-
-echo 8 - Выполнить скрипт со значениями по-умолчанию
-
-echo 9 - Прервать работу скрипта
-
-CHOICE /C:123456789 /N /T 30 /D 6
-
-cls
-
-if %errorlevel%==1 (if %BUserAccounts%==1  (set BUserAccounts=0) else (set BUserAccounts=1))
-
-if %errorlevel%==2 (if %BDisWinUpdates%==1  (set BDisWinUpdates=0) else (set BDisWinUpdates=1))
-
-if %errorlevel%==3 (if %BDelWinApps%==1  (set BDelWinApps=0) else (set BDelWinApps=1))
-
-if %errorlevel%==4 (if %BGroupPolicy%==1  (set BGroupPolicy=0) else (set BGroupPolicy=1))
-
-if %errorlevel%==5 (if %BClerAllUsersDesktop%==1  (set BClerAllUsersDesktop=0) else (set BClerAllUsersDesktop=1))
-
-if %errorlevel%==6 (if %BClearSoftiumProfile%==1  (set BClearSoftiumProfile=0) else (set BClearSoftiumProfile=1))
-
-if %errorlevel%==7 (goto MyStart)
-
-if %errorlevel%==8 (goto SetDefVal)
-
-if %errorlevel%==9 (EXIT /B)
-
-GOTO StartMenu
-
-:SetDefVal
-
-set BUserAccounts=1
-set BDisWinUpdates=1
-set BDelWinApps=1
-set BGroupPolicy=1
-set BClerAllUsersDesktop=1
-set BClearSoftiumProfile=1
-
-:MyStart
+REM set PathToSetuserFTA="%ScriptPath%Distr\noarch\SetUserFTA\*"
 
 REM ****************************************************************************************
 REM Удалим всё с общего рабочего стола
 REM ****************************************************************************************
 
-if %BClerAllUsersDesktop%==1 (
-	del "%SystemDrive%\Users\Public\Desktop\*" /q /s /f
-	forfiles /P "%SystemDrive%\Users\Public\Desktop" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
-	)
+del "%SystemDrive%\Users\Public\Desktop\*" /q /s /f
+forfiles /P "%SystemDrive%\Users\Public\Desktop" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 REM ****************************************************************************************
 REM Скопируем файлы на настраиваемый компьютер
@@ -150,17 +113,13 @@ REM ****************************************************************************
 REM Настраиваем учётные записи пользователей на компьютере
 REM ****************************************************************************************
 
-if %BUserAccounts%==1 (
-	CALL "%ScriptPath%Scripts\UserAccounts.bat"
-	)
+CALL "%ScriptPath%Scripts\UserAccounts.bat"
 
 REM ****************************************************************************************
 REM Отключим автоматическое обновление системы
 REM ****************************************************************************************
 
-if %BDisWinUpdates%==1 (
-	CALL "%ScriptPath%Scripts\DisableWindowsUpdates.bat"
-	)
+CALL "%ScriptPath%Scripts\DisableWindowsUpdates.bat"
 
 REM ****************************************************************************************
 REM Отключим службу поиска Windows
@@ -318,11 +277,11 @@ REM ****************************************************************************
 
 CALL "%ScriptPath%Scripts\DeleteOneDrive.bat"
 
-Rem Удалим лишние программы Windows
-if %BDelWinApps%==1 (
-	start "Title" /wait powershell -command "Set-ExecutionPolicy Bypass -Force"
-	start "Title" /wait powershell -File  "%SystemDrive%\ProgramData\Softium\DelWindowsApps.ps1"
-	)
+Rem Удалим лишние программы
+
+start "Title" /wait powershell -command "Set-ExecutionPolicy Bypass -Force"
+
+start "Title" /wait powershell -File  "%SystemDrive%\ProgramData\Softium\DelWindowsApps.ps1"
 
 REM Отключаем режим планшета
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f
@@ -333,6 +292,14 @@ REM Установим собственную тему оформления
 CALL "%ScriptPath%Scripts\SetSoftiumTheme.bat"
 
 REM Включим защитника Windows
+
+REM start "Title" /wait powershell -command "Set-MpPreference -DisableRealtimeMonitoring $false"
+
+REM reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
+REM reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableBehaviorMonitoring /t REG_DWORD /d 0 /f
+REM reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableOnAccessProtection /t REG_DWORD /d 0 /f
+REM reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableScanOnRealtimeEnable /t REG_DWORD /d 0 /f
+REM reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableIOAVProtection /t REG_DWORD /d 0 /f
 
 powershell -command "Set-MpPreference -DisableArchiveScanning $false"
 powershell -command "Set-MpPreference -DisableAutoExclusions $false"
@@ -355,15 +322,14 @@ set /p MyHostname="Укажите имя компьютера: "
 wmic computersystem where name="%computername%" call rename name="%MyHostname%"
 
 Rem Установим параметры групповой политики
-if %BGroupPolicy%==1 (
-	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
-	)
 
-ECHO .
-ECHO Всё!
-ECHO .
-ECHO Перезагрузка через 10 секунд...
-	
+"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
+
+:CONTINUE
+	ECHO .
+	ECHO Всё!
+	ECHO .
+	ECHO Перезагрузка через 10 секунд...
 :END
 
 timeout 10 /nobreak
