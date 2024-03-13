@@ -116,7 +116,7 @@ Rem Устанавливаем ассоциации файлов
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .TS  AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .TTS  AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .txt  txtfile
-"%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .url  ChromeHTML
+REM "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .url  ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .wav  AppXqj98qxeaynz6dv4459ayz6bnqxbyaqcs
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .wdp  AppX43hnxtbyyps62jhe9sqpdzxn1790zetc
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .webm  AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
