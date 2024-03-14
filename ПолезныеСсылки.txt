@@ -1,0 +1,19 @@
+Полный архив репозитория для Softium
+
+	https://repo.mihanik.net/ForSoftium.zip
+
+Админка облачного управления Google Chrome
+
+	https://admin.google.com/u/2/ac/home
+
+Регистрация облачного управления Google Chrome
+
+	https://support.google.com/chrome/a/answer/9116814?hl=ru
+
+Adblock Plus. Описание правил создания фильтров.
+
+	https://help.adblockplus.org/hc/en-us/articles/360062733293-How-to-write-filters?lang=ru&link=filterdoc#creating-filters
+
+Мой список фильтров
+
+	https://repo.mihanik.net/MyFilter.txt
