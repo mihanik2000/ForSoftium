@@ -27,18 +27,11 @@ IF NOT %HasAdminRights%==1 (
 	GOTO ENDSUB
 )
 
-if NOT defined ScriptPath (
-	ECHO .
-	ECHO Не определена переменная ScriptPath
-	ECHO .
-	GOTO ENDSUB
-)
-
 REM ****************************************************************************************
-REM Запланируем на всякий случай ежедневное выключение в 21:00
+REM Запланируем задачу по обновлению рабочих файлов
 REM ****************************************************************************************
 
-SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC DAILY /TN "Microsoft\Office\Office Shutdown" /TR  "\"%SystemDrive%\Windows\System32\shutdown.exe\" /s /f /t 00"  /ST 21:00 /RL HIGHEST /F
+SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\FileUpdater.bat\"" /RL HIGHEST /F /DELAY 0010:00
 
 :ENDSUB
 

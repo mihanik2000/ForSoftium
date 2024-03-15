@@ -46,6 +46,8 @@ REM ****************************************************************************
 	set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
 	set PathToChromeDefault="%ScriptPath%Distr\noarch\Chrome.reg"
 	set PathToTheme="%ScriptPath%Distr\noarch\Softium.theme"
+	set PathToFileUpdater="%ScriptPath%Scripts\FileUpdater.bat"
+	set PathToFileUpdaterInstaller="%ScriptPath%Scripts\ScheduleFileUpdate.bat"
 
 REM создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
@@ -78,6 +80,11 @@ REM Скрипт очистки папок пользователей. Производит действия только для пользоват
 if %BClearSoftiumProfile%==1 (
 	copy /y "%ScriptPath%user-CleanUp.bat" "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat"
 	)
+	
+REM Скрипт обновления служебных файлов
+	copy /y "%PathToFileUpdater%"  "%SystemDrive%\ProgramData\Softium\FileUpdater.bat"
+	copy /y "%PathToFileUpdaterInstaller%"  "%SystemDrive%\ProgramData\Softium\ScheduleFileUpdate.bat"
+
 
 :ENDSUB
 

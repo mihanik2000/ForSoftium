@@ -11,6 +11,8 @@ REM                        Dependencies: No
 REM
 REM Описание
 REM
+REM Процедура обновляет используемые в работе на ПК файлы.
+REM
 REM ****************************************
 
 rem Проверяем наличие у пользователя админских прав...
@@ -27,58 +29,52 @@ IF NOT %HasAdminRights%==1 (
 	GOTO ENDSUB
 )
 
-REM ****************************************************************************************
-REM Описание процедуры
-REM ****************************************************************************************
-
-
 REM Задаём URL файлов
 
-	set PathToWallpaper="%ScriptPath%Distr\noarch\Wallpaper.jpg"
-	set PathToRegTaskbar="%ScriptPath%Distr\noarch\PinnedTaskbar.reg"
-	set PathToTaskbarFolder="%ScriptPath%Distr\noarch\QuickLaunch.zip"
-	set PathToGroupPolicy="%ScriptPath%Distr\noarch\GroupPolicy.7z"
-	set PathToDelWindowsApps="%ScriptPath%Distr\noarch\DelWindowsApps.ps1"
-	set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
-	set PathToChromeDefault="%ScriptPath%Distr\noarch\Chrome.reg"
-	set PathToTheme="%ScriptPath%Distr\noarch\Softium.theme"
+	set PathToWallpaper="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/Wallpaper.jpg"
+	set PathToRegTaskbar="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/PinnedTaskbar.reg"
+	set PathToTaskbarFolder="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/QuickLaunch.zip"
+	set PathToGroupPolicy="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/GroupPolicy.7z"
+	set PathToDelWindowsApps="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/DelWindowsApps.ps1"
+	set PathToComputerLNK="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/computer.lnk"
+	set PathToChromeDefault="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/Chrome.reg"
+	set PathToTheme="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/Softium.theme"
+	set PathToCleanUp="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/user-CleanUp.bat"
+	
+	set PathToLnkCreate="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/lnk_create.js"
+	
+	set PathToFileDelete="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/file_delete.js"
+	
+	set PathToPowerOff="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/shutdown.bat"
 
 REM создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
 
-	copy /y %PathToWallpaper% "%SystemDrive%\ProgramData\Softium\Wallpaper.jpg"
-	copy /y %PathToRegTaskbar% "%SystemDrive%\ProgramData\Softium\PinnedTaskbar.reg"
-	copy /y %PathToTaskbarFolder% "%SystemDrive%\ProgramData\Softium\QuickLaunch.zip"
-	copy /y %PathToGroupPolicy% "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z"
-	copy /y %PathToDelWindowsApps% "%SystemDrive%\ProgramData\Softium\DelWindowsApps.ps1"
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\Wallpaper.jpg" %PathToWallpaper%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\PinnedTaskbar.reg" %PathToRegTaskbar%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\QuickLaunch.zip" %PathToTaskbarFolder%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" %PathToGroupPolicy%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DelWindowsApps.ps1" %PathToDelWindowsApps% 
 	
-	copy /y %PathToComputerLNK% "%SystemDrive%\ProgramData\Softium\computer.lnk"
-	copy /y %PathToChromeDefault% "%SystemDrive%\ProgramData\Softium\Chrome.reg"
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\computer.lnk" %PathToComputerLNK%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\Chrome.reg" %PathToChromeDefault%
 	
-	copy /y %PathToTheme% "%SystemDrive%\ProgramData\Softium\Softium.theme"
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\Softium.theme" %PathToTheme%
 	
 REM Служебные JAVA-Скрипты
 REM Скрипт создания ссылки на файл
-	copy /y "%ScriptPath%Distr\noarch\lnk_create.js" "%SystemDrive%\ProgramData\Softium\lnk_create.js"
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\lnk_create.js" %PathToLnkCreate%
 
 REM Скрипт удаления файла
-	copy /y "%ScriptPath%Distr\noarch\file_delete.js" "%SystemDrive%\ProgramData\Softium\file_delete.js"
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\file_delete.js" %PathToFileDelete%
 
 REM Дополнительные скрипты
 REM Скрипт выключения ПК
-	copy /y "%ScriptPath%Distr\noarch\shutdown.bat"  "%SystemDrive%\ProgramData\Softium\shutdown.bat"
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\shutdown.bat" %PathToPowerOff%
 
 REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
-	copy /y "%ScriptPath%user-CleanUp.bat" "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat"
-
-if %BClearSoftiumProfile%==1 (
-	copy /y "%ScriptPath%user-CleanUp.bat" "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat"
-	)
-
-
-
-
-
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat" %PathToCleanUp%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat" %PathToCleanUp%
 
 :ENDSUB
 
