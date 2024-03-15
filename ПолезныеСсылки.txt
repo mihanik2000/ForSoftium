@@ -17,3 +17,11 @@ Adblock Plus. Описание правил создания фильтров.
 Мой список фильтров
 
 	https://repo.mihanik.net/MyFilter.txt
+
+Common Startup
+
+	C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
+
+Common Desktop
+
+	C:\Users\Public\Desktop

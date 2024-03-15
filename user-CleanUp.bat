@@ -238,6 +238,16 @@ tasklist | find /i "SystemSettings.exe" > nul 2> nul
 if not %ERRORLEVEL%==0 goto killsettings_loop
 taskkill /f /im SystemSettings.exe > nul
 
+REM Возвращаем правильное название "Мой компьютер"
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /ve /d "Мой компьютер" /t REG_SZ /f > nul 2> nul
+ 
+REM Возвращаем правильное название "Корзина"
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" /ve /d "Корзина" /t REG_SZ /f > nul 2> nul
+ 
+REM Перезапуск explorer.exe
+taskkill /f /im explorer.exe > nul
+start explorer.exe
+
 :CONTINUE
 	ECHO .
 	ECHO Всё!
