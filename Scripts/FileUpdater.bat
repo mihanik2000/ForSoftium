@@ -75,6 +75,10 @@ REM Скрипт выключения ПК
 REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat" %PathToCleanUp%
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat" %PathToCleanUp%
+	
+Rem Установим параметры групповой политики
+	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
+	gpupdate /force
 
 :ENDSUB
 
