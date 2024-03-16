@@ -43,8 +43,6 @@ REM ****************************************************************************
 	set PathToTaskbarFolder="%ScriptPath%Distr\noarch\QuickLaunch.zip"
 	set PathToGroupPolicy="%ScriptPath%Distr\noarch\GroupPolicy.7z"
 	set PathToDelWindowsApps="%ScriptPath%Distr\noarch\DelWindowsApps.ps1"
-	set PathToComputerLNK="%ScriptPath%Distr\noarch\computer.lnk"
-	set PathToChromeDefault="%ScriptPath%Distr\noarch\Chrome.reg"
 	set PathToTheme="%ScriptPath%Distr\noarch\Softium.theme"
 	set PathToFileUpdater="%ScriptPath%Scripts\FileUpdater.bat"
 	set PathToFileUpdaterInstaller="%ScriptPath%Scripts\ScheduleFileUpdate.bat"
@@ -59,9 +57,6 @@ REM создаём скрытую папку для хранения важных файлов
 	copy /y %PathToTaskbarFolder% "%SystemDrive%\ProgramData\Softium\QuickLaunch.zip"
 	copy /y %PathToGroupPolicy% "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z"
 	copy /y %PathToDelWindowsApps% "%SystemDrive%\ProgramData\Softium\DelWindowsApps.ps1"
-	
-	copy /y %PathToComputerLNK% "%SystemDrive%\ProgramData\Softium\computer.lnk"
-	copy /y %PathToChromeDefault% "%SystemDrive%\ProgramData\Softium\Chrome.reg"
 	
 	copy /y %PathToTheme% "%SystemDrive%\ProgramData\Softium\Softium.theme"
 	

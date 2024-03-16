@@ -26,9 +26,10 @@ IF NOT %HasAdminRights%==1 (
 	ECHO .
 	GOTO ENDSUB
 )
-REM Запретим изображение на экране блокировки системы
-
+REM Запретим изображение на экране блокировки системы, установим своё изображение
 	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v DisableLogonBackgroundImage /t REG_DWORD /d 1 /f
+	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization" /v NoLockScreenChange /t REG_DWORD /d 1 /f
+	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization" /v LockScreenImage /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
 
 REM ****************************************************************************************
 REM Описание процедуры
