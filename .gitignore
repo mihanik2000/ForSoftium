@@ -3,3 +3,4 @@
 *.rar
 *.iso
 *.zip
+!QuickLaunch.zip
