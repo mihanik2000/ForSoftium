@@ -85,8 +85,9 @@ REM Скрипт очистки папок пользователей. Производит действия только для пользоват
 REM Скрипт удаления OneDrive
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat" %PathToDeleteOneDrive%
 
-REM Удалим ярлыки Microsoft Edge
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "" "C:\Users\Softium\Desktop\Microsoft Edge.lnk"
+REM Удалим лишние ярлыки и файлы
+	del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\step 3 - user - CleanUp.bat" /q /f
+	del "C:\Users\Softium\Desktop\Microsoft Edge.lnk" /q /f
 	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\Microsoft Edge.lnk"
 
 REM Запретим изображение на экране блокировки системы
