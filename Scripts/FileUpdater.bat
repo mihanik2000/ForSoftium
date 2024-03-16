@@ -89,6 +89,9 @@ REM Удалим ярлыки Microsoft Edge
 	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "" "C:\Users\Softium\Desktop\Microsoft Edge.lnk"
 	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\Microsoft Edge.lnk"
 
+REM Запретим изображение на экране блокировки системы
+	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v DisableLogonBackgroundImage /t REG_DWORD /d 1 /f
+
 Rem Установим параметры групповой политики
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
 	gpupdate /force

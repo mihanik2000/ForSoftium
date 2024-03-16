@@ -331,6 +331,8 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveSh
 
 REM Установим собственную тему оформления
 
+SetLockScreen.bat
+CALL "%ScriptPath%Scripts\SetLockScreen.bat"
 CALL "%ScriptPath%Scripts\SetSoftiumTheme.bat"
 
 REM Включим защитника Windows
