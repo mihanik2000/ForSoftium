@@ -47,6 +47,7 @@ REM ****************************************************************************
 	set PathToFileUpdater="%ScriptPath%Scripts\FileUpdater.bat"
 	set PathToFileUpdaterInstaller="%ScriptPath%Scripts\ScheduleFileUpdate.bat"
 	set PathToDeleteOneDrive="%ScriptPath%Scripts\DeleteOneDrive.bat"
+	set PathToSetLockScreen="%ScriptPath%Scripts\SetLockScreen.bat"
 	
 
 REM создаём скрытую папку для хранения важных файлов
@@ -86,6 +87,9 @@ REM Скрипт обновления служебных файлов
 
 REM Скрипт удаления OneDrive
 	copy /y "%PathToDeleteOneDrive%"  "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
+	
+REM Скрипт настройки экрана блокировки Windows
+	copy /y "%PathToSetLockScreen%"  "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat"
 
 :ENDSUB
 

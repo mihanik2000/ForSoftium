@@ -29,7 +29,9 @@ IF NOT %HasAdminRights%==1 (
 	GOTO ENDSUB
 )
 
+REM ==================================
 REM Задаём URL файлов
+REM ==================================
 
 	set PathToWallpaper="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/Wallpaper.jpg"
 	set PathToRegTaskbar="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/PinnedTaskbar.reg"
@@ -47,11 +49,15 @@ REM Задаём URL файлов
 	set PathToPowerOff="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/shutdown.bat"
 	
 	set PathToDeleteOneDrive="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/DeleteOneDrive.bat"
+	
+	set PathToSetLockScreen="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/SetLockScreen.bat"
+
+REM ==================================
+REM Скачиваем актуальные версии файлов
+REM ==================================
 
 REM создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
-
-REM Скачиваем актуальные версии файлов
 
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\Wallpaper.jpg" %PathToWallpaper%
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\PinnedTaskbar.reg" %PathToRegTaskbar%
@@ -82,16 +88,21 @@ REM Скрипт очистки папок пользователей. Производит действия только для пользоват
 
 REM Скрипт удаления OneDrive
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat" %PathToDeleteOneDrive%
+	
+REM Скрипт настройки экрана блокировки Windows
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat" %PathToSetLockScreen%
+
+REM ==================================
+REM Выполняем настройку
+REM ==================================
+
+REM Запретим изображение на экране блокировки системы, установим своё изображение
+	CALL "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat"
 
 REM Удалим лишние ярлыки и файлы
 	del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\step 3 - user - CleanUp.bat" /q /f
 	del "C:\Users\Softium\Desktop\Microsoft Edge.lnk" /q /f
 	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\Microsoft Edge.lnk"
-
-REM Запретим изображение на экране блокировки системы, установим своё изображение
-	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v DisableLogonBackgroundImage /t REG_DWORD /d 1 /f
-	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization" /v NoLockScreenChange /t REG_DWORD /d 1 /f
-	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization" /v LockScreenImage /t REG_SZ /d "C:\ProgramData\Softium\Wallpaper.jpg" /f
 
 Rem Установим параметры групповой политики
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
