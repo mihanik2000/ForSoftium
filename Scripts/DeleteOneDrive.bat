@@ -20,20 +20,6 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
-	ECHO .
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
-	GOTO ENDSUB
-)
-
-if NOT defined ScriptPath (
-	ECHO .
-	ECHO Не определена переменная ScriptPath
-	ECHO .
-	GOTO ENDSUB
-)
-
 REM ****************************************************************************************
 REM Удалим One Drive
 REM ****************************************************************************************
@@ -44,8 +30,6 @@ taskkill /f /im OneDrive.exe
 	 ) else (
  		start "Title" /wait %SystemRoot%\System32\OneDriveSetup.exe /uninstall
  	)
-
-:ENDSUB
 
 timeout 3 /nobreak
 
