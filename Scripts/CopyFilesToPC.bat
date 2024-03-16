@@ -48,6 +48,8 @@ REM ****************************************************************************
 	set PathToTheme="%ScriptPath%Distr\noarch\Softium.theme"
 	set PathToFileUpdater="%ScriptPath%Scripts\FileUpdater.bat"
 	set PathToFileUpdaterInstaller="%ScriptPath%Scripts\ScheduleFileUpdate.bat"
+	set PathToDeleteOneDrive="%ScriptPath%Scripts\DeleteOneDrive.bat"
+	
 
 REM создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
@@ -64,6 +66,7 @@ REM создаём скрытую папку для хранения важных файлов
 	copy /y %PathToTheme% "%SystemDrive%\ProgramData\Softium\Softium.theme"
 	
 REM Служебные JAVA-Скрипты
+
 REM Скрипт создания ссылки на файл
 	copy /y "%ScriptPath%Distr\noarch\lnk_create.js" "%SystemDrive%\ProgramData\Softium\lnk_create.js"
 
@@ -71,6 +74,7 @@ REM Скрипт удаления файла
 	copy /y "%ScriptPath%Distr\noarch\file_delete.js" "%SystemDrive%\ProgramData\Softium\file_delete.js"
 
 REM Дополнительные скрипты
+
 REM Скрипт выключения ПК
 	copy /y "%ScriptPath%Distr\noarch\shutdown.bat"  "%SystemDrive%\ProgramData\Softium\shutdown.bat"
 
@@ -85,6 +89,8 @@ REM Скрипт обновления служебных файлов
 	copy /y "%PathToFileUpdater%"  "%SystemDrive%\ProgramData\Softium\FileUpdater.bat"
 	copy /y "%PathToFileUpdaterInstaller%"  "%SystemDrive%\ProgramData\Softium\ScheduleFileUpdate.bat"
 
+REM Скрипт удаления OneDrive
+	copy /y "%PathToDeleteOneDrive%"  "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
 
 :ENDSUB
 

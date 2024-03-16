@@ -27,5 +27,6 @@ Common Desktop
 	C:\Users\Public\Desktop
 
 FileUpdater
+
 	C:\ProgramData\Softium\FileUpdater.bat
 

@@ -170,6 +170,10 @@ FORFILES /P "%LOCALAPPDATA%\Yandex\YandexBrowser\Application" /S /M setup.exe /C
 
 FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
 
+REM Удалим OneDrive
+
+CALL "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
+
 Rem Почистим папки
 
 rem Контакты
