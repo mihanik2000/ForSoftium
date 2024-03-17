@@ -52,6 +52,8 @@ REM ==================================
 	
 	set PathToSetLockScreen="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/SetLockScreen.bat"
 
+	set PathToDelFilesFromPC="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/DelFilesFromPC.bat"
+
 REM ==================================
 REM Скачиваем актуальные версии файлов
 REM ==================================
@@ -90,7 +92,9 @@ REM Скрипт удаления OneDrive
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat" %PathToDeleteOneDrive%
 	
 REM Скрипт настройки экрана блокировки Windows
-	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat" %PathToSetLockScreen%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DelFilesFromPC.bat" %PathToDelFilesFromPC%
+	
+REM Скрипт удаления лишних файлов и ярлыков с компьютера
 
 REM ==================================
 REM Выполняем настройку
@@ -100,9 +104,7 @@ REM Запретим изображение на экране блокировки системы, установим своё изображени
 	CALL "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat"
 
 REM Удалим лишние ярлыки и файлы
-	del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\step 3 - user - CleanUp.bat" /q /f
-	del "C:\Users\Softium\Desktop\Microsoft Edge.lnk" /q /f
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\Microsoft Edge.lnk"
+	CALL "%SystemDrive%\ProgramData\Softium\DelFilesFromPC.bat"
 
 Rem Установим параметры групповой политики
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"

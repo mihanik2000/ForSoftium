@@ -9,6 +9,8 @@ REM        Require administrator rights: YES
 REM Antivirus software must be disabled: Not necessary
 REM                        Dependencies: No
 REM
+REM Windows Machine Guid:
+REM HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography\MachineGuid
 REM Описание
 REM
 REM ****************************************
@@ -20,16 +22,17 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-REM ****************************************************************************************
-REM Удалим One Drive
-REM ****************************************************************************************
+IF NOT %HasAdminRights%==1 (
+	ECHO .
+	ECHO Вам нужны права администратора для запуска этого скрипта!
+	ECHO .
+	GOTO ENDSUB
+)
 
-taskkill /f /im OneDrive.exe
-	If exist "%SystemDrive%\Program Files (x86)" (
-		If exist "%SystemRoot%\SysWOW64\OneDriveSetup.exe" start "Title" /wait %SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
-	 ) else (
- 		If exist "%SystemRoot%\System32\OneDriveSetup.exe" start "Title" /wait %SystemRoot%\System32\OneDriveSetup.exe /uninstall
- 	)
+REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Google\Chrome\Enrollment" /va /f
+REG DELETE "HKEY_LOCAL_MACHINE\Software\WOW6432Node\Google\Enrollment" /va /f
+
+:ENDSUB
 
 timeout 3 /nobreak
 
