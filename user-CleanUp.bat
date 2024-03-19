@@ -144,10 +144,6 @@ REM "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .url  ChromeHTML
 Rem включим режим электропитания "Экономия энергии"
 powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
 
-Rem Удалим лишние ярлыки
-Rem - Microsoft Edge
-	cscript /nologo /e:jscript "C:\ProgramData\Softium\file_delete.js" "Desktop" "\Microsoft Edge.lnk"
-
 Rem Отключаем режим планшета
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v SignInMode /t REG_DWORD /d 2 /f
@@ -161,18 +157,6 @@ regedit.exe /s "C:\ProgramData\Softium\PinnedTaskbar.reg"
 
 Rem Отбражаем Мой компьютер
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
-
-REM Удалим программы Яндекса
-
-wmic product where name="Голосовой помощник Алиса" call uninstall /nointeractive
-
-FORFILES /P "%LOCALAPPDATA%\Yandex\YandexBrowser\Application" /S /M setup.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
-
-FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
-
-REM Удалим OneDrive
-
-CALL "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
 
 Rem Почистим папки
 
@@ -252,10 +236,28 @@ REM Перезапуск explorer.exe
 taskkill /f /im explorer.exe > nul
 start explorer.exe
 
+REM Удалим программы Яндекса
+
+wmic product where name="Голосовой помощник Алиса" call uninstall /nointeractive
+
+FORFILES /P "%LOCALAPPDATA%\Yandex\YandexBrowser\Application" /S /M setup.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
+
+FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
+
+REM Удалим OneDrive
+
+CALL "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
+
+REM Выводим на рабочий стол техническую информацию о ПК
+reg add HKEY_CURRENT_USER\Software\Sysinternals\BGInfo /v EulaAccepted /t REG_DWORD /d 1 /f
+"%ProgramFiles%\BGInfo\Bginfo.exe" "%ProgramFiles%\BGInfo\BGSettings.bgi" /silent /TIMER:00 /nolicprompt
+
 :CONTINUE
 	ECHO .
 	ECHO Всё!
 	ECHO .
 :END
+
+
 
 EXIT /B
