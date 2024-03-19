@@ -98,11 +98,11 @@ REM Скрипт настройки экрана блокировки Windows
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DelFilesFromPC.bat" %PathToDelFilesFromPC%
 	
 REM Скрипт выведения на рабочий стол технической информации о ПК
-	If exist "%ProgramFiles%\BGInfo" (
+	If exist "%ProgramFiles%\BGInfo\Bginfo.exe" (
 		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\BGSettings.bgi" %PathToBGInfo%
 	 ) else (
 		mkdir "%ProgramFiles%\BGInfo"
-		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\PathToBGexe" %PathToBGexe%
+		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\Bginfo.exe" %PathToBGexe%
  		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\BGSettings.bgi" %PathToBGInfo%
  	)
 
