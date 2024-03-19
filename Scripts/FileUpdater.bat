@@ -53,6 +53,9 @@ REM ==================================
 	set PathToSetLockScreen="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/SetLockScreen.bat"
 
 	set PathToDelFilesFromPC="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/DelFilesFromPC.bat"
+	
+	set PathToBGInfo="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/BGInfo/BGSettings.bgi"
+	set PathToBGexe="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/BGInfo/Bginfo.exe"
 
 REM ==================================
 REM Скачиваем актуальные версии файлов
@@ -94,6 +97,15 @@ REM Скрипт удаления OneDrive
 REM Скрипт настройки экрана блокировки Windows
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DelFilesFromPC.bat" %PathToDelFilesFromPC%
 	
+REM Скрипт выведения на рабочий стол технической информации о ПК
+	If exist "%ProgramFiles%\BGInfo" (
+		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\BGSettings.bgi" %PathToBGInfo%
+	 ) else (
+		mkdir "%ProgramFiles%\BGInfo"
+		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\PathToBGexe" %PathToBGexe%
+ 		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\BGSettings.bgi" %PathToBGInfo%
+ 	)
+
 REM Скрипт удаления лишних файлов и ярлыков с компьютера
 
 REM ==================================

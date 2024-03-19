@@ -4,3 +4,4 @@
 *.iso
 *.zip
 !QuickLaunch.zip
+!Bginfo.exe
