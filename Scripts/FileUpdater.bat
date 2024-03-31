@@ -88,7 +88,10 @@ REM Дополнительные скрипты
 
 REM Скрипт обновления FileUpdater
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat" %PathToUpdaterOfFileUpdater%
-	SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\Update File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat\"" /RL HIGHEST /F /DELAY 0005:00
+	schtasks /query /fo LIST /tn "Microsoft\Office\Update File Updater"
+	if %ERRORLEVEL%==1 (
+		SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\Update File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat\"" /RL HIGHEST /F /DELAY 0005:00
+	)
 
 REM Скрипт выключения ПК
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\shutdown.bat" %PathToPowerOff%

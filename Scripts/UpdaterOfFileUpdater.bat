@@ -38,7 +38,10 @@ REM Скачиваем скрипт-обновлятор и планируем �
 REM ***********************************************************************************************
 
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\FileUpdater.bat" %URLFileUpdater%
-	SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\FileUpdater.bat\"" /RL HIGHEST /F /DELAY 0010:00
+	schtasks /query /fo LIST /tn "\Microsoft\Office\File Updater"
+	if %ERRORLEVEL%==1 (
+		SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\FileUpdater.bat\"" /RL HIGHEST /F /DELAY 0010:00
+	)
 
 timeout 3 /nobreak
 
