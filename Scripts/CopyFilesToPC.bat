@@ -46,6 +46,7 @@ REM ****************************************************************************
 	set PathToTheme="%ScriptPath%Distr\noarch\Softium.theme"
 	set PathToFileUpdater="%ScriptPath%Scripts\FileUpdater.bat"
 	set PathToFileUpdaterInstaller="%ScriptPath%Scripts\ScheduleFileUpdate.bat"
+	set PathToUpdaterOfFileUpdater="%ScriptPath%Scripts\UpdaterOfFileUpdater.bat"
 	set PathToDeleteOneDrive="%ScriptPath%Scripts\DeleteOneDrive.bat"
 	set PathToSetLockScreen="%ScriptPath%Scripts\SetLockScreen.bat"
 	
@@ -81,9 +82,10 @@ if %BClearSoftiumProfile%==1 (
 	copy /y "%ScriptPath%user-CleanUp.bat" "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat"
 	)
 	
-REM Скрипт обновления служебных файлов
+REM Скрипты обновления служебных файлов
 	copy /y "%PathToFileUpdater%"  "%SystemDrive%\ProgramData\Softium\FileUpdater.bat"
 	copy /y "%PathToFileUpdaterInstaller%"  "%SystemDrive%\ProgramData\Softium\ScheduleFileUpdate.bat"
+	copy /y "%PathToUpdaterOfFileUpdater%"  "%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat"
 
 REM Скрипт удаления OneDrive
 	copy /y "%PathToDeleteOneDrive%"  "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
