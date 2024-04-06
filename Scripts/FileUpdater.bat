@@ -59,8 +59,8 @@ REM ==================================
 	
 	set PathToUpdaterOfFileUpdater="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/UpdaterOfFileUpdater.bat"
 	
-	set PathToAdblockPlus=
-	PathToAdblockSettings=
+	set PathToAdblockPlus="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/RestoreAdblockSettings.bat"
+	set PathToAdblockSettings="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/IndexedDB.zip"
 
 REM ==================================
 REM Скачиваем актуальные версии файлов
@@ -94,6 +94,14 @@ REM Скрипт обновления FileUpdater
 	schtasks /query /fo LIST /tn "Microsoft\Office\Update File Updater"
 	if %ERRORLEVEL%==1 (
 		SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\Update File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat\"" /RL HIGHEST /F /DELAY 0005:00
+	)
+
+REM Скрипт восстановления настроек Adblock Plus
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\RestoreAdblockSettings.bat" %PathToAdblockPlus%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\IndexedDB.zip" %PathToAdblockSettings%
+	schtasks /query /fo LIST /tn "Microsoft\Office\Restore Adblock Plus Settings"
+	if %ERRORLEVEL%==1 (
+		SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\Restore Adblock Plus Settings" /TR  "\"%SystemDrive%\ProgramData\Softium\RestoreAdblockSettings.bat\"" /RL HIGHEST /F
 	)
 
 REM Скрипт выключения ПК
