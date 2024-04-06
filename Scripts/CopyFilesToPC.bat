@@ -50,6 +50,9 @@ REM ****************************************************************************
 	set PathToDeleteOneDrive="%ScriptPath%Scripts\DeleteOneDrive.bat"
 	set PathToSetLockScreen="%ScriptPath%Scripts\SetLockScreen.bat"
 	
+	set PathToAdblockPlus="%ScriptPath%Scripts\RestoreAdblockSettings.bat"
+	set PathToAdblockSettings="%ScriptPath%Distr\noarch\IndexedDB.zip"
+	
 
 REM создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
@@ -86,6 +89,10 @@ REM Скрипты обновления служебных файлов
 	copy /y "%PathToFileUpdater%"  "%SystemDrive%\ProgramData\Softium\FileUpdater.bat"
 	copy /y "%PathToFileUpdaterInstaller%"  "%SystemDrive%\ProgramData\Softium\ScheduleFileUpdate.bat"
 	copy /y "%PathToUpdaterOfFileUpdater%"  "%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat"
+	
+REM Скрипт восстановления настроек Adblock Plus у пользователя Softium
+	copy /y "%PathToAdblockPlus%"  "%SystemDrive%\ProgramData\Softium\RestoreAdblockSettings.bat"
+	copy /y "%PathToAdblockSettings%"  "%SystemDrive%\ProgramData\Softium\IndexedDB.zip"
 
 REM Скрипт удаления OneDrive
 	copy /y "%PathToDeleteOneDrive%"  "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"

@@ -58,6 +58,9 @@ REM ==================================
 	set PathToBGexe="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/BGInfo/Bginfo.exe"
 	
 	set PathToUpdaterOfFileUpdater="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/UpdaterOfFileUpdater.bat"
+	
+	set PathToAdblockPlus=
+	PathToAdblockSettings=
 
 REM ==================================
 REM Скачиваем актуальные версии файлов

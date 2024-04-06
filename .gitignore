@@ -5,3 +5,4 @@
 *.zip
 !QuickLaunch.zip
 !Bginfo.exe
+!IndexedDB.zip
