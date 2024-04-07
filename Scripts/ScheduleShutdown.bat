@@ -32,6 +32,7 @@ REM Запланируем на всякий случай ежедневное выключение в 21:00
 REM ****************************************************************************************
 
 SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC DAILY /TN "Microsoft\Office\Office Shutdown" /TR  "\"%SystemDrive%\Windows\System32\shutdown.exe\" /s /f /t 00"  /ST 21:00 /RL HIGHEST /F
+Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\Office Shutdown\" -Settings $Parm"
 
 :ENDSUB
 

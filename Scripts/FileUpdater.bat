@@ -94,6 +94,7 @@ REM Скрипт обновления FileUpdater
 	schtasks /query /fo LIST /tn "Microsoft\Office\Update File Updater"
 	if %ERRORLEVEL%==1 (
 		SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\Update File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat\"" /RL HIGHEST /F /DELAY 0005:00
+		Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\Update File Updater\" -Settings $Parm"
 	)
 
 REM Скрипт восстановления настроек Adblock Plus
@@ -102,6 +103,7 @@ REM Скрипт восстановления настроек Adblock Plus
 	schtasks /query /fo LIST /tn "Microsoft\Office\Restore Adblock Plus Settings"
 	if %ERRORLEVEL%==1 (
 		SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\Restore Adblock Plus Settings" /TR  "\"%SystemDrive%\ProgramData\Softium\RestoreAdblockSettings.bat\"" /RL HIGHEST /F
+		Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\Restore Adblock Plus Settings\" -Settings $Parm"
 	)
 
 REM Скрипт выключения ПК

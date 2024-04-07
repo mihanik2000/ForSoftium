@@ -41,6 +41,7 @@ REM ****************************************************************************
 	schtasks /query /fo LIST /tn "\Microsoft\Office\File Updater"
 	if %ERRORLEVEL%==1 (
 		SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC ONSTART /TN "Microsoft\Office\File Updater" /TR  "\"%SystemDrive%\ProgramData\Softium\FileUpdater.bat\"" /RL HIGHEST /F /DELAY 0010:00
+		Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\File Updater\" -Settings $Parm"
 	)
 
 timeout 3 /nobreak
