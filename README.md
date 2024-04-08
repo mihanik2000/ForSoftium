@@ -67,7 +67,7 @@ https://repo.mihanik.net/ForSoftium.zip
 
 https://vk.com/video24886612_456239104?list=dd99bccf9e6fb63836
 
-![Замечания](https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/img/note.png) **Замечания:**
+![Замечания](https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/img/note.png)
 
 ## Некоторые пояснения/замечания
 
