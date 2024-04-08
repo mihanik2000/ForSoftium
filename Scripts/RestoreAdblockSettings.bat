@@ -27,6 +27,7 @@ REM Удаляем текущие настройки Adblock Plus
 
 REM Восстанавливаем настройки Adblock Plus
 
+	mkdir "C:\Users\Softium\AppData\Local\Google\Chrome\User Data\Default"
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\IndexedDB.zip" -o"C:\Users\Softium\AppData\Local\Google\Chrome\User Data\Default"
 
 :ENDSUB
