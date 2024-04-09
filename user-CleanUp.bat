@@ -116,7 +116,6 @@ Rem Устанавливаем ассоциации файлов
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .TS  AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .TTS  AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .txt  txtfile
-REM "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .url  ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .wav  AppXqj98qxeaynz6dv4459ayz6bnqxbyaqcs
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .wdp  AppX43hnxtbyyps62jhe9sqpdzxn1790zetc
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .webm  AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
@@ -161,54 +160,36 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Hi
 Rem Почистим папки
 
 rem Контакты
-rem del "%USERPROFILE%\Contacts\*" /q /s /f
 forfiles /P "%USERPROFILE%\Contacts" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Рабочий стол
-rem del "%USERPROFILE%\Desktop\*" /q /s /f
 forfiles /P "%USERPROFILE%\Desktop" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Загрузки
-rem del "%USERPROFILE%\Downloads\*" /q /s /f
 forfiles /P "%USERPROFILE%\Downloads" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Избранное
-rem del "%USERPROFILE%\Favorites\*" /q /s /f
 forfiles /P "%USERPROFILE%\Favorites" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Ссылки
-rem del "%USERPROFILE%\Links\*" /q /s /f
 forfiles /P "%USERPROFILE%\Links" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Музыка
-rem del "%USERPROFILE%\Music\*" /q /s /f
 forfiles /P "%USERPROFILE%\Music" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem OneDrive
-rem del "%USERPROFILE%\OneDrive\*" /q /s /f
-forfiles /P "%USERPROFILE%\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
-
-rem del "%USERPROFILE%\AppData\Local\Microsoft\OneDrive\*" /q /s /f
-forfiles /P "%USERPROFILE%\AppData\Local\Microsoft\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
-
 rem Изображения
-rem del "%USERPROFILE%\Pictures\*" /q /s /f
 forfiles /P "%USERPROFILE%\Pictures" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Сохранения игр
-rem del "%USERPROFILE%\Saved Games\*" /q /s /f
 forfiles /P "%USERPROFILE%\Saved Games" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Поиски
-rem del "%USERPROFILE%\Searches\*" /q /s /f
 forfiles /P "%USERPROFILE%\Searches" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Видео
-rem del "%USERPROFILE%\Videos\*" /q /s /f
 forfiles /P "%USERPROFILE%\Videos" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Временные файлы
-rem del "%USERPROFILE%\AppData\Local\Temp\*" /q /s /f
 forfiles /P "%USERPROFILE%\AppData\Local\Temp" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 REM ****************************************************************************************
@@ -247,6 +228,8 @@ FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" 
 REM Удалим OneDrive
 
 CALL "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
+forfiles /P "%USERPROFILE%\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
+forfiles /P "%USERPROFILE%\AppData\Local\Microsoft\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 REM Выводим на рабочий стол техническую информацию о ПК
 reg add HKEY_CURRENT_USER\Software\Sysinternals\BGInfo /v EulaAccepted /t REG_DWORD /d 1 /f
