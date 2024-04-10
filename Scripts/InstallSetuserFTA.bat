@@ -50,6 +50,13 @@ mkdir  "%ProgramFiles%\SetuserFTA\"
 
 copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\"
 
+
+REM подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driver-ucpd-sys/
+net stop UCPD
+sc.exe delete UCPD
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d 4 /f
+schtasks/Change /TN "\Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable
+
 :ENDSUB
 
 timeout 3 /nobreak
