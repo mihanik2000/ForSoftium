@@ -63,6 +63,8 @@
 
 https://disk.yandex.ru/d/5GsesSvHNMQPgA
 
+https://clck.ru/3AkSu7
+
 Видео того, как работает репозиторий
 
 https://vk.com/video24886612_456239104?list=dd99bccf9e6fb63836
