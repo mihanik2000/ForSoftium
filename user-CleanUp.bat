@@ -21,8 +21,6 @@ Rem ****************************************************************************
 Rem Описываем переменные.
 Rem ****************************************************************************************
 
-set PathToUserTaskBar="%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
-
 Rem Устанавливаем ассоциации файлов
 
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .swf "C:\Program Files (x86)\SWF.max\SWF.max.exe"
@@ -160,36 +158,47 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Hi
 Rem Почистим папки
 
 rem Контакты
+del "%USERPROFILE%\Contacts\*" /q /s /f
 forfiles /P "%USERPROFILE%\Contacts" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Рабочий стол
+del "%USERPROFILE%\Desktop\*" /q /s /f
 forfiles /P "%USERPROFILE%\Desktop" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Загрузки
+del "%USERPROFILE%\Downloads\*" /q /s /f
 forfiles /P "%USERPROFILE%\Downloads" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Избранное
+del "%USERPROFILE%\Favorites\*" /q /s /f
 forfiles /P "%USERPROFILE%\Favorites" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Ссылки
+del "%USERPROFILE%\Links\*" /q /s /f
 forfiles /P "%USERPROFILE%\Links" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Музыка
+del "%USERPROFILE%\Music\*" /q /s /f
 forfiles /P "%USERPROFILE%\Music" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Изображения
+del "%USERPROFILE%\Pictures\*" /q /s /f
 forfiles /P "%USERPROFILE%\Pictures" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Сохранения игр
+del "%USERPROFILE%\Saved Games\*" /q /s /f
 forfiles /P "%USERPROFILE%\Saved Games" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Поиски
+del "%USERPROFILE%\Searches\*" /q /s /f
 forfiles /P "%USERPROFILE%\Searches" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Видео
+del "%USERPROFILE%\Videos\*" /q /s /f
 forfiles /P "%USERPROFILE%\Videos" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 rem Временные файлы
+del "%USERPROFILE%\AppData\Local\Temp\*" /q /s /f
 forfiles /P "%USERPROFILE%\AppData\Local\Temp" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
 REM ****************************************************************************************

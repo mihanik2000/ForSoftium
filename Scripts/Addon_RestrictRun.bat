@@ -35,9 +35,6 @@ Powershell.exe -executionpolicy Bypass -File C:\ProgramData\Softium\RestrictRun.
 
 net localgroup Администраторы Softium /del
 
-Rem Отключим некоторые функции Windows
-REM start "Title" /wait start "OOSU10" /wait %PathToOOSU10% %PathToOOSU10-CFG% /quiet /nosrp
-
 :END
 
 timeout 10 /nobreak

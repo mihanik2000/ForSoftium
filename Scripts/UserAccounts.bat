@@ -49,12 +49,6 @@ if %BClearSoftiumProfile%==1 (
 Rem Срок действия пароля пользователя Softium не ограничен
 wmic UserAccount where Name="Softium" set PasswordExpires=False
 
-Rem Пользователю Softium запрещаем менять пароль
-Rem wmic UserAccount where Name="Softium" set PasswordChangeable=False
-
-
-
-
 :ENDSUB
 
 timeout 3 /nobreak

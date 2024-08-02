@@ -25,19 +25,24 @@ Rem ****************************************************************************
 Rem Глобальная переменная. Используется во всей сессии CMD
 set ScriptPath=%~dp0
 
-Rem PathToUserTaskBar, вероятно, не используется...
-set PathToUserTaskBar="%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
-
-set PathToOOSU10="%ScriptPath%Distr\noarch\OOSU10.exe"
-set PathToOOSU10-CFG="%ScriptPath%Distr\noarch\ooshutup10.cfg"
-
 Rem Составляем основное меню программы
 
+Rem Настроить аккаунты пользователей
 set BUserAccounts=1
+
+Rem Отключить обновление Windows
 set BDisWinUpdates=1
+
+Rem Удалить "лишние" программы Windows
 set BDelWinApps=1
+
+Rem Ограничить запуск программ
 set BGroupPolicy=1
+
+Rem Очистить общий рабочий стол
 set BClerAllUsersDesktop=1
+
+Rem Установить скрипт очистки профиля ребёнка
 set BClearSoftiumProfile=1
 
 mode 128,32
@@ -345,23 +350,8 @@ Rem Установим собственную тему оформления
 	CALL "%ScriptPath%Scripts\SetLockScreen.bat"
 	CALL "%ScriptPath%Scripts\SetSoftiumTheme.bat"
 
-Rem Включим защитника Windows
-
-powershell -command "Set-MpPreference -DisableArchiveScanning $false"
-powershell -command "Set-MpPreference -DisableAutoExclusions $false"
-powershell -command "Set-MpPreference -DisableBehaviorMonitoring $false"
-powershell -command "Set-MpPreference -DisableBlockAtFirstSeen $false"
-powershell -command "Set-MpPreference -DisableIOAVProtection $false"
-powershell -command "Set-MpPreference -DisablePrivacyMode $false"
-powershell -command "Set-MpPreference -DisableRealtimeMonitoring $false"
-powershell -command "Set-MpPreference -DisableScanningNetworkFiles $false"
-powershell -command "Set-MpPreference -DisableScriptScanning $false"
-
 Rem включим режим электропитания "Экономия энергии"
 	powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
-
-Rem Отключим некоторые функции Windows
-Rem start "Title" /wait %PathToOOSU10% %PathToOOSU10-CFG% /quiet /nosrp
 
 Rem Установим имя компьютера
 set /p MyHostname="Укажите имя компьютера: "
