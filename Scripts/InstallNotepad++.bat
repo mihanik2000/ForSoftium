@@ -38,8 +38,8 @@ REM ****************************************************************************
 REM Устанавливаем Notepad++
 REM ****************************************************************************************
 
-set PathToNotepad="%ScriptPath%Distr\x32\npp.8.6.Installer.exe"
-set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.8.6.Installer.x64.exe"
+set PathToNotepad="%ScriptPath%Distr\x32\npp.8.6.9.Installer.exe"
+set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.8.6.9.Installer.x64.exe"
 
 ECHO .
 ECHO Install Notepad++...

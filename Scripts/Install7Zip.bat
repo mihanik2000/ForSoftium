@@ -38,8 +38,8 @@ REM ****************************************************************************
 REM Устанавливаем программу-архиватор 7zip
 REM ****************************************************************************************
 
-set PathTo7Zip="%ScriptPath%Distr\x32\7z2301.msi"
-set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z2301-x64.msi"
+set PathTo7Zip="%ScriptPath%Distr\x32\7z2407.msi"
+set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z2407-x64.msi"
 
 ECHO .
 ECHO Install 7-Zip...

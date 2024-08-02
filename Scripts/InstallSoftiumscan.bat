@@ -41,7 +41,7 @@ REM ****************************************************************************
 REM создаём папку в корне системного диска для хранения рабочих файлов
 	mkdir "%SystemDrive%\Softium"
 
-set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
+	set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
 
 REM Программа Softium для обучающегося
 	copy /y %PathToSoftium% "%SystemDrive%\Softium\softiumscan.exe"
@@ -50,7 +50,7 @@ REM Добавляем программу softiumscan в исключения брандмауера Windows
 	netsh advfirewall firewall del rule name="softiumscan"
 	netsh advfirewall firewall add rule name="softiumscan" dir=in action=allow program="%SystemDrive%\Softium\softiumscan.exe"
 
-REM + Softium
+REM Создаём ссылку на Softium на общем рабочем столе
 	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\Softium\softiumscan.exe" "C:\Softium\" "Софтиум" "C:\Softium\softiumscan.exe" "Софтиум"
 
 :ENDSUB

@@ -34,8 +34,26 @@ REM ****************************************************************************
 REM активируем встроенного Администратора
 net user Администратор "AdminPass" /active:yes /expires:never
 
+Rem Срок действия пароля Администратора не ограничен
+wmic UserAccount where Name="Администратор" set PasswordExpires=False
+
 REM Создадим пользователя Softium с паролем 321
-net user Softium "321" /add /expires:never
+if %BClearSoftiumProfile%==1 (
+	Rem Назначим пользователю Sofium стартовый скрипт
+	net user Softium "321" /add /expires:never /passwordchg:no /scriptpath:CleanUp.bat
+	) else (
+	Rem Не назначаем пользователю Sofium стартовый скрипт
+	net user Softium "321" /add /expires:never /passwordchg:no
+	)
+
+Rem Срок действия пароля пользователя Softium не ограничен
+wmic UserAccount where Name="Softium" set PasswordExpires=False
+
+Rem Пользователю Softium запрещаем менять пароль
+Rem wmic UserAccount where Name="Softium" set PasswordChangeable=False
+
+
+
 
 :ENDSUB
 

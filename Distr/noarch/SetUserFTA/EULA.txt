@@ -1,6 +1,6 @@
 END USER LICENSE AGREEMENT (EULA)
 
-SetUserFTA by Christoph Kolbicz - https://kolbi.cz, 2018
+SetUserFTA by Christoph Kolbicz - https://kolbi.cz, 2024
 
 This End-User License Agreement (EULA) is a legal agreement between you and the mentioned author of this Software for the software product identified above, which includes computer software and may include associated media, printed materials, and "online" or electronic documentation ("Software Product").
 
@@ -8,7 +8,7 @@ By installing, copying, or otherwise using the Software Product, you agree to be
 
 SOFTWARE PRODUCT LICENSE
 
-a) SetUserFTA is being distributed as Freeware for personal, commercial use, non-profit organization and educational purpose. It may be included with CD-ROM/DVD-ROM distributions. You are NOT allowed to make a charge for distributing this Software (either for profit or merely to recover your media and distribution costs) whether as a stand-alone product, or as part of a compilation or anthology, nor to use it for supporting your business or customers. It may be distributed freely on any website or through any other distribution mechanism, as long as no part of it is changed in any way and appropriate credits are given.
+a) SetUserFTA is being distributed as Freeware for personal, non-commercial use, non-profit organization and educational purpose. It may be included with CD-ROM/DVD-ROM distributions. You are NOT allowed to make a charge for distributing this Software (either for profit or merely to recover your media and distribution costs) whether as a stand-alone product, or as part of a compilation or anthology, nor to use it for supporting your business or customers. It may be distributed freely on any website or through any other distribution mechanism, as long as no part of it is changed in any way and appropriate credits are given.
 
 1. Grant of License. This EULA grants you the following rights:
 
