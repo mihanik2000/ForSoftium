@@ -109,8 +109,10 @@ REM Скрипт восстановления настроек Adblock Plus
 REM Скрипт выключения ПК
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\shutdown.bat" %PathToPowerOff%
 
-REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
+REM Скрипт очистки папок пользователей. 
+	mkdir "%systemroot%\System32\Repl\Import\Scripts"
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat" %PathToCleanUp%
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%systemroot%\System32\Repl\Import\Scripts\CleanUp.bat" %PathToCleanUp%
 
 REM Скрипт удаления OneDrive
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat" %PathToDeleteOneDrive%
