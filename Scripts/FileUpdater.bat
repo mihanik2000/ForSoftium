@@ -111,7 +111,6 @@ REM Скрипт выключения ПК
 
 REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat" %PathToCleanUp%
-	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\StartUp\CleanUp.bat" %PathToCleanUp%
 
 REM Скрипт удаления OneDrive
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat" %PathToDeleteOneDrive%
@@ -140,7 +139,7 @@ REM подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driv
 net stop UCPD
 sc.exe delete UCPD
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d 4 /f
-schtasks/Change /TN "\Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable
+schtasks /Change /TN "\Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable /F
 
 REM Запретим изображение на экране блокировки системы, установим своё изображение
 	CALL "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat"
