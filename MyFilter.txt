@@ -2,7 +2,7 @@
 ! Version:
 ! Title:
 ! Last modified:
-! Expires: 4 days (update frequency)
+! Expires: 1 days (update frequency)
 ! Homepage:
 !
 
