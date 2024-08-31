@@ -40,6 +40,9 @@ REM ****************************************************************************
 
 set PathToGoogleChrome="%ScriptPath%Distr\x32\GoogleChromeStandaloneEnterprise.msi"
 set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\GoogleChromeStandaloneEnterprise64.msi"
+Set PathToChromeForcelist="%ScriptPath%Distr\noarch\ChromeForcelist.reg"
+
+reg import %PathToChromeForcelist%
 
 ECHO .
 ECHO Install Google Chrome...
