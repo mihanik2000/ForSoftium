@@ -61,9 +61,7 @@
 
 Полный архив со скриптами и установочными дистрибутивами можно скачать тут: 
 
-https://disk.yandex.ru/d/5GsesSvHNMQPgA
-
-https://clck.ru/3AkSu7
+http://choco.mihanik.net/distr/Softium/ForSoftium.zip
 
 Видео того, как работает репозиторий
 
