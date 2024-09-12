@@ -18,7 +18,7 @@ Adblock Plus. Описание правил создания фильтров.
 
 Мой список фильтров
 
-	https://repo.mihanik.net/MyFilter.txt
+	https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/MyFilter.txt
 
 Common Startup
 
