@@ -1,13 +1,13 @@
 @echo off
 REM ****************************************
 REM
-REM Written by Michael Medvedev aka mihanik.
+REM Автор скрипта Михаил Медведев aka mihanik
 REM
 REM https://mihanik.net
 REM
-REM        Require administrator rights: YES
-REM Antivirus software must be disabled: Not necessary
-REM                        Dependencies: No
+REM        Требуется наличие прав администратора: ДА
+REM Антивирусная программа должна быть отключена: желательно, но не обязательно
+REM                                    Замечания: НЕТ
 REM
 REM Описание
 REM

@@ -1,19 +1,23 @@
 @echo off
 REM ****************************************
 REM
-REM Written by Michael Medvedev aka mihanik.
+REM Автор скрипта Михаил Медведев aka mihanik
 REM
 REM https://mihanik.net
 REM
-REM        Require administrator rights: YES
-REM Antivirus software must be disabled: Not necessary
-REM                        Dependencies: You must first run Curl-Install.bat and Wget-Install.bat
+REM        Требуется наличие прав администратора: ДА
+REM Антивирусная программа должна быть отключена: желательно, но не обязательно
+REM                        Зависимости: You must first run Curl-Install.bat and Wget-Install.bat
 REM
 REM Install 7-Zip
 REM
 REM ****************************************
 
-rem Проверяем наличие у пользователя админских прав...
+REM **************************************************
+REM Проверяем наличие у пользователя админских прав.
+REM Если таковых прав нет, завершаем работу скрипта...
+REM **************************************************
+
 SET HasAdminRights=0
 
 FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (

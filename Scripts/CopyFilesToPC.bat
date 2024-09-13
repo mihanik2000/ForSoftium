@@ -1,19 +1,23 @@
 @echo off
 REM ****************************************
 REM
-REM Written by Michael Medvedev aka mihanik.
+REM Автор скрипта Михаил Медведев aka mihanik
 REM
 REM https://mihanik.net
 REM
-REM        Require administrator rights: YES
-REM Antivirus software must be disabled: Not necessary
-REM                        Dependencies: No
+REM        Требуется наличие прав администратора: ДА
+REM Антивирусная программа должна быть отключена: желательно, но не обязательно
+REM                                    Замечания: НЕТ
 REM
 REM Описание
 REM
 REM ****************************************
 
-rem Проверяем наличие у пользователя админских прав...
+REM **************************************************
+REM Проверяем наличие у пользователя админских прав.
+REM Если таковых прав нет, завершаем работу скрипта...
+REM **************************************************
+
 SET HasAdminRights=0
 
 FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
@@ -57,7 +61,7 @@ REM ****************************************************************************
 REM создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
 
-Rem Начинаем копировать файлы
+REM Начинаем копировать файлы
 	copy /y %PathToWallpaper% "%SystemDrive%\ProgramData\Softium\Wallpaper.jpg"
 	copy /y %PathToRegTaskbar% "%SystemDrive%\ProgramData\Softium\PinnedTaskbar.reg"
 	copy /y %PathToTaskbarFolder% "%SystemDrive%\ProgramData\Softium\QuickLaunch.zip"
@@ -82,7 +86,7 @@ REM Скрипт выключения ПК
 REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
 	copy /y "%ScriptPath%user-CleanUp.bat" "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat"
 
-Rem Копируем скрипт очистки профиля в папку startup-скриптов
+REM Копируем скрипт очистки профиля в папку startup-скриптов
 	mkdir "%systemroot%\System32\Repl\Import\Scripts"
 	copy /y "%ScriptPath%user-CleanUp.bat" "%systemroot%\System32\Repl\Import\Scripts\CleanUp.bat"
 	
