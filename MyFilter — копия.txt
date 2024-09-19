@@ -10,15 +10,8 @@
 @@||quickdraw.withgoogle.com^
 @@||www.google-analytics.com^
 @@||inputtools.google.com^
-
 ! Тильда
 @@||tilda.cc^
-
-! Закраски
-@@||zakraski.ru^
-
-!blockly
-@@||blockly.games^
 
 ! Создай мульт
 @@||media.abcya.com^

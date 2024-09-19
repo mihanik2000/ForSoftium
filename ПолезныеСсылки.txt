@@ -32,3 +32,6 @@ FileUpdater
 
 	C:\ProgramData\Softium\FileUpdater.bat
 
+Драйверы Azerty
+
+	https://azerty.ru/page/drivers
