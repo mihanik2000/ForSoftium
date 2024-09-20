@@ -19,6 +19,7 @@
 
 !blockly
 @@||blockly.games^
+@@||blockly.ru^
 
 ! Создай мульт
 @@||media.abcya.com^
