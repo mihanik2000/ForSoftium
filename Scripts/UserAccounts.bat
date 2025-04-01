@@ -44,6 +44,10 @@ wmic UserAccount where Name="Администратор" set PasswordExpires=False
 REM Создадим пользователя Softium с паролем 321
 if %BClearSoftiumProfile%==1 (
 	REM Назначим пользователю Sofium стартовый скрипт
+	REM https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc771865(v=ws.11)
+	REM /scriptpath:<Path>
+	REM Sets a path for the user's logon script. <Path> cannot be an absolute path. <Path> is relative to %systemroot%\System32\Repl\Import\Scripts.
+	
 	net user Softium "321" /add /expires:never /passwordchg:no /scriptpath:CleanUp.bat
 	
 	REM Т.к. профиль пользователя ещё не создан, то первый запуск скрипта приведёт

@@ -23,6 +23,7 @@
 
 ! Создай мульт
 @@||media.abcya.com^
+@@||www.abcya.com^
 
 ! MS Office
 @@||www.office.com^
