@@ -74,6 +74,7 @@ REM Установить скрипт очистки профиля ребёнка
 set BClearSoftiumProfile=1
 
 mode 128,32
+color 1f
 cls
 
 :StartMenu
@@ -81,37 +82,37 @@ cls
 echo Выберите параметры настройки рабочего места.
 echo .
 
-if %BUserAccounts%==1 (
+if %BUserAccounts% equ 1 (
 		echo 1 - Настроить аккаунты пользователей - Да
 	) else (
 		echo 1 - Настроить аккаунты пользователей - Нет
 	)
 
-if %BDisWinUpdates%==1 (
+if %BDisWinUpdates% equ 1 (
 		echo 2 - Отключить обновление Windows - Да
 	) else (
 		echo 2 - Отключить обновление Windows - Нет
 	)
 
-if %BDelWinApps%==1 (
+if %BDelWinApps% equ 1 (
 		echo 3 - Удалить "лишние" программы Windows - Да
 	) else (
 		echo 3 - Удалить "лишние" программы Windows - Нет
 	)
 
-if %BGroupPolicy%==1 (
+if %BGroupPolicy% equ 1 (
 		echo 4 - Ограничить запуск программ - Да
 	) else (
 		echo 4 - Ограничить запуск программ - Нет
 	)
 
-if %BClerAllUsersDesktop%==1 (
+if %BClerAllUsersDesktop% equ 1 (
 		echo 5 - Очистить общий рабочий стол - Да
 	) else (
 		echo 5 - Очистить общий рабочий стол - Нет
 	)
 
-if %BClearSoftiumProfile%==1 (
+if %BClearSoftiumProfile% equ 1 (
 		echo 6 - Установить скрипт очистки профиля ребёнка - Да
 	) else (
 		echo 6 - Установить скрипт очистки профиля ребёнка - Нет
@@ -128,30 +129,30 @@ CHOICE /C:123456789 /N /T 30 /D 6
 cls
 
 REM Настройка учётных записей пользователей на компьютере
-if %errorlevel%==1 (if %BUserAccounts%==1  (set BUserAccounts=0) else (set BUserAccounts=1))
+if %errorlevel%==1 ( set /a BUserAccounts=1-BUserAccounts )
 
 REM Отключение автоматического обновление системы
-if %errorlevel%==2 (if %BDisWinUpdates%==1  (set BDisWinUpdates=0) else (set BDisWinUpdates=1))
+if %errorlevel%==2 ( set /a BDisWinUpdates=1-BDisWinUpdates )
 
 REM Удаление "лишних" программ Windows
-if %errorlevel%==3 (if %BDelWinApps%==1  (set BDelWinApps=0) else (set BDelWinApps=1))
+if %errorlevel%==3 ( set /a BDelWinApps=1-BDelWinApps )
 
 REM Настройка групповой политики на ПК
-if %errorlevel%==4 (if %BGroupPolicy%==1  (set BGroupPolicy=0) else (set BGroupPolicy=1))
+if %errorlevel%==4 ( set /a BGroupPolicy=1-BGroupPolicy )
 
 REM Удаление файлов с общего рабочего стола
-if %errorlevel%==5 (if %BClerAllUsersDesktop%==1  (set BClerAllUsersDesktop=0) else (set BClerAllUsersDesktop=1))
+if %errorlevel%==5 ( set /a BClerAllUsersDesktop=1-BClerAllUsersDesktop )
 
 REM установка скрипта очистки профиля пользователя
-if %errorlevel%==6 (if %BClearSoftiumProfile%==1  (set BClearSoftiumProfile=0) else (set BClearSoftiumProfile=1))
+if %errorlevel%==6 ( set /a BClearSoftiumProfile=1-BClearSoftiumProfile )
 
-if %errorlevel%==7 (goto MyStart)
+if %errorlevel%==7 (goto :MyStart)
 
-if %errorlevel%==8 (goto SetDefVal)
+if %errorlevel%==8 (goto :SetDefVal)
 
 if %errorlevel%==9 (EXIT /B)
 
-GOTO StartMenu
+GOTO :StartMenu
 
 :SetDefVal
 
