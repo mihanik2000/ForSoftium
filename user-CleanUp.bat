@@ -90,7 +90,7 @@ Rem Устанавливаем ассоциации файлов
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .opus AppXqj98qxeaynz6dv4459ayz6bnqxbyaqcs
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .orf AppX43hnxtbyyps62jhe9sqpdzxn1790zetc
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .oxps Windows.XPSReachViewer
-"%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .pdf AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .pdf ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .pef AppX43hnxtbyyps62jhe9sqpdzxn1790zetc
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .ply AppXmgw6pxxs62rbgfp9petmdyb4fx7rnd4k
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .png AppX43hnxtbyyps62jhe9sqpdzxn1790zetc
