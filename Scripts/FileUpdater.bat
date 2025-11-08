@@ -1,24 +1,24 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: ДА
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM Процедура обновляет используемые в работе на ПК файлы.
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: ДА
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: Процедура обновляет используемые в работе на ПК файлы.
+::
+:: ****************************************
 
-REM **************************************************
-REM Проверяем наличие у пользователя админских прав.
-REM Если таковых прав нет, завершаем работу скрипта...
-REM **************************************************
+:: **************************************************
+:: Проверяем наличие у пользователя админских прав.
+:: Если таковых прав нет, завершаем работу скрипта...
+:: **************************************************
 
 SET HasAdminRights=0
 
@@ -27,15 +27,15 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	ECHO.
 	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
-REM ==================================
-REM Задаём URL файлов
-REM ==================================
+:: ==================================
+:: Задаём URL файлов
+:: ==================================
 
 	set PathToWallpaper="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/Wallpaper.jpg"
 	set PathToRegTaskbar="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/PinnedTaskbar.reg"
@@ -66,11 +66,11 @@ REM ==================================
 	set PathToAdblockPlus="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/RestoreAdblockSettings.bat"
 	set PathToAdblockSettings="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/IndexedDB.zip"
 
-REM ==================================
-REM Скачиваем актуальные версии файлов
-REM ==================================
+:: ==================================
+:: Скачиваем актуальные версии файлов
+:: ==================================
 
-REM создаём скрытую папку для хранения важных файлов
+:: создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
 
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\Wallpaper.jpg" %PathToWallpaper%
@@ -83,17 +83,17 @@ REM создаём скрытую папку для хранения важных файлов
 	
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\Softium.theme" %PathToTheme%
 	
-REM Служебные JAVA-Скрипты
+:: Служебные JAVA-Скрипты
 
-REM Скрипт создания ссылки на файл
+:: Скрипт создания ссылки на файл
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\lnk_create.js" %PathToLnkCreate%
 
-REM Скрипт удаления файла
+:: Скрипт удаления файла
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\file_delete.js" %PathToFileDelete%
 
-REM Дополнительные скрипты
+:: Дополнительные скрипты
 
-REM Скрипт обновления FileUpdater
+:: Скрипт обновления FileUpdater
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat" %PathToUpdaterOfFileUpdater%
 	schtasks /query /fo LIST /tn "Microsoft\Office\Update File Updater"
 	if %ERRORLEVEL%==1 (
@@ -101,7 +101,7 @@ REM Скрипт обновления FileUpdater
 		Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\Update File Updater\" -Settings $Parm"
 	)
 
-REM Скрипт восстановления настроек Adblock Plus
+:: Скрипт восстановления настроек Adblock Plus
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\RestoreAdblockSettings.bat" %PathToAdblockPlus%
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\IndexedDB.zip" %PathToAdblockSettings%
 	schtasks /query /fo LIST /tn "Microsoft\Office\Restore Adblock Plus Settings"
@@ -110,21 +110,21 @@ REM Скрипт восстановления настроек Adblock Plus
 		Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\Restore Adblock Plus Settings\" -Settings $Parm"
 	)
 
-REM Скрипт выключения ПК
+:: Скрипт выключения ПК
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\shutdown.bat" %PathToPowerOff%
 
-REM Скрипт очистки папок пользователей. 
+:: Скрипт очистки папок пользователей. 
 	mkdir "%systemroot%\System32\Repl\Import\Scripts"
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat" %PathToCleanUp%
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%systemroot%\System32\Repl\Import\Scripts\CleanUp.bat" %PathToCleanUp%
 
-REM Скрипт удаления OneDrive
+:: Скрипт удаления OneDrive
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat" %PathToDeleteOneDrive%
 	
-REM Скрипт настройки экрана блокировки Windows
+:: Скрипт настройки экрана блокировки Windows
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\DelFilesFromPC.bat" %PathToDelFilesFromPC%
 	
-REM Скрипт выведения на рабочий стол технической информации о ПК
+:: Скрипт выведения на рабочий стол технической информации о ПК
 	If exist "%ProgramFiles%\BGInfo\Bginfo.exe" (
 		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\BGSettings.bgi" %PathToBGInfo%
 	 ) else (
@@ -133,27 +133,27 @@ REM Скрипт выведения на рабочий стол технической информации о ПК
  		"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%ProgramFiles%\BGInfo\BGSettings.bgi" %PathToBGInfo%
  	)
 
-REM Скрипт удаления лишних файлов и ярлыков с компьютера
+:: Скрипт удаления лишних файлов и ярлыков с компьютера
 
-REM ==================================
-REM Выполняем настройку
-REM ==================================
+:: ==================================
+:: Выполняем настройку
+:: ==================================
 
-REM Избавляемся от UserChoice Protection Driver
-REM подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driver-ucpd-sys/
+:: Избавляемся от UserChoice Protection Driver
+:: подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driver-ucpd-sys/
 
 net stop UCPD
 sc.exe delete UCPD
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d 4 /f
 schtasks /Change /TN "\Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable /F
 
-REM Запретим изображение на экране блокировки системы, установим своё изображение
+:: Запретим изображение на экране блокировки системы, установим своё изображение
 	CALL "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat"
 
-REM Удалим лишние ярлыки и файлы
+:: Удалим лишние ярлыки и файлы
 	CALL "%SystemDrive%\ProgramData\Softium\DelFilesFromPC.bat"
 
-REM Установим параметры групповой политики
+:: Установим параметры групповой политики
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
 	gpupdate /force
 

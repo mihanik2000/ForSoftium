@@ -1,22 +1,22 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: ДА
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: ДА
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: ****************************************
 
-REM **************************************************
-REM Проверяем наличие у пользователя админских прав.
-REM Если таковых прав нет, завершаем работу скрипта...
-REM **************************************************
+:: **************************************************
+:: Проверяем наличие у пользователя админских прав.
+:: Если таковых прав нет, завершаем работу скрипта...
+:: **************************************************
 
 SET HasAdminRights=0
 
@@ -25,28 +25,28 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	ECHO.
 	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO .
+	ECHO.
 	ECHO Не определена переменная ScriptPath
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
-REM ****************************************************************************************
-REM Устанавливаем Python 3
-REM ****************************************************************************************
+:: ****************************************************************************************
+:: Устанавливаем Python 3
+:: ****************************************************************************************
 
 set PathToPython3="%ScriptPath%Distr\noarch\python-3.11.5.exe"
 
-ECHO .
+ECHO.
 ECHO Install Python 3...
-ECHO .
+ECHO.
 	start "Title" /wait %PathToPython3% /quiet InstallAllUsers=1 PrependPath=1 DefaultAllUsersTargetDir="C:\Python3" AssociateFiles=1 Shortcuts=1
 	
 	PATH=C:\Python3\;C:\Python3\Scripts;%Path%
@@ -55,7 +55,7 @@ ECHO .
 	pip install pygame
 	pip install WMI
 
-REM Создадим ссылку на IDLE
+:: Создадим ссылку на IDLE
 	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  ""  "C:\Python3\Lib\idlelib\idle.pyw" "C:\Python3" "Python IDLE" "C:\Python3\pythonw.exe" "Python IDLE"
 
 :ENDSUB

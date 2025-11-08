@@ -1,22 +1,24 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: ДА
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: ДА
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: ****************************************
 
-REM **************************************************
-REM Проверяем наличие у пользователя админских прав.
-REM Если таковых прав нет, завершаем работу скрипта...
-REM **************************************************
+echo Запрет использования учетных записей Microsoft...
+
+:: **************************************************
+:: Проверяем наличие у пользователя админских прав.
+:: Если таковых прав нет, завершаем работу скрипта...
+:: **************************************************
 
 SET HasAdminRights=0
 
@@ -25,16 +27,35 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	ECHO.
 	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
-REM Запретим использование аккаунтов Microsoft на компьютере
-REM https://www.elevenforum.com/t/enable-or-disable-microsoft-accounts-in-windows-11.23799/
 
-	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v NoConnectedUser /t REG_DWORD /d 3 /f
-	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Settings\AllowYourAccount" /v AllowYourAccount /t REG_DWORD /d 3 /f
+:: Запретим использование аккаунтов Microsoft на компьютере
+:: https://www.elevenforum.com/t/enable-or-disable-microsoft-accounts-in-windows-11.23799/
+
+:: Первый ключ - основной запрет
+	echo Устанавливаем основной запрет...
+	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v NoConnectedUser /t REG_DWORD /d 3 /f >nul 2>&1
+	
+:: Второй ключ - дополнительная политика
+	echo Устанавливаем дополнительную политику...
+	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Settings\AllowYourAccount" /v AllowYourAccount /t REG_DWORD /d 3 /f >nul 2>&1
+	
+:: Дополнительные ключи для надежности
+	echo Устанавливаем дополнительные настройки...
+	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Accounts" /v AllowMicrosoftAccountConnection /t REG_DWORD /d 0 /f >nul 2>&1
+	reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Accounts" /v AllowConnectedAccounts /t REG_DWORD /d 0 /f >nul 2>&1
+
+:: Принудительное обновление политик
+	echo Обновляем политики...
+	gpupdate /force >nul 2>&1
+
+echo.
+echo Готово! Учетные записи Microsoft запрещены.
+echo Для применения изменений может потребоваться перезагрузка.
 
 :ENDSUB
 

@@ -1,22 +1,22 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: ДА
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: ДА
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: ****************************************
 
-REM **************************************************
-REM Проверяем наличие у пользователя админских прав.
-REM Если таковых прав нет, завершаем работу скрипта...
-REM **************************************************
+:: **************************************************
+:: Проверяем наличие у пользователя админских прав.
+:: Если таковых прав нет, завершаем работу скрипта...
+:: **************************************************
 
 SET HasAdminRights=0
 
@@ -25,22 +25,22 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	ECHO.
 	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO .
+	ECHO.
 	ECHO Не определена переменная ScriptPath
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
-REM ****************************************************************************************
-REM Скопируем файлы на настраиваемый компьютер
-REM ****************************************************************************************
+:: ****************************************************************************************
+:: Скопируем файлы на настраиваемый компьютер
+:: ****************************************************************************************
 
 	set PathToWallpaper="%ScriptPath%Distr\noarch\Wallpaper.jpg"
 	set PathToRegTaskbar="%ScriptPath%Distr\noarch\PinnedTaskbar.reg"
@@ -58,10 +58,10 @@ REM ****************************************************************************
 	set PathToAdblockSettings="%ScriptPath%Distr\noarch\IndexedDB.zip"
 	
 
-REM создаём скрытую папку для хранения важных файлов
+:: создаём скрытую папку для хранения важных файлов
 	mkdir "%SystemDrive%\ProgramData\Softium"
 
-REM Начинаем копировать файлы
+:: Начинаем копировать файлы
 	copy /y %PathToWallpaper% "%SystemDrive%\ProgramData\Softium\Wallpaper.jpg"
 	copy /y %PathToRegTaskbar% "%SystemDrive%\ProgramData\Softium\PinnedTaskbar.reg"
 	copy /y %PathToTaskbarFolder% "%SystemDrive%\ProgramData\Softium\QuickLaunch.zip"
@@ -70,39 +70,39 @@ REM Начинаем копировать файлы
 	
 	copy /y %PathToTheme% "%SystemDrive%\ProgramData\Softium\Softium.theme"
 	
-REM Служебные JAVA-Скрипты
+:: Служебные JAVA-Скрипты
 
-REM Скрипт создания ссылки на файл
+:: Скрипт создания ссылки на файл
 	copy /y "%ScriptPath%Distr\noarch\lnk_create.js" "%SystemDrive%\ProgramData\Softium\lnk_create.js"
 
-REM Скрипт удаления файла
+:: Скрипт удаления файла
 	copy /y "%ScriptPath%Distr\noarch\file_delete.js" "%SystemDrive%\ProgramData\Softium\file_delete.js"
 
-REM Дополнительные скрипты
+:: Дополнительные скрипты
 
-REM Скрипт выключения ПК
+:: Скрипт выключения ПК
 	copy /y "%ScriptPath%Distr\noarch\shutdown.bat"  "%SystemDrive%\ProgramData\Softium\shutdown.bat"
 
-REM Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
+:: Скрипт очистки папок пользователей. Производит действия только для пользователя с именем Softium !!!
 	copy /y "%ScriptPath%user-CleanUp.bat" "%SystemDrive%\ProgramData\Softium\user-CleanUp.bat"
 
-REM Копируем скрипт очистки профиля в папку startup-скриптов
+:: Копируем скрипт очистки профиля в папку startup-скриптов
 	mkdir "%systemroot%\System32\Repl\Import\Scripts"
 	copy /y "%ScriptPath%user-CleanUp.bat" "%systemroot%\System32\Repl\Import\Scripts\CleanUp.bat"
 	
-REM Скрипты обновления служебных файлов
+:: Скрипты обновления служебных файлов
 	copy /y "%PathToFileUpdater%"  "%SystemDrive%\ProgramData\Softium\FileUpdater.bat"
 	copy /y "%PathToFileUpdaterInstaller%"  "%SystemDrive%\ProgramData\Softium\ScheduleFileUpdate.bat"
 	copy /y "%PathToUpdaterOfFileUpdater%"  "%SystemDrive%\ProgramData\Softium\UpdaterOfFileUpdater.bat"
 	
-REM Скрипт восстановления настроек Adblock Plus у пользователя Softium
+:: Скрипт восстановления настроек Adblock Plus у пользователя Softium
 	copy /y "%PathToAdblockPlus%"  "%SystemDrive%\ProgramData\Softium\RestoreAdblockSettings.bat"
 	copy /y "%PathToAdblockSettings%"  "%SystemDrive%\ProgramData\Softium\IndexedDB.zip"
 
-REM Скрипт удаления OneDrive
+:: Скрипт удаления OneDrive
 	copy /y "%PathToDeleteOneDrive%"  "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
 	
-REM Скрипт настройки экрана блокировки Windows
+:: Скрипт настройки экрана блокировки Windows
 	copy /y "%PathToSetLockScreen%"  "%SystemDrive%\ProgramData\Softium\SetLockScreen.bat"
 
 :ENDSUB

@@ -1,31 +1,31 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: НЕТ
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: НЕТ
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: ****************************************
 
-REM ****************************************************************************************
-REM Описание процедуры
-REM ****************************************************************************************
+:: ****************************************************************************************
+:: Описание процедуры
+:: ****************************************************************************************
 
-REM Закрываем Google Chrome
+:: Закрываем Google Chrome
 
 	taskkill /f /im chrome.exe
 
-REM Удаляем текущие настройки Adblock Plus
+:: Удаляем текущие настройки Adblock Plus
 
 	forfiles /P "C:\Users\Softium\AppData\Local\Google\Chrome\User Data\Default\IndexedDB" /m *cfhdojbkjhnklbpkdaibdccddilifddb* /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-REM Восстанавливаем настройки Adblock Plus
+:: Восстанавливаем настройки Adblock Plus
 
 	mkdir "%SystemDrive%\Users\Softium\AppData\Local\Google\Chrome\User Data\Default"
 	ICACLS "%SystemDrive%\Users\Softium\AppData\Local\Google\Chrome\User Data\Default" /setowner "Softium" /T /C

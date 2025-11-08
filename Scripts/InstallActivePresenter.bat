@@ -31,12 +31,26 @@ IF NOT %HasAdminRights%==1 (
 	GOTO ENDSUB
 )
 
+if NOT defined ScriptPath (
+	ECHO.
+	ECHO Не определена переменная ScriptPath
+	ECHO.
+	GOTO ENDSUB
+)
+
 :: ****************************************************************************************
-:: Запланируем на всякий случай ежедневное выключение в 21:00
+:: Устанавливаем ActivePresenter
 :: ****************************************************************************************
 
-SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC DAILY /TN "Microsoft\Office\Office Shutdown" /TR  "\"%SystemDrive%\Windows\System32\shutdown.exe\" /s /f /t 00"  /ST 21:00 /RL HIGHEST /F
-Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\Office Shutdown\" -Settings $Parm"
+set PathToconstruct="%ScriptPath%Distr\noarch\ActivePresenter_v9.1.4_setup.exe"
+
+ECHO.
+ECHO Install ActivePresenter...
+ECHO.
+	start "ActivePresenter" /wait %PathToconstruct% /VERYSILENT /NORESTART
+
+:: Создадим  ссылку на ActivePresenter
+::	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\ATOMI\ActivePresenter\ActivePresenter.exe" "%ProgramFiles%\ATOMI\ActivePresenter" "ActivePresenter" "%ProgramFiles%\ATOMI\ActivePresenter\ActivePresenter.exe" "ActivePresenter"
 
 :ENDSUB
 

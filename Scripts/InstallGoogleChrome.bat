@@ -1,22 +1,22 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: ДА
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: ДА
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: ****************************************
 
-REM **************************************************
-REM Проверяем наличие у пользователя админских прав.
-REM Если таковых прав нет, завершаем работу скрипта...
-REM **************************************************
+:: **************************************************
+:: Проверяем наличие у пользователя админских прав.
+:: Если таковых прав нет, завершаем работу скрипта...
+:: **************************************************
 
 SET HasAdminRights=0
 
@@ -25,22 +25,22 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	ECHO.
 	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO .
+	ECHO.
 	ECHO Не определена переменная ScriptPath
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
-REM ****************************************************************************************
-REM Устанавливаем Google Chrome
-REM ****************************************************************************************
+:: ****************************************************************************************
+:: Устанавливаем Google Chrome
+:: ****************************************************************************************
 
 set PathToGoogleChrome="%ScriptPath%Distr\x32\GoogleChromeStandaloneEnterprise.msi"
 set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\GoogleChromeStandaloneEnterprise64.msi"
@@ -48,16 +48,16 @@ Set PathToChromeForcelist="%ScriptPath%Distr\noarch\ChromeForcelist.reg"
 
 reg import %PathToChromeForcelist%
 
-ECHO .
+ECHO.
 ECHO Install Google Chrome...
-ECHO .
+ECHO.
 	If exist "%SystemDrive%\Program Files (x86)" (
 		start "Install Google Chrome..." /wait %PathToGoogleChrome-x64% /passive /norestart
 	 ) else (
  		start "Install Google Chrome..." /wait %PathToGoogleChrome% /passive /norestart
  	)
 	
-REM Сделаем Chrome браузером по-умолчанию.
+:: Сделаем Chrome браузером по-умолчанию.
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  http ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  https ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .htm ChromeHTML

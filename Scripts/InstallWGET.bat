@@ -1,22 +1,22 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: ДА
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: ДА
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: ****************************************
 
-REM **************************************************
-REM Проверяем наличие у пользователя админских прав.
-REM Если таковых прав нет, завершаем работу скрипта...
-REM **************************************************
+:: **************************************************
+:: Проверяем наличие у пользователя админских прав.
+:: Если таковых прав нет, завершаем работу скрипта...
+:: **************************************************
 
 SET HasAdminRights=0
 
@@ -25,29 +25,29 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	ECHO.
 	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO .
+	ECHO.
 	ECHO Не определена переменная ScriptPath
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
-REM ****************************************************************************************
-REM Устанавливаем wget
-REM ****************************************************************************************
+:: ****************************************************************************************
+:: Устанавливаем wget
+:: ****************************************************************************************
 
 set PathToWget="%ScriptPath%Distr\x32\wget.exe"
 set PathToWget-x64="%ScriptPath%Distr\x64\wget.exe"
 
-ECHO .
+ECHO.
 ECHO Install wget...
-ECHO .
+ECHO.
 mkdir  "%ProgramFiles%\wget\"
 	If exist "%SystemDrive%\Program Files (x86)" (
 		copy /y %PathToWget-x64% "%ProgramFiles%\wget\wget.exe"
@@ -55,11 +55,11 @@ mkdir  "%ProgramFiles%\wget\"
 		copy /y %PathToWget% "%ProgramFiles%\wget\wget.exe"
 	)
 
-REM Добавим путь к wget в path
+:: Добавим путь к wget в path
 	setx PATH "%ProgramFiles%\wget\;%Path%"
 	PATH=%ProgramFiles%\wget\;%Path%
 
-REM Добавляем утилиту wget.exe в исключения брандмауера Windows
+:: Добавляем утилиту wget.exe в исключения брандмауера Windows
 	netsh advfirewall firewall del rule name="wget"
 	netsh advfirewall firewall add rule name="wget" dir=in action=allow program="%ProgramFiles%\wget\wget.exe"
 

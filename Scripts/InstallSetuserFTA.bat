@@ -1,22 +1,22 @@
 @echo off
-REM ****************************************
-REM
-REM Автор скрипта Михаил Медведев aka mihanik
-REM
-REM https://mihanik.net
-REM
-REM        Требуется наличие прав администратора: ДА
-REM Антивирусная программа должна быть отключена: желательно, но не обязательно
-REM                                    Замечания: НЕТ
-REM
-REM Описание
-REM
-REM ****************************************
+:: ****************************************
+::
+:: Автор скрипта Михаил Медведев aka mihanik
+::
+:: https://mihanik.net
+::
+::        Требуется наличие прав администратора: ДА
+:: Антивирусная программа должна быть отключена: желательно, но не обязательно
+::                                    Замечания: НЕТ
+::
+:: Описание
+::
+:: ****************************************
 
-REM **************************************************
-REM Проверяем наличие у пользователя админских прав.
-REM Если таковых прав нет, завершаем работу скрипта...
-REM **************************************************
+:: **************************************************
+:: Проверяем наличие у пользователя админских прав.
+:: Если таковых прав нет, завершаем работу скрипта...
+:: **************************************************
 
 SET HasAdminRights=0
 
@@ -25,37 +25,37 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	ECHO.
 	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO .
+	ECHO.
 	ECHO Не определена переменная ScriptPath
-	ECHO .
+	ECHO.
 	GOTO ENDSUB
 )
 
-REM ****************************************************************************************
-REM Устанавливаем SetuserFTA
-REM ****************************************************************************************
+:: ****************************************************************************************
+:: Устанавливаем SetuserFTA
+:: ****************************************************************************************
 
 set PathToSetuserFTA="%ScriptPath%Distr\noarch\SetUserFTA\*"
 
-REM SetuserFTA - Программа для управления защищёнными настройками Windows 10.
-REM Сайт разработчика: http://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
-REM По русски: https://ru.desktopsupportpanel.com/izmenit-prilozheniya-po-umolchaniyu-brauzer-ili-sopostavleni
+:: SetuserFTA - Программа для управления защищёнными настройками Windows 10.
+:: Сайт разработчика: http://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
+:: По русски: https://ru.desktopsupportpanel.com/izmenit-prilozheniya-po-umolchaniyu-brauzer-ili-sopostavleni
 
 ECHO Install SetuserFTA...
-ECHO .
+ECHO.
 mkdir  "%ProgramFiles%\SetuserFTA\"
 
 copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\"
 
 
-REM подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driver-ucpd-sys/
+:: подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driver-ucpd-sys/
 net stop UCPD
 sc.exe delete UCPD
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d 4 /f

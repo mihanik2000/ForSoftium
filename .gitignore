@@ -3,6 +3,7 @@
 *.rar
 *.iso
 *.zip
+*.bak
 !QuickLaunch.zip
 !Bginfo.exe
 !IndexedDB.zip

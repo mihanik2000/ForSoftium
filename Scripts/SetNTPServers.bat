@@ -31,12 +31,45 @@ IF NOT %HasAdminRights%==1 (
 	GOTO ENDSUB
 )
 
-:: ****************************************************************************************
-:: Запланируем на всякий случай ежедневное выключение в 21:00
-:: ****************************************************************************************
+if NOT defined ScriptPath (
+	ECHO.
+	ECHO Не определена переменная ScriptPath
+	ECHO.
+	GOTO ENDSUB
+)
 
-SCHTASKS /Create /RU "NT AUTHORITY\SYSTEM" /SC DAILY /TN "Microsoft\Office\Office Shutdown" /TR  "\"%SystemDrive%\Windows\System32\shutdown.exe\" /s /f /t 00"  /ST 21:00 /RL HIGHEST /F
-Powershell -command "$Parm = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd ; Set-ScheduledTask -TaskName \"\Microsoft\Office\Office Shutdown\" -Settings $Parm"
+echo.
+echo Настройка параметров службы времени...
+echo.
+
+:: включение службы времени
+
+echo Включаем/Запускаем службу времени
+
+:: Установить автоматический запуск
+sc config w32time start=auto  >nul 2>&1
+
+:: Запустить службу (если остановлена)
+net start w32time  >nul 2>&1
+
+echo Указываем адреса NTP-серверов
+
+:: Укажем несколько NTP-серверов
+w32tm /config /manualpeerlist:"0.ru.pool.ntp.org,0x9 1.ru.pool.ntp.org,0x9" /syncfromflags:manual /update /reliable:yes  >nul 2>&1
+
+echo Применяем сделанные настройки
+echo.
+
+:: Перезапустить службу
+net stop w32time >nul 2>&1
+net start w32time >nul 2>&1
+
+echo Производим синхронизацию времени
+:: Принудительная синхронизация
+w32tm /resync  >nul 2>&1
+
+echo Настройка параметров службы времени завершена.
+echo.
 
 :ENDSUB
 
