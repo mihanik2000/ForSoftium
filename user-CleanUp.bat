@@ -1,14 +1,14 @@
-Rem Скрипт настройки среды пользователя
+:: Скрипт настройки среды пользователя
 
 @echo off
 
 powershell -window Hidden -command ""
 
-Rem Постараемся запускать приложения с привилегиями родительского процесса без запроса UAC,
-Rem т.е. от имени запускающего пользователя
+:: Постараемся запускать приложения с привилегиями родительского процесса без запроса UAC,
+:: т.е. от имени запускающего пользователя
 set __COMPAT_LAYER=RUNASINVOKER
 
-Rem Если скрипт запускается первый раз, то завершаем работу скрипта
+:: Если скрипт запускается первый раз, то завершаем работу скрипта
 	If exist "%SystemDrive%\ProgramData\Softium\FirstRun.txt" (
 		echo Первый запуск. Выходим из скрипта.
 		del "%SystemDrive%\ProgramData\Softium\FirstRun.txt" /q /f
@@ -16,14 +16,14 @@ Rem Если скрипт запускается первый раз, то завершаем работу скрипта
 		logoff
 	 )
 
-Rem ****************************************************************************************
-Rem Описываем переменные.
-Rem ****************************************************************************************
+:: ****************************************************************************************
+:: Описываем переменные.
+:: ****************************************************************************************
 
 :: Дополнительно создаём ассоциацию для PDF
 reg add "HKCU\Software\Classes\.pdf" /ve /t REG_SZ /d "ChromeHTML" /f
 
-Rem Устанавливаем ассоциации файлов
+:: Устанавливаем ассоциации файлов
 
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .3g2 AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" .3gp AppX6eg8h5sxqq90pv53845wmnbewywdqq5h
@@ -142,95 +142,98 @@ Rem Устанавливаем ассоциации файлов
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" mswindowsvideo AppX6w6n4f8xch1s3vzwf3af6bfe88qhxbza
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe" read AppXe862j7twqs4aww05211jaakwxyfjx4da
 
-Rem включим режим электропитания "Экономия энергии"
+:: включим режим электропитания "Экономия энергии"
 powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
 
-Rem Отключаем режим планшета
+:: Отключаем режим планшета
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v SignInMode /t REG_DWORD /d 2 /f
 
-REM Настроим панель задач
+:: Настроим панель задач
 del "%APPDATA%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*" /q /s /f
 
 "%ProgramFiles%\7-Zip\7z.exe" x -y  "C:\ProgramData\Softium\QuickLaunch.zip" -o"%APPDATA%\Microsoft\Internet Explorer"
 
 regedit.exe /s "C:\ProgramData\Softium\PinnedTaskbar.reg"
 
-Rem Отбражаем Мой компьютер
+:: Отбражаем Мой компьютер
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
 
-Rem Почистим папки
+:: Почистим папки
 
-rem Контакты
+:: Контакты
 del "%USERPROFILE%\Contacts\*" /q /s /f
 forfiles /P "%USERPROFILE%\Contacts" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Рабочий стол
+:: Рабочий стол
 del "%USERPROFILE%\Desktop\*" /q /s /f
 forfiles /P "%USERPROFILE%\Desktop" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Загрузки
+:: Загрузки
 del "%USERPROFILE%\Downloads\*" /q /s /f
 forfiles /P "%USERPROFILE%\Downloads" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Избранное
+:: Избранное
 del "%USERPROFILE%\Favorites\*" /q /s /f
 forfiles /P "%USERPROFILE%\Favorites" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Ссылки
+:: Ссылки
 del "%USERPROFILE%\Links\*" /q /s /f
 forfiles /P "%USERPROFILE%\Links" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Музыка
+:: Музыка
 del "%USERPROFILE%\Music\*" /q /s /f
 forfiles /P "%USERPROFILE%\Music" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Изображения
+:: Изображения
 del "%USERPROFILE%\Pictures\*" /q /s /f
 forfiles /P "%USERPROFILE%\Pictures" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Сохранения игр
+:: Сохранения игр
 del "%USERPROFILE%\Saved Games\*" /q /s /f
 forfiles /P "%USERPROFILE%\Saved Games" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Поиски
+:: Поиски
 del "%USERPROFILE%\Searches\*" /q /s /f
 forfiles /P "%USERPROFILE%\Searches" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Видео
+:: Видео
 del "%USERPROFILE%\Videos\*" /q /s /f
 forfiles /P "%USERPROFILE%\Videos" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-rem Временные файлы
+:: Временные файлы
 del "%USERPROFILE%\AppData\Local\Temp\*" /q /s /f
 forfiles /P "%USERPROFILE%\AppData\Local\Temp" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-REM ****************************************************************************************
-REM Установим тему Softium
-REM ****************************************************************************************
+:: ****************************************************************************************
+:: Установим тему Softium
+:: ****************************************************************************************
 
-REM применяем тему
-REM[*] rundll32 не умеет в определение текущей папки, поэтому если надо - придется подсунуть ему %cd%
-REM[*] пути с кавычками не работают
+:: применяем тему
+::[*] rundll32 не умеет в определение текущей папки, поэтому если надо - придется подсунуть ему %cd%
+::[*] пути с кавычками не работают
 rundll32 themecpl.dll,OpenThemeAction %SystemDrive%\ProgramData\Softium\Softium.theme
  
-REM прибиваем настройки
+:: прибиваем настройки
 :killsettings_loop
 tasklist | find /i "SystemSettings.exe" > nul 2> nul
 if not %ERRORLEVEL%==0 goto killsettings_loop
 taskkill /f /im SystemSettings.exe > nul
 
-REM Возвращаем правильное название "Мой компьютер"
+:: Возвращаем правильное название "Мой компьютер"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /ve /d "Мой компьютер" /t REG_SZ /f > nul 2> nul
  
-REM Возвращаем правильное название "Корзина"
+:: Возвращаем правильное название "Корзина"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}" /ve /d "Корзина" /t REG_SZ /f > nul 2> nul
  
-REM Перезапуск explorer.exe
+:: Перезапуск explorer.exe
 taskkill /f /im explorer.exe > nul
 start explorer.exe
 
-REM Удалим программы Яндекса
+:: Создадим на рабочем столе ярлык для общей папки (SharedFolder)
+cscript /nologo "%SystemDrive%\ProgramData\Softium\CreateSharedFolderLink.vbs"
+
+:: Удалим программы Яндекса
 
 wmic product where name="Голосовой помощник Алиса" call uninstall /nointeractive
 
@@ -238,13 +241,13 @@ FORFILES /P "%LOCALAPPDATA%\Yandex\YandexBrowser\Application" /S /M setup.exe /C
 
 FORFILES /P "%LOCALAPPDATA%\Yandex\YaPin" /S /M Yandex.exe /C "cmd /c \"@path\" --uninstall --force-uninstall"
 
-REM Удалим OneDrive
+:: Удалим OneDrive
 
 CALL "%SystemDrive%\ProgramData\Softium\DeleteOneDrive.bat"
 forfiles /P "%USERPROFILE%\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 forfiles /P "%USERPROFILE%\AppData\Local\Microsoft\OneDrive" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
 
-REM Выводим на рабочий стол техническую информацию о ПК
+:: Выводим на рабочий стол техническую информацию о ПК
 reg add HKEY_CURRENT_USER\Software\Sysinternals\BGInfo /v EulaAccepted /t REG_DWORD /d 1 /f
 "%ProgramFiles%\BGInfo\Bginfo.exe" "%ProgramFiles%\BGInfo\BGSettings.bgi" /silent /TIMER:00 /nolicprompt
 

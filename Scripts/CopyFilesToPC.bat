@@ -77,6 +77,9 @@ if NOT defined ScriptPath (
 
 :: Скрипт удаления файла
 	copy /y "%ScriptPath%Distr\noarch\file_delete.js" "%SystemDrive%\ProgramData\Softium\file_delete.js"
+	
+:: Скрипт создания ссылки на общую папку
+	copy /y "%ScriptPath%Distr\noarch\CreateSharedFolderLink.vbs" "%SystemDrive%\ProgramData\Softium\CreateSharedFolderLink.vbs"
 
 :: Дополнительные скрипты
 
