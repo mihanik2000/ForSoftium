@@ -12,12 +12,12 @@ Set https = CreateObject("MSXML2.XMLHTTP")
 	https.SetRequestHeader "User-Agent", "curl/7.81.0"
 	https.Send
 
-	' їзвлекаем IP из ответа
+	' »звлекаем IP из ответа
 	responseText = https.ResponseText
 	
 Set https = Nothing
 
-' Фстанавливаем пустое значение пути €рлыка общей папки на рабочем столе.
+' ”станавливаем пустое значение пути €рлыка общей папки на рабочем столе.
 MyTargetPath = ""
 
 ' “еперь на основании полученного внешнего IP-адреса задаЄм правильное значение MyTargetPath
