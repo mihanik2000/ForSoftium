@@ -51,7 +51,7 @@ ECHO.
 
 :: Удалим созданную автоматически ссылку и создадим  правильную ссылку на GIMP
 	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\GIMP 2.10.38.lnk"
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js"  "AllUsersDesktop"  "" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "%USERPROFILE%" "GIMP" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "Графический редактор GIMP"
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js"  "AllUsersDesktop"  "" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "C:\Users\Softium\Documents" "GIMP" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "Графический редактор GIMP"
 
 :ENDSUB
 

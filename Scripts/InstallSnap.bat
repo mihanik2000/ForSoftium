@@ -51,7 +51,7 @@ ECHO.
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathTosnap% -o"%ProgramFiles%\SNAP"
 
 :: Создадим  ссылку на Snap
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\SNAP\Snap-9.0.5\index.html" "%ProgramFiles%\SNAP\Snap-9.0.5" "Snap!" "%ProgramFiles%\SNAP\Snap-9.0.5\src\favicon.ico" "SNAP! Оффлайн версия"
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\SNAP\Snap-9.0.5\index.html" "C:\Users\Softium\Documents" "Snap!" "%ProgramFiles%\SNAP\Snap-9.0.5\src\favicon.ico" "SNAP! Оффлайн версия"
 
 :ENDSUB
 

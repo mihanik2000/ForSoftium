@@ -56,7 +56,7 @@ ECHO.
 	pip install WMI
 
 :: Создадим ссылку на IDLE
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  ""  "C:\Python3\Lib\idlelib\idle.pyw" "C:\Python3" "Python IDLE" "C:\Python3\pythonw.exe" "Python IDLE"
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  ""  "C:\Python3\Lib\idlelib\idle.pyw" "C:\Users\Softium\Documents" "Python IDLE" "C:\Python3\pythonw.exe" "Python IDLE"
 
 :ENDSUB
 

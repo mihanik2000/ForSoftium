@@ -56,6 +56,9 @@ ECHO ВАЖНО!!!
 ECHO Программу нужно устанавливать в ручном режиме.
 ECHO Нет возможности установить программу автоматически.
 ECHO.
+powershell -command "$wshell = New-Object -ComObject WScript.Shell; $wshell.Popup(\"ВАЖНО!!!`nПрограмму нужно устанавливать в ручном режиме.`nНет возможности установить программу автоматически.\", 0, 'Install SWF_Player...', 64)"
+
+
 	start "Title" /wait %PathToPlayer% /silent
 	If exist "%SystemDrive%\Program Files (x86)" (
 			copy /y %PathToFlashOCX% "C:\Program Files (x86)\SWF.max\Media\Binary\Flash.ocx"
@@ -75,7 +78,8 @@ ECHO.
 	copy /y %PathToAnimateIco% "%ProgramFiles%\Animate\animate.ico"
 	
 :: Создадим  ссылку на Animate
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Animate\animate.swf" "%USERPROFILE%" "Сделай мульт" "%ProgramFiles%\Animate\animate.ico" "Animate (для начального уровня)."
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Animate\animate.swf" "C:\Users\Softium\Documents" "Сделай мульт" "%ProgramFiles%\Animate\animate.ico" "Animate (для начального уровня)."
+
 
 :ENDSUB
 

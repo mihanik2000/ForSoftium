@@ -20,7 +20,7 @@
 :: он вызывает соотвествующий скрипт из папки ".\Scripts"
 ::
 :: Если вам не требуется устанавливать какие-то программы или нет необходимости выполнять некоторые
-:: действияпо настройке компьютера, просто удалите или задокументируйте часть скрипта, которая это делает.
+:: действия по настройке компьютера, просто удалите или задокументируйте часть скрипта, которая это делает.
 ::
 :: ****************************************
 
@@ -55,7 +55,6 @@ set ScriptPath=%~dp0
 
 :: Составляем основное меню программы
 
-
 :: Описываем используемые переменные
 
 :: Настроить аккаунты пользователей
@@ -83,7 +82,7 @@ cls
 :StartMenu
 
 echo Выберите параметры настройки рабочего места.
-echo .
+echo.
 
 if %BUserAccounts% equ 1 (
 		echo 1 - Настроить аккаунты пользователей - Да
@@ -174,7 +173,7 @@ set BClearSoftiumProfile=1
 :: ****************************************************************************************
 :: Устанавливаем на компьютере правильное время
 ::
-:: Неправильно установленное время может вызывать ошибки в работе скрипта!!!
+:: Неправильно установленное время может вызывать ошибки в работе детей :-D !!!
 ::
 :: ****************************************************************************************
 
@@ -223,7 +222,8 @@ if %BDisWinUpdates%==1 (
 	)
 
 :: ****************************************************************************************
-:: Отключим службу поиска Windows
+:: Отключим службу поиска Windows.
+:: Эта служба сильно тормозит ПК
 :: ****************************************************************************************
 
 CALL "%ScriptPath%Scripts\DisableWindowsSearch.bat"
@@ -375,10 +375,10 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Hi
 :: ****************************************************************************************
 
 :: + Блокнот
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%windir%\system32\notepad.exe" "%HOMEDRIVE%%HOMEPATH%" "Блокнот" "%windir%\system32\notepad.exe" "Текстовый редактор Блокнот"
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%windir%\system32\notepad.exe" "C:\Users\Softium\Documents" "Блокнот" "%windir%\system32\notepad.exe" "Текстовый редактор Блокнот"
 
 :: + Скрипт выключения
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%SystemDrive%\ProgramData\Softium\shutdown.bat" "%HOMEDRIVE%%HOMEPATH%" "Выключить" "%SystemRoot%\System32\SHELL32.dll,27" "Выключение компьютера"
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%SystemDrive%\ProgramData\Softium\shutdown.bat" "C:\Users\Softium\Documents" "Выключить" "%SystemRoot%\System32\SHELL32.dll,27" "Выключение компьютера"
 
 :: ****************************************************************************************
 :: Настройки для Microsoft Edge

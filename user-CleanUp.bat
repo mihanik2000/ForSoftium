@@ -12,7 +12,8 @@ Rem Если скрипт запускается первый раз, то завершаем работу скрипта
 	If exist "%SystemDrive%\ProgramData\Softium\FirstRun.txt" (
 		echo Первый запуск. Выходим из скрипта.
 		del "%SystemDrive%\ProgramData\Softium\FirstRun.txt" /q /f
-		exit /b
+		powershell -command "$wshell = New-Object -ComObject WScript.Shell; $wshell.Popup(\"Это первый вход пользователя Softium в систему`nПрофиль пользователя создан.`nТребуется повторный вход.\", 0, 'Скрипт настройки профиля', 64)"
+		logoff
 	 )
 
 Rem ****************************************************************************************
@@ -247,12 +248,12 @@ REM Выводим на рабочий стол техническую информацию о ПК
 reg add HKEY_CURRENT_USER\Software\Sysinternals\BGInfo /v EulaAccepted /t REG_DWORD /d 1 /f
 "%ProgramFiles%\BGInfo\Bginfo.exe" "%ProgramFiles%\BGInfo\BGSettings.bgi" /silent /TIMER:00 /nolicprompt
 
+powershell -command "$wshell = New-Object -ComObject WScript.Shell; $wshell.Popup(\"Настройка профиля завершена.`nМожно работать!\", 0, 'Скрипт настройки профиля', 64)"
+
 :CONTINUE
 	ECHO .
 	ECHO Всё!
 	ECHO .
 :END
-
-
 
 EXIT /B

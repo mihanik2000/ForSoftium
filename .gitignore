@@ -4,6 +4,7 @@
 *.iso
 *.zip
 *.bak
+nppBackup
 !QuickLaunch.zip
 !Bginfo.exe
 !IndexedDB.zip

@@ -56,12 +56,17 @@ ECHO.
 	 ) else (
  		start "Install Google Chrome..." /wait %PathToGoogleChrome% /passive /norestart
  	)
+
+:: Дополнительно создаём ассоциацию для PDF
+reg add "HKCU\Software\Classes\.pdf" /ve /t REG_SZ /d "ChromeHTML" /f
 	
 :: Сделаем Chrome браузером по-умолчанию.
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  http ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  https ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .htm ChromeHTML
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .html ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .pdf ChromeHTML
+"%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  .website ChromeHTML
 
 :ENDSUB
 
