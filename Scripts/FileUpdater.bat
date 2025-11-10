@@ -49,7 +49,10 @@ IF NOT %HasAdminRights%==1 (
 	set PathToLnkCreate="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/lnk_create.js"
 	
 	set PathToFileDelete="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/file_delete.js"
+
+	set PathToSharedFolder="https://raw.githubusercontent.com/mihanik2000/ForSoftium/refs/heads/main/Distr/noarch/CreateSharedFolderLink.vbs"
 	
+
 	set PathToPowerOff="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Distr/noarch/shutdown.bat"
 	
 	set PathToDeleteOneDrive="https://raw.githubusercontent.com/mihanik2000/ForSoftium/main/Scripts/DeleteOneDrive.bat"
@@ -90,6 +93,9 @@ IF NOT %HasAdminRights%==1 (
 
 :: Скрипт удаления файла
 	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\file_delete.js" %PathToFileDelete%
+
+:: Скрипт для создания ярлыка общей папки на рабочем столе.
+	"%ProgramFiles%\wget\wget.exe" --no-check-certificate -O "%SystemDrive%\ProgramData\Softium\CreateSharedFolderLink.vbs" %PathToSharedFolder%
 
 :: Дополнительные скрипты
 
