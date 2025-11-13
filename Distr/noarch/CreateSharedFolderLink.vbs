@@ -31,6 +31,12 @@ if instr (responseText, "85.91.97.212") then
 		MyTargetPath = "\\SOFTIUM1\SharedFolder"
 End if
 
+' Юность
+if instr (responseText, "176.213.96.45") then
+		MyTargetPath = "\\MAIN-PC\SharedFolder"
+End if
+
+
 Set WshShell = WScript.CreateObject("WScript.Shell")
 
 	strDesktop = WshShell.SpecialFolders("Desktop")
