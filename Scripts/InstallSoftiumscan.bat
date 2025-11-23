@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -43,20 +43,25 @@ if NOT defined ScriptPath (
 :: ****************************************************************************************
 
 :: Определяем место расположения программы softiumscan
-	set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
+
+set PathToSoftium="%ScriptPath%Distr\noarch\softiumscan.exe"
 
 :: создаём папку в корне системного диска для хранения рабочих файлов
-	mkdir "%SystemDrive%\Softium"
+
+mkdir "%SystemDrive%\Softium" >nul 2>&1
 
 :: Программа Softium для обучающегося
-	copy /y %PathToSoftium% "%SystemDrive%\Softium\softiumscan.exe"
+
+copy /y %PathToSoftium% "%SystemDrive%\Softium\softiumscan.exe" >nul 2>&1
 
 :: Добавляем программу softiumscan в исключения брандмауера Windows
-	netsh advfirewall firewall del rule name="softiumscan"
-	netsh advfirewall firewall add rule name="softiumscan" dir=in action=allow program="%SystemDrive%\Softium\softiumscan.exe"
+
+netsh advfirewall firewall del rule name="softiumscan" >nul 2>&1
+netsh advfirewall firewall add rule name="softiumscan" dir=in action=allow program="%SystemDrive%\Softium\softiumscan.exe" >nul 2>&1
 
 :: Создаём ссылку на Softium на общем рабочем столе
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\Softium\softiumscan.exe" "C:\Softium\" "Софтиум" "C:\Softium\softiumscan.exe" "Софтиум"
+
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\Softium\softiumscan.exe" "C:\Softium\" "Софтиум" "C:\Softium\softiumscan.exe" "Софтиум" >nul 2>&1
 
 :ENDSUB
 

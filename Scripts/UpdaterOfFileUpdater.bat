@@ -21,9 +21,9 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO You need administrator rights to run this script!
-	ECHO.
+	echo.
+	echo You need administrator rights to run this script!
+	echo.
 	GOTO ENDSUB
 )
 

@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -47,11 +47,12 @@ set PathToBGInfo="%ScriptPath%Distr\noarch\BGInfo\*"
 :: BGInfo - Программа для выведения на рабочий стол технической информации о ПК
 :: Сайт разработчика: https://learn.microsoft.com/en-us/sysinternals/downloads/bginfo
 
-ECHO Install BGInfo...
-ECHO.
-mkdir  "%ProgramFiles%\BGInfo\"
+echo Install BGInfo...
+echo.
 
-copy /y %PathToBGInfo% "%ProgramFiles%\BGInfo\"
+mkdir  "%ProgramFiles%\BGInfo\" >nul 2>&1
+
+copy /y %PathToBGInfo% "%ProgramFiles%\BGInfo\" >nul 2>&1
 
 :ENDSUB
 

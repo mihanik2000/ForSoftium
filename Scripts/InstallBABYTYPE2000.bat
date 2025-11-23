@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -44,13 +44,15 @@ if NOT defined ScriptPath (
 
 set PathToBABYTYPE2000="%ScriptPath%Distr\noarch\BABYTYPE2000.zip"
 
-ECHO.
-ECHO Install BABYTYPE2000...
-ECHO.
-	"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathToBABYTYPE2000% -oc:
+echo.
+echo Install BABYTYPE2000...
+echo.
+
+"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathToBABYTYPE2000% -oc: >nul 2>&1
 
 :: Создадим  ссылку на BABYTYPE
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\BABYTYPE2000\BABYTYPE.EXE" "C:\BABYTYPE2000" "BabyType" "%SystemRoot%\System32\SHELL32.dll,41" "Тренажер печати BabyType"
+
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "C:\BABYTYPE2000\BABYTYPE.EXE" "C:\BABYTYPE2000" "BabyType" "%SystemRoot%\System32\SHELL32.dll,41" "Тренажер печати BabyType" >nul 2>&1
 
 :ENDSUB
 

@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -50,35 +50,40 @@ set PathToAnimateIco="%ScriptPath%Distr\noarch\animate.ico"
 
 :: Устанавливаем программу SWF_Player
 
-ECHO.
-ECHO Install SWF_Player...
-ECHO ВАЖНО!!!
-ECHO Программу нужно устанавливать в ручном режиме.
-ECHO Нет возможности установить программу автоматически.
-ECHO.
-powershell -command "$wshell = New-Object -ComObject WScript.Shell; $wshell.Popup(\"ВАЖНО!!!`nПрограмму нужно устанавливать в ручном режиме.`nНет возможности установить программу автоматически.\", 0, 'Install SWF_Player...', 64)"
+echo.
+echo Install SWF_Player...
+echo ВАЖНО!!!
+echo Программу нужно устанавливать в ручном режиме.
+echo Нет возможности установить программу автоматически.
+echo.
 
+cscript //nologo "%ScriptPath%Scripts\MsgBox.vbs" ^
+		"ВАЖНО!!!`n`nПрограмму нужно устанавливать в ручном режиме.`nНет возможности установить программу автоматически!" ^
+		64 ^
+		"Требуется ручная установка программы!"
+
+:: Устанавливаем SWF.max Flash Player
 
 start "Title" /wait %PathToPlayer% /silent
-If exist "%SystemDrive%\Program Files (x86)" (
-		copy /y %PathToFlashOCX% "C:\Program Files (x86)\SWF.max\Media\Binary\Flash.ocx"
- ) else (
-		copy /y %PathToFlashOCX% "C:\Program Files\SWF.max\Media\Binary\Flash.ocx"
-)
+
+copy /y %PathToFlashOCX% "C:\Program Files (x86)\SWF.max\Media\Binary\Flash.ocx" >nul 2>&1
 
 :: Удалим с рабочего стола ярлык SWF.max Flash Player
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "Desktop" "\SWF.max Flash Player.lnk"
+
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "Desktop" "\SWF.max Flash Player.lnk" >nul 2>&1
 
 :: Устанавливаем программу Animate (Создай мульт)
-ECHO.
-ECHO Install Animate...
-ECHO.
-	mkdir "%ProgramFiles%\Animate"
-	copy /y %PathToAnimate% "%ProgramFiles%\Animate\animate.swf"
-	copy /y %PathToAnimateIco% "%ProgramFiles%\Animate\animate.ico"
+echo.
+echo Устанавливаем "Создай Мульт"...
+echo.
+
+mkdir "%ProgramFiles%\Animate" >nul 2>&1
+copy /y %PathToAnimate% "%ProgramFiles%\Animate\animate.swf" >nul 2>&1
+copy /y %PathToAnimateIco% "%ProgramFiles%\Animate\animate.ico" >nul 2>&1
 	
 :: Создадим  ссылку на Animate
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Animate\animate.swf" "C:\Users\Softium\Documents" "Сделай мульт" "%ProgramFiles%\Animate\animate.ico" "Animate (для начального уровня)."
+
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Animate\animate.swf" "C:\Users\Softium\Documents" "Сделай мульт" "%ProgramFiles%\Animate\animate.ico" "Animate (для начального уровня)." >nul 2>&1
 
 :ENDSUB
 

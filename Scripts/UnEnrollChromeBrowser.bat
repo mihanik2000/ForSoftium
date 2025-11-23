@@ -27,9 +27,9 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 

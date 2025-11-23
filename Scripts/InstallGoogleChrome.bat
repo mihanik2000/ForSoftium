@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -42,23 +42,32 @@ if NOT defined ScriptPath (
 :: Устанавливаем Google Chrome
 :: ****************************************************************************************
 
-set PathToGoogleChrome="%ScriptPath%Distr\x32\GoogleChromeStandaloneEnterprise.msi"
 set PathToGoogleChrome-x64="%ScriptPath%Distr\x64\GoogleChromeStandaloneEnterprise64.msi"
 Set PathToChromeForcelist="%ScriptPath%Distr\noarch\ChromeForcelist.reg"
+Set PathToInitialPreferences="%ScriptPath%Distr\noarch\initial_preferences"
 
-reg import %PathToChromeForcelist%
+echo.
+echo Устанавливаем Google Chrome...
+echo.
 
-ECHO.
-ECHO Install Google Chrome...
-ECHO.
-	If exist "%SystemDrive%\Program Files (x86)" (
-		start "Install Google Chrome..." /wait %PathToGoogleChrome-x64% /passive /norestart
-	 ) else (
- 		start "Install Google Chrome..." /wait %PathToGoogleChrome% /passive /norestart
- 	)
+start "Install Google Chrome..." /wait %PathToGoogleChrome-x64% /passive /norestart
+
+
+if %BChromePolicy%==1 (
+	echo.
+	echo Настраиваем политики Google Chrome...
+	echo.
+
+	reg import %PathToChromeForcelist% >nul 2>&1
+
+	mkdir "%ProgramFiles%\Google\Chrome\Application\"  >nul 2>&1
+
+	copy /y %PathToInitialPreferences% "%ProgramFiles%\Google\Chrome\Application\initial_preferences" >nul 2>&1
+)
 
 :: Дополнительно создаём ассоциацию для PDF
-reg add "HKCU\Software\Classes\.pdf" /ve /t REG_SZ /d "ChromeHTML" /f
+
+reg add "HKCU\Software\Classes\.pdf" /ve /t REG_SZ /d "ChromeHTML" /f  >nul 2>&1
 	
 :: Сделаем Chrome браузером по-умолчанию.
 "%ProgramFiles%\SetuserFTA\SetUserFTA.exe"  http ChromeHTML

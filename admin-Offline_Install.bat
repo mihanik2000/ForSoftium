@@ -1,5 +1,5 @@
 @echo off
-:: ****************************************
+:: ****************************************************************************************
 :: Редактировать данный скрипт рекомендуется в программе Notepad++
 ::
 :: Автор скрипта Михаил Медведев aka mihanik
@@ -22,12 +22,32 @@
 :: Если вам не требуется устанавливать какие-то программы или нет необходимости выполнять некоторые
 :: действия по настройке компьютера, просто удалите или задокументируйте часть скрипта, которая это делает.
 ::
-:: ****************************************
+:: ****************************************************************************************
+
+:: Установим значение переменной ScriptPath.
+:: Это путь к папке, откуда запущен этот скрипт.
+:: Без этой переменной другие скрипты работать не будут!
+
+set ScriptPath=%~dp0
 
 :: ****************************************************************************************
+
+:: Проверяем что настройка работы скрипта выполнена.
+CALL "%ScriptPath%admin-Offline_Install.conf.bat"
+ 
+if %SettingsEnabled%==0 (
+
+	cscript //nologo "%ScriptPath%Scripts\MsgBox.vbs" ^
+			"Для продолжения:`n`n1. Откройте файл admin-Offline_Install.conf.bat`n2. Задайте необходимые параметры.`n3. Запустите скрипт повторно." ^
+			16 ^
+			"Требуется настройка!"
+	exit /b
+)
+
+:: ****************************************************************************************
+
 :: Проверяем наличие у пользователя админских прав.
 :: Если таковых прав нет, завершаем работу скрипта.
-:: ****************************************************************************************
 
 SET HasAdminRights=0
 FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
@@ -35,140 +55,31 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
-	ECHO Для запуска этого скрипта вам нужно обладать правами "Администратоа"
-	ECHO .
-	GOTO END
+
+	cscript //nologo "%ScriptPath%Scripts\MsgBox.vbs" ^
+			"Запустите скрипт с повышенными правами.`n`nДля этого:`n`n1. Кликните по скрипту правой кнопкой мыши`n2. Выберите пункт 'Запуск от имени Администратора'`n3. При необходимости введите пароль." ^
+			16 ^
+			"Недостаточно прав!"
+	exit /b
 )
-
-:: Глобальная переменная описывающая путь из которого выполняется данный скрипт.
-:: !!! Используется во всей сессии CMD !!!
-:: Если данная переменная не будет определена, то некоторые дополнительные скрипты 
-:: !!!! не смогут быть запущены !!!
-
-set ScriptPath=%~dp0
-
-:: ****************************************************************************************
-:: Выводим небольшое меню для установки некоторых параметров выполнения скрипта.
-:: Описываем переменные, которые влияют на параметры работы скрипта.
-:: ****************************************************************************************
-
-:: Составляем основное меню программы
-
-:: Описываем используемые переменные
-
-:: Настроить аккаунты пользователей
-set BUserAccounts=1
-
-:: Отключить обновление Windows
-set BDisWinUpdates=1
-
-:: Удалить "лишние" программы Windows
-set BDelWinApps=1
-
-:: Ограничить запуск программ
-set BGroupPolicy=1
-
-:: Очистить общий рабочий стол
-set BClerAllUsersDesktop=1
-
-:: Установить скрипт очистки профиля ребёнка
-set BClearSoftiumProfile=1
 
 mode 128,32
 color 1f
 cls
 
-:StartMenu
+:: ****************************************************************************************
+:: Включаем теневое копирование для системного диска.
 
-echo Выберите параметры настройки рабочего места.
-echo.
+if %BEnableSystemRestore%==1 (
+	CALL "%ScriptPath%Scripts\EnableSystemRestore.bat"
+)
 
-if %BUserAccounts% equ 1 (
-		echo 1 - Настроить аккаунты пользователей - Да
-	) else (
-		echo 1 - Настроить аккаунты пользователей - Нет
-	)
+:: ****************************************************************************************
+:: Создаём точку восстановления Windows.
 
-if %BDisWinUpdates% equ 1 (
-		echo 2 - Отключить обновление Windows - Да
-	) else (
-		echo 2 - Отключить обновление Windows - Нет
-	)
-
-if %BDelWinApps% equ 1 (
-		echo 3 - Удалить "лишние" программы Windows - Да
-	) else (
-		echo 3 - Удалить "лишние" программы Windows - Нет
-	)
-
-if %BGroupPolicy% equ 1 (
-		echo 4 - Ограничить запуск программ - Да
-	) else (
-		echo 4 - Ограничить запуск программ - Нет
-	)
-
-if %BClerAllUsersDesktop% equ 1 (
-		echo 5 - Очистить общий рабочий стол - Да
-	) else (
-		echo 5 - Очистить общий рабочий стол - Нет
-	)
-
-if %BClearSoftiumProfile% equ 1 (
-		echo 6 - Установить скрипт очистки профиля ребёнка - Да
-	) else (
-		echo 6 - Установить скрипт очистки профиля ребёнка - Нет
-	)
-
-echo 7 - Выполнить скрипт с указанными ограничениями
-
-echo 8 - Выполнить скрипт со значениями по-умолчанию
-
-echo 9 - Прервать работу скрипта
-
-CHOICE /C:123456789 /N /T 30 /D 6
-
-cls
-
-:: Настройка учётных записей пользователей на компьютере
-if %errorlevel%==1 ( set /a BUserAccounts=1-BUserAccounts )
-
-:: Отключение автоматического обновление системы
-if %errorlevel%==2 ( set /a BDisWinUpdates=1-BDisWinUpdates )
-
-:: Удаление "лишних" программ Windows
-if %errorlevel%==3 ( set /a BDelWinApps=1-BDelWinApps )
-
-:: Настройка групповой политики на ПК
-if %errorlevel%==4 ( set /a BGroupPolicy=1-BGroupPolicy )
-
-:: Удаление файлов с общего рабочего стола
-if %errorlevel%==5 ( set /a BClerAllUsersDesktop=1-BClerAllUsersDesktop )
-
-:: установка скрипта очистки профиля пользователя
-if %errorlevel%==6 ( set /a BClearSoftiumProfile=1-BClearSoftiumProfile )
-
-:: Запускаем скрипт
-if %errorlevel%==7 (goto :MyStart)
-
-:: Устанавливаем значения по умолчанию
-if %errorlevel%==8 (goto :SetDefVal)
-
-:: Завершаем работу скрипта
-if %errorlevel%==9 (EXIT /B)
-
-GOTO :StartMenu
-
-:SetDefVal
-
-set BUserAccounts=1
-set BDisWinUpdates=1
-set BDelWinApps=1
-set BGroupPolicy=1
-set BClerAllUsersDesktop=1
-set BClearSoftiumProfile=1
-
-:MyStart
+if %BEnableSystemRestore%==1 (
+	CALL "%ScriptPath%Scripts\CreateSystemRestorePoint.bat"
+)
 
 :: ****************************************************************************************
 :: Устанавливаем на компьютере правильное время
@@ -177,7 +88,9 @@ set BClearSoftiumProfile=1
 ::
 :: ****************************************************************************************
 
-CALL "%ScriptPath%Scripts\SetNTPServers.bat"
+if %BSetNTPServers%==1 (
+	CALL "%ScriptPath%Scripts\SetNTPServers.bat"
+)
 
 :: ****************************************************************************************
 :: Удалим всё с общего рабочего стола
@@ -186,7 +99,7 @@ CALL "%ScriptPath%Scripts\SetNTPServers.bat"
 if %BClerAllUsersDesktop%==1 (
 	del "%SystemDrive%\Users\Public\Desktop\*" /q /s /f
 	forfiles /P "%SystemDrive%\Users\Public\Desktop" /C "cmd /c (if @isdir==TRUE rmdir /q /s @file)"
-	)
+)
 
 :: ****************************************************************************************
 :: Скопируем файлы на настраиваемый компьютер
@@ -206,12 +119,14 @@ CALL "%ScriptPath%Scripts\InstallSoftiumscan.bat"
 
 if %BUserAccounts%==1 (
 	CALL "%ScriptPath%Scripts\UserAccounts.bat"
-	)
+)
 
 :: ****************************************************************************************
 :: Запрещаем использование учётных записей Microsoft на компьютере
 :: ****************************************************************************************
+if %BDisableMicrosoftAccounts%==1 (
 	CALL "%ScriptPath%Scripts\DisableMicrosoftAccounts.bat"
+)
 
 :: ****************************************************************************************
 :: Отключим автоматическое обновление системы
@@ -226,7 +141,9 @@ if %BDisWinUpdates%==1 (
 :: Эта служба сильно тормозит ПК
 :: ****************************************************************************************
 
-CALL "%ScriptPath%Scripts\DisableWindowsSearch.bat"
+if %BDisableWindowsSearch%==1 (
+	CALL "%ScriptPath%Scripts\DisableWindowsSearch.bat"
+)
 
 :: ****************************************************************************************
 :: Включим на время работы скрипта режим электропитания "Высокая производительность"
@@ -244,7 +161,9 @@ CALL "%ScriptPath%Scripts\PowerSupplyParameters.bat"
 :: Запланируем на всякий случай ежедневное выключение в 21:00
 :: ****************************************************************************************
 
-CALL "%ScriptPath%Scripts\ScheduleShutdown.bat"
+if %BScheduleShutdown%==1 (
+	CALL "%ScriptPath%Scripts\ScheduleShutdown.bat"
+)
 
 :: ****************************************************************************************
 :: Включим административные папки
@@ -368,21 +287,33 @@ CALL "%ScriptPath%Scripts\InstallActivePresenter.bat"
 :: Отбражаем Мой компьютер
 :: ****************************************************************************************
 
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
+echo.
+echo Отбражаем ярлык "Мой компьютер"
+echo.
+
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f >nul 2>&1
 
 :: ****************************************************************************************
 :: Создадим недостающие ярлыки
 :: ****************************************************************************************
 
+echo.
+echo Создадим недостающие ярлыки.
+echo.
+
 :: + Блокнот
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%windir%\system32\notepad.exe" "C:\Users\Softium\Documents" "Блокнот" "%windir%\system32\notepad.exe" "Текстовый редактор Блокнот"
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%windir%\system32\notepad.exe" "C:\Users\Softium\Documents" "Блокнот" "%windir%\system32\notepad.exe" "Текстовый редактор Блокнот" >nul 2>&1
 
 :: + Скрипт выключения
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%SystemDrive%\ProgramData\Softium\shutdown.bat" "C:\Users\Softium\Documents" "Выключить" "%SystemRoot%\System32\SHELL32.dll,27" "Выключение компьютера"
+	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%SystemDrive%\ProgramData\Softium\shutdown.bat" "C:\Users\Softium\Documents" "Выключить" "%SystemRoot%\System32\SHELL32.dll,27" "Выключение компьютера"  >nul 2>&1
 
 :: ****************************************************************************************
 :: Настройки для Microsoft Edge
 :: ****************************************************************************************
+
+echo.
+echo Выполним некоторые настройки для Microsoft Edge
+echo.
 
 CALL "%ScriptPath%Scripts\DeleteMicrosoftEdge.bat"
 
@@ -390,56 +321,91 @@ CALL "%ScriptPath%Scripts\DeleteMicrosoftEdge.bat"
 :: Удалим One Drive
 :: ****************************************************************************************
 
+echo.
+echo Удалим One Drive
+echo.
+
 CALL "%ScriptPath%Scripts\DeleteOneDrive.bat"
 
 :: ****************************************************************************************
 :: Удалим "лишние" программы Windows
 :: ****************************************************************************************
 
+echo.
+echo Удалим "лишние" программы Windows 
+echo.
+
 if %BDelWinApps%==1 (
 	start "Title" /wait powershell -command "Set-ExecutionPolicy Bypass -Force"
 	start "Title" /wait powershell -File  "%SystemDrive%\ProgramData\Softium\DelWindowsApps.ps1"
 	)
 
+echo.
+echo Готово
+echo.
+
 :: ****************************************************************************************
 :: Отключаем режим планшета
 :: ****************************************************************************************
 
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v SignInMode /t REG_DWORD /d 2 /f
+echo.
+echo Отключаем режим планшета
+echo.
+
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v TabletMode /t REG_DWORD /d 0 /f >nul 2>&1
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ImmersiveShell" /v SignInMode /t REG_DWORD /d 2 /f >nul 2>&1
 
 :: ****************************************************************************************
 :: Установим собственную тему оформления профиля пользователя и экрана приветсвия Windows
 :: ****************************************************************************************
 
-	CALL "%ScriptPath%Scripts\SetLockScreen.bat"
-	CALL "%ScriptPath%Scripts\SetSoftiumTheme.bat"
+echo.
+echo Установим собственную тему оформления профиля пользователя и экрана приветсвия Windows
+echo.
+
+CALL "%ScriptPath%Scripts\SetLockScreen.bat"
+CALL "%ScriptPath%Scripts\SetSoftiumTheme.bat"
 
 :: ****************************************************************************************
 :: включим режим электропитания "Экономия энергии"
 :: ****************************************************************************************
 
-	powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a
+echo.
+echo включим режим электропитания \"Экономия энергии\"
+echo.
 
-:: ****************************************************************************************
-:: Установим имя компьютера
-:: ****************************************************************************************
-
-	set /p MyHostname="Укажите имя компьютера: "
-	wmic computersystem where name="%computername%" call rename name="%MyHostname%"
+powercfg /setactive a1841308-3541-4fab-bc81-f71556f20b4a >nul 2>&1
 
 :: ****************************************************************************************
 :: Установим параметры групповой политики
 :: ****************************************************************************************
 
 if %BGroupPolicy%==1 (
+	echo.
+	echo Установим ограничение запуска программ из профиля пользователя...
+	echo.
+
 	"%ProgramFiles%\7-Zip\7z.exe" x -y  "%SystemDrive%\ProgramData\Softium\GroupPolicy.7z" -o"%windir%\System32"
 	)
 
-ECHO .
-ECHO Всё!
-ECHO .
-ECHO Перезагрузка через 10 секунд...
+:: ****************************************************************************************
+:: Создаём точку восстановления Windows.
+
+if %BEnableSystemRestore%==1 (
+	CALL "%ScriptPath%Scripts\CreateSystemRestorePoint.bat"
+)
+
+:: ****************************************************************************************
+:: Установим имя компьютера
+:: ****************************************************************************************
+
+	set /p MyHostname="Укажите имя компьютера: "
+	wmic computersystem where name="%computername%" call rename name="%MyHostname%" >nul 2>&1
+
+echo.
+echo Всё!
+echo.
+echo Перезагрузка через 10 секунд...
 	
 :END
 

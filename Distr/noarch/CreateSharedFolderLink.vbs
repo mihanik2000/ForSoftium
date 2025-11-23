@@ -21,6 +21,7 @@ Set https = Nothing
 MyTargetPath = ""
 
 ' Теперь на основании полученного внешнего IP-адреса задаём правильное значение MyTargetPath
+
 ' Офис
 if instr (responseText, "84.42.29.51") then
 		MyTargetPath = "\\192.168.69.47\SharedFolder"
@@ -36,20 +37,23 @@ if instr (responseText, "176.213.96.45") then
 		MyTargetPath = "\\MAIN-PC\SharedFolder"
 End if
 
+if MyTargetPath <> "" then
 
-Set WshShell = WScript.CreateObject("WScript.Shell")
+	Set WshShell = WScript.CreateObject("WScript.Shell")
 
-	strDesktop = WshShell.SpecialFolders("Desktop")
+		strDesktop = WshShell.SpecialFolders("Desktop")
 
-	Set oShellLink = WshShell.CreateShortcut(strDesktop & "\Общая папка.lnk")
-		oShellLink.TargetPath = MyTargetPath
-		oShellLink.WindowStyle = 1
-		oShellLink.IconLocation = "%SystemRoot%\System32\SHELL32.dll,103"
-		oShellLink.Description = "Общая папка для хранения файлов ""Софтиков"""
-		oShellLink.WorkingDirectory = MyTargetPath
-		oShellLink.Arguments = ""
-		oShellLink.Hotkey = ""
-		oShellLink.Save
-	Set oShellLink = Nothing
+		Set oShellLink = WshShell.CreateShortcut(strDesktop & "\Общая папка.lnk")
+			oShellLink.TargetPath = MyTargetPath
+			oShellLink.WindowStyle = 1
+			oShellLink.IconLocation = "%SystemRoot%\System32\SHELL32.dll,103"
+			oShellLink.Description = "Общая папка для хранения файлов ""Софтиков"""
+			oShellLink.WorkingDirectory = MyTargetPath
+			oShellLink.Arguments = ""
+			oShellLink.Hotkey = ""
+			oShellLink.Save
+		Set oShellLink = Nothing
 
-Set WshShell = Nothing
+	Set WshShell = Nothing
+
+End If

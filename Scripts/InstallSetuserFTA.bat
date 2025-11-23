@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -48,18 +48,20 @@ set PathToSetuserFTA="%ScriptPath%Distr\noarch\SetUserFTA\*"
 :: Сайт разработчика: http://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
 :: По русски: https://ru.desktopsupportpanel.com/izmenit-prilozheniya-po-umolchaniyu-brauzer-ili-sopostavleni
 
-ECHO Install SetuserFTA...
-ECHO.
-mkdir  "%ProgramFiles%\SetuserFTA\"
+echo.
+echo Устанавливаем SetuserFTA...
+echo.
 
-copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\"
+mkdir  "%ProgramFiles%\SetuserFTA\" >nul 2>&1
 
+copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\" >nul 2>&1
 
 :: подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driver-ucpd-sys/
-net stop UCPD
-sc.exe delete UCPD
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d 4 /f
-schtasks /Change /TN "\Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable
+
+net stop UCPD >nul 2>&1
+sc.exe delete UCPD >nul 2>&1
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UCPD" /v "Start" /t REG_DWORD /d 4 /f >nul 2>&1
+schtasks /Change /TN "\Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable >nul 2>&1
 
 :ENDSUB
 

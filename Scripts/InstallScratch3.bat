@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -44,10 +44,11 @@ if NOT defined ScriptPath (
 
 set PathToScratchDesktop="%ScriptPath%Distr\noarch\Scratch 3.29.1 Setup.exe"
 
-ECHO.
-ECHO Install Scratch Desktop...
-ECHO.
-	start "Title" /wait %PathToScratchDesktop% /S /allusers
+echo.
+echo Install Scratch Desktop...
+echo.
+
+start "Title" /wait %PathToScratchDesktop% /S /allusers
 
 :ENDSUB
 

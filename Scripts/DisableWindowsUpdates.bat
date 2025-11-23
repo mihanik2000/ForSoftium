@@ -12,9 +12,9 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO .
+	echo .
 	MSG * "You need administrator rights to run!!!"
-	ECHO .
+	echo .
 	GOTO :END
 )
 

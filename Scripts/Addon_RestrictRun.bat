@@ -6,7 +6,7 @@
 ver | find "5.1."
 
 If %errorlevel%==0  (
-	Echo Windows XP unsupported!!!
+	echo Windows XP unsupported!!!
 	timeout 10 /nobreak
 	Exit /b 1
  ) 
@@ -23,9 +23,9 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Для запуска этого скрипта вам нужно обладать правами "Администратоа"
-	ECHO.
+	echo.
+	echo Для запуска этого скрипта вам нужно обладать правами "Администратоа"
+	echo.
 	GOTO END
 )
 

@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -45,14 +45,15 @@ if NOT defined ScriptPath (
 set PathToxnafx="%ScriptPath%Distr\noarch\xnafx40_redist.msi"
 set PathToKodu="%ScriptPath%Distr\noarch\KoduSetup_1.6.18.0.msi"
 
-ECHO.
-ECHO Install Kodu...
-ECHO.
+echo.
+echo Install Kodu...
+echo.
 	start "Title" /wait %PathToxnafx% /passive /norestart
 	start "Title" /wait %PathToKodu% /passive /norestart
 
 :: Удалим лишнюю ссылку Kodu
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\Configure Kodu Game Lab.lnk"
+
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\Configure Kodu Game Lab.lnk" >nul 2>&1
 
 :ENDSUB
 

@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -44,14 +44,16 @@ if NOT defined ScriptPath (
 
 set PathToGIMP="%ScriptPath%Distr\noarch\gimp-2.10.38-setup.exe"
 
-ECHO.
-ECHO Install GIMP...
-ECHO.
-	start "Install GIMP..." /wait %PathToGIMP% /SILENT /NORESTART /ALLUSERS
+echo.
+echo Install GIMP...
+echo.
+
+start "Install GIMP..." /wait %PathToGIMP% /SILENT /NORESTART /ALLUSERS
 
 :: Удалим созданную автоматически ссылку и создадим  правильную ссылку на GIMP
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\GIMP 2.10.38.lnk"
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js"  "AllUsersDesktop"  "" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "C:\Users\Softium\Documents" "GIMP" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "Графический редактор GIMP"
+
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "AllUsersDesktop" "\GIMP 2.10.38.lnk"  >nul 2>&1
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js"  "AllUsersDesktop"  "" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "C:\Users\Softium\Documents" "GIMP" "%ProgramFiles%\GIMP 2\bin\gimp-2.10.exe" "Графический редактор GIMP"  >nul 2>&1
 
 :ENDSUB
 

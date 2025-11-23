@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -45,6 +45,7 @@ echo.
 :: включение службы времени
 
 echo Включаем/Запускаем службу времени
+echo.
 
 :: Установить автоматический запуск
 sc config w32time start=auto  >nul 2>&1
@@ -53,6 +54,7 @@ sc config w32time start=auto  >nul 2>&1
 net start w32time  >nul 2>&1
 
 echo Указываем адреса NTP-серверов
+echo.
 
 :: Укажем несколько NTP-серверов
 w32tm /config /manualpeerlist:"0.ru.pool.ntp.org,0x9 1.ru.pool.ntp.org,0x9" /syncfromflags:manual /update /reliable:yes  >nul 2>&1
@@ -66,7 +68,7 @@ net start w32time >nul 2>&1
 
 echo Производим синхронизацию времени
 :: Принудительная синхронизация
-w32tm /resync  >nul 2>&1
+w32tm /resync >nul 2>&1
 
 echo Настройка параметров службы времени завершена.
 echo.

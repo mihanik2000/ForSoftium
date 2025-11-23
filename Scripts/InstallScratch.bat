@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -46,21 +46,18 @@ set PathToAdobeAIR="%ScriptPath%Distr\noarch\AdobeAIR.exe"
 
 set PathToScratch="%ScriptPath%Distr\noarch\Scratch-461.exe"
 
-ECHO.
-ECHO Install AdobeAIR...
-ECHO.
+echo.
+echo Устанавливаем AdobeAIR...
+echo.
 	start "Title" /wait %PathToAdobeAIR% -silent
 
-ECHO.
-ECHO Install Scratch Offline...
-ECHO.
-	start "Title" /wait %PathToScratch% -silent
+echo.
+echo Install Scratch Offline...
+echo.
+
+start "Title" /wait %PathToScratch% -silent
  
-	If exist "%SystemDrive%\Program Files (x86)" (
-		cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles(x86)%\Scratch 2\Scratch 2.exe" "C:\Users\Softium\Documents" "Scratch 2" "%ProgramFiles(x86)%\Scratch 2\Scratch 2.exe" "Офлайн-редактор Scratch 2.0"
-	 ) else (
-		cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Scratch 2\Scratch 2.exe" "C:\Users\Softium\Documents" "Scratch 2" "%ProgramFiles%\Scratch 2\Scratch 2.exe" "Офлайн-редактор Scratch 2.0"
-	)
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles(x86)%\Scratch 2\Scratch 2.exe" "C:\Users\Softium\Documents" "Scratch 2" "%ProgramFiles(x86)%\Scratch 2\Scratch 2.exe" "Офлайн-редактор Scratch 2.0"  >nul 2>&1
 
 :ENDSUB
 

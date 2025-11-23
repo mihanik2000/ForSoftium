@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -63,7 +63,7 @@ SET /p myvar= < ver.txt
 cd %myvar%\Installer
 setup.exe -uninstall -system-level -verbose-logging -force-uninstall
 
-ECHO Ждём пока закончится удаление Edge Chromium 10 секунд...
+echo Ждём пока закончится удаление Edge Chromium 10 секунд...
 timeout 10 /nobreak
 
 :: Запрещаем обновляться до Edge Chromium

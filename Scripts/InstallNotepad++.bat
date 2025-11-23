@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -42,20 +42,17 @@ if NOT defined ScriptPath (
 :: Устанавливаем Notepad++
 :: ****************************************************************************************
 
-set PathToNotepad="%ScriptPath%Distr\x32\npp.8.6.9.Installer.exe"
 set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.8.6.9.Installer.x64.exe"
 
-ECHO.
-ECHO Install Notepad++...
-ECHO.
-	If exist "%SystemDrive%\Program Files (x86)" (
-		start "Title" /wait %PathToNotepad-x64% /S
-	 ) else (
- 		start "Title" /wait %PathToNotepad% /S
- 	)
+echo.
+echo Устанавливаем Notepad++...
+echo.
+
+start "Title" /wait %PathToNotepad-x64% /S
 
 :: Создадим  ссылку на Notepad
-	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Notepad++\notepad++.exe" "C:\Users\Softium\Documents" "Notepad++" "%ProgramFiles%\Notepad++\notepad++.exe" "Текстовый редактор Notepad++"
+
+cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\Notepad++\notepad++.exe" "C:\Users\Softium\Documents" "Notepad++" "%ProgramFiles%\Notepad++\notepad++.exe" "Текстовый редактор Notepad++"  >nul 2>&1
 
 :ENDSUB
 

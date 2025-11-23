@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -42,15 +42,13 @@ if NOT defined ScriptPath (
 :: Устанавливаем ActivePresenter
 :: ****************************************************************************************
 
-set PathToconstruct="%ScriptPath%Distr\noarch\ActivePresenter_v9.1.4_setup.exe"
+set PathToActivePresenter="%ScriptPath%Distr\noarch\ActivePresenter_v9.1.4_setup.exe"
 
-ECHO.
-ECHO Install ActivePresenter...
-ECHO.
-	start "ActivePresenter" /wait %PathToconstruct% /VERYSILENT /NORESTART
+echo.
+echo Устанавливаем ActivePresenter...
+echo.
 
-:: Создадим  ссылку на ActivePresenter
-::	cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\lnk_create.js" "AllUsersDesktop"  "" "%ProgramFiles%\ATOMI\ActivePresenter\ActivePresenter.exe" "%ProgramFiles%\ATOMI\ActivePresenter" "ActivePresenter" "%ProgramFiles%\ATOMI\ActivePresenter\ActivePresenter.exe" "ActivePresenter"
+start "ActivePresenter" /wait %PathToActivePresenter% /VERYSILENT /NORESTART
 
 :ENDSUB
 

@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -42,26 +42,25 @@ if NOT defined ScriptPath (
 :: Устанавливаем wget
 :: ****************************************************************************************
 
-set PathToWget="%ScriptPath%Distr\x32\wget.exe"
 set PathToWget-x64="%ScriptPath%Distr\x64\wget.exe"
 
-ECHO.
-ECHO Install wget...
-ECHO.
-mkdir  "%ProgramFiles%\wget\"
-	If exist "%SystemDrive%\Program Files (x86)" (
-		copy /y %PathToWget-x64% "%ProgramFiles%\wget\wget.exe"
-	) else (
-		copy /y %PathToWget% "%ProgramFiles%\wget\wget.exe"
-	)
+echo.
+echo Устанавливаем wget...
+echo.
+
+mkdir  "%ProgramFiles%\wget\" >nul 2>&1
+
+copy /y %PathToWget-x64% "%ProgramFiles%\wget\wget.exe" >nul 2>&1
 
 :: Добавим путь к wget в path
-	setx PATH "%ProgramFiles%\wget\;%Path%"
-	PATH=%ProgramFiles%\wget\;%Path%
+
+setx PATH "%ProgramFiles%\wget\;%Path%" >nul 2>&1
+PATH=%ProgramFiles%\wget\;%Path% >nul 2>&1
 
 :: Добавляем утилиту wget.exe в исключения брандмауера Windows
-	netsh advfirewall firewall del rule name="wget"
-	netsh advfirewall firewall add rule name="wget" dir=in action=allow program="%ProgramFiles%\wget\wget.exe"
+
+netsh advfirewall firewall del rule name="wget" >nul 2>&1
+netsh advfirewall firewall add rule name="wget" dir=in action=allow program="%ProgramFiles%\wget\wget.exe" >nul 2>&1
 
 :ENDSUB
 

@@ -25,9 +25,9 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO You need administrator rights to run!
-	ECHO.
+	echo.
+	echo You need administrator rights to run!
+	echo.
 	GOTO ENDSUB
 )
 
@@ -36,9 +36,9 @@ exit /b
 
 :ENDSUB
 
-ECHO.
+echo.
 echo Done!
-ECHO.
+echo.
 
 timeout 3 >> nul
 

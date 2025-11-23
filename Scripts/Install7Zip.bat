@@ -25,16 +25,16 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 )
 
 IF NOT %HasAdminRights%==1 (
-	ECHO.
-	ECHO Вам нужны права администратора для запуска этого скрипта!
-	ECHO.
+	echo.
+	echo Вам нужны права администратора для запуска этого скрипта!
+	echo.
 	GOTO ENDSUB
 )
 
 if NOT defined ScriptPath (
-	ECHO.
-	ECHO Не определена переменная ScriptPath
-	ECHO.
+	echo.
+	echo Не определена переменная ScriptPath
+	echo.
 	GOTO ENDSUB
 )
 
@@ -42,17 +42,14 @@ if NOT defined ScriptPath (
 :: Устанавливаем программу-архиватор 7zip
 :: ****************************************************************************************
 
-set PathTo7Zip="%ScriptPath%Distr\x32\7z2407.msi"
-set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z2407-x64.msi"
+set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z2501-x64.msi"
 
-ECHO.
-ECHO Install 7-Zip...
-ECHO.
- If exist "%SystemDrive%\Program Files (x86)" (
-		start "Title" /wait %PathTo7Zip-x64% /passive /norestart
-	) else (
-		start "Title" /wait %PathTo7Zip% /passive /norestart
-	)
+echo.
+echo Устанавливаем 7-Zip...
+echo.
+
+start "Title" /wait %PathTo7Zip-x64% /passive /norestart
+
 
 :ENDSUB
 
