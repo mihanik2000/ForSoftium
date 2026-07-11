@@ -39,18 +39,18 @@ if NOT defined ScriptPath (
 )
 
 :: ****************************************************************************************
-:: Устанавливаем Scratch 3
+:: Устанавливаем Yandex Browser
 :: ****************************************************************************************
 
-set "PathToScratchDesktop=%ScriptPath%Distr\noarch\Scratch 3.29.1 Setup.exe"
+set "PathToYandexBrowser-x64=%ScriptPath%Distr\x64\YandexBrowser.msi"
 
 echo.
 echo ========================================
-echo Устанавливаем Scratch Desktop
+echo Устанавливаем Yandex Browser...
 echo ========================================
 echo.
 
-start "Title" /wait "%PathToScratchDesktop%" /S /allusers
+msiexec.exe /i "%PathToYandexBrowser-x64%" /passive /norestart
 
 :ENDSUB
 

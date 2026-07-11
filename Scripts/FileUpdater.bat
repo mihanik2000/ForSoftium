@@ -26,7 +26,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.

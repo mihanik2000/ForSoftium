@@ -1,10 +1,8 @@
-this is version 1.8.4
+this is version 1.8.2
 
 Release Notes:
 ==============
 
-Version 1.8.4   - implements new method for .pdf and http/https. requires wmic
-Version 1.8.3	- detects AppDefaultHashRotation, supports additional protected extensions
 Version 1.8.2	- fixes "del" command not working properly
 Version 1.8.1	- addresses the issue that new extensions did not apply
 Version 1.8	- allows http, https and .pdf changes with active UCPD.sys

@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,13 +42,15 @@ if NOT defined ScriptPath (
 :: Устанавливаем GIMP
 :: ****************************************************************************************
 
-set PathToGIMP="%ScriptPath%Distr\noarch\gimp-2.10.38-setup.exe"
+set "PathToGIMP=%ScriptPath%Distr\noarch\gimp-2.10.38-setup.exe"
 
 echo.
-echo Install GIMP...
+echo ========================================
+echo Устанавливаем GIMP
+echo ========================================
 echo.
 
-start "Install GIMP..." /wait %PathToGIMP% /SILENT /NORESTART /ALLUSERS
+start "Install GIMP..." /wait "%PathToGIMP%" /SILENT /NORESTART /ALLUSERS
 
 :: Удалим созданную автоматически ссылку и создадим  правильную ссылку на GIMP
 

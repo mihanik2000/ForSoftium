@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,13 +42,15 @@ if NOT defined ScriptPath (
 :: Устанавливаем Notepad++
 :: ****************************************************************************************
 
-set PathToNotepad-x64="%ScriptPath%Distr\x64\npp.8.6.9.Installer.x64.exe"
+set "PathToNotepad-x64=%ScriptPath%Distr\x64\npp.8.6.9.Installer.x64.exe"
 
 echo.
-echo Устанавливаем Notepad++...
+echo ========================================
+echo Устанавливаем Notepad++
+echo ========================================
 echo.
 
-start "Title" /wait %PathToNotepad-x64% /S
+start "Title" /wait "%PathToNotepad-x64%" /S
 
 :: Создадим  ссылку на Notepad
 

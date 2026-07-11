@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -47,7 +47,10 @@ set PathToBGInfo="%ScriptPath%Distr\noarch\BGInfo\*"
 :: BGInfo - Программа для выведения на рабочий стол технической информации о ПК
 :: Сайт разработчика: https://learn.microsoft.com/en-us/sysinternals/downloads/bginfo
 
-echo Install BGInfo...
+echo.
+echo ========================================
+echo Устанавливаем BGInfo
+echo ========================================
 echo.
 
 mkdir  "%ProgramFiles%\BGInfo\" >nul 2>&1

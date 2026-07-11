@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,15 +42,17 @@ if NOT defined ScriptPath (
 :: Устанавливаем Snap
 :: ****************************************************************************************
 
-set PathTosnap="%ScriptPath%Distr\noarch\Snap-9.0.5.zip"
+echo.
+echo ========================================
+echo Устанавливаем Snap
+echo ========================================
+echo.
 
-echo.
-echo Install Snap...
-echo.
+set "PathTosnap=%ScriptPath%Distr\noarch\Snap-9.0.5.zip"
 
 mkdir "%ProgramFiles%\SNAP" >nul 2>&1
 
-"%ProgramFiles%\7-Zip\7z.exe" x -y  %PathTosnap% -o"%ProgramFiles%\SNAP" >nul 2>&1
+"%ProgramFiles%\7-Zip\7z.exe" x -y "%PathTosnap%" -o"%ProgramFiles%\SNAP" >nul 2>&1
 
 :: Создадим  ссылку на Snap
 

@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,14 +42,17 @@ if NOT defined ScriptPath (
 :: Устанавливаем Kodu
 :: ****************************************************************************************
 
-set PathToxnafx="%ScriptPath%Distr\noarch\xnafx40_redist.msi"
-set PathToKodu="%ScriptPath%Distr\noarch\KoduSetup_1.6.18.0.msi"
+set "PathToxnafx=%ScriptPath%Distr\noarch\xnafx40_redist.msi"
+set "PathToKodu=%ScriptPath%Distr\noarch\KoduSetup_1.6.18.0.msi"
 
 echo.
-echo Install Kodu...
+echo ========================================
+echo Устанавливаем Kodu
+echo ========================================
 echo.
-	start "Title" /wait %PathToxnafx% /passive /norestart
-	start "Title" /wait %PathToKodu% /passive /norestart
+
+	msiexec.exe /i "%PathToxnafx%" /passive /norestart
+	msiexec.exe /i "%PathToKodu%" /passive /norestart
 
 :: Удалим лишнюю ссылку Kodu
 

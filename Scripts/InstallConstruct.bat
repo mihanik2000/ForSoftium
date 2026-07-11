@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,13 +42,15 @@ if NOT defined ScriptPath (
 :: Устанавливаем Construct
 :: ****************************************************************************************
 
-set PathToconstruct="%ScriptPath%Distr\noarch\construct2-r280-setup.exe"
+set "PathToconstruct=%ScriptPath%Distr\noarch\construct2-r280-setup.exe"
 
 echo.
-echo Install Construct...
+echo ========================================
+echo Устанавливаем Construct
+echo ========================================
 echo.
 
-start "Construct" /wait %PathToconstruct% /verysilent
+start "Construct" /wait "%PathToconstruct%" /verysilent
 
 :: Создадим  ссылку на construct2
 

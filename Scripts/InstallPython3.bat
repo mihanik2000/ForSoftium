@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,12 +42,15 @@ if NOT defined ScriptPath (
 :: Устанавливаем Python 3
 :: ****************************************************************************************
 
-set PathToPython3="%ScriptPath%Distr\noarch\python-3.11.5.exe"
+set "PathToPython3=%ScriptPath%Distr\noarch\python-3.11.5.exe"
 
 echo.
-echo Install Python 3...
+echo ========================================
+echo Устанавливаем Python 3
+echo ========================================
 echo.
-	start "Title" /wait %PathToPython3% /quiet InstallAllUsers=1 PrependPath=1 DefaultAllUsersTargetDir="C:\Python3" AssociateFiles=1 Shortcuts=1
+
+	start "Title" /wait "%PathToPython3%" /quiet InstallAllUsers=1 PrependPath=1 DefaultAllUsersTargetDir="C:\Python3" AssociateFiles=1 Shortcuts=1
 	
 	PATH=C:\Python3\;C:\Python3\Scripts;%Path%
 	python.exe -m pip install --upgrade pip

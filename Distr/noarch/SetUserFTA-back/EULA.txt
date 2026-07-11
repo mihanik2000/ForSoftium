@@ -1,6 +1,6 @@
 END USER LICENSE AGREEMENT (EULA)
 
-SetUserFTA by Kolbicz IT - https://setuserfta.com, 2025
+SetUserFTA by Christoph Kolbicz - https://kolbi.cz, 2024
 
 This End-User License Agreement (EULA) is a legal agreement between you and the mentioned author of this Software for the software product identified above, which includes computer software and may include associated media, printed materials, and "online" or electronic documentation ("Software Product").
 

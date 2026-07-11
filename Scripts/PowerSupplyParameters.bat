@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -35,22 +35,22 @@ IF NOT %HasAdminRights%==1 (
 :: Настроим дополнительные параметры электропитания
 :: ****************************************************************************************
 
-REM :: Никогда не отключать дисплей при питании от сети
-REM powercfg /CHANGE -monitor-timeout-dc 0
+:: :: Никогда не отключать дисплей при питании от сети
+:: powercfg /CHANGE -monitor-timeout-dc 0
 
-REM :: Никогда не отключать диск при питании от сети
-REM powercfg /CHANGE -disk-timeout-dc 0
+:: :: Никогда не отключать диск при питании от сети
+:: powercfg /CHANGE -disk-timeout-dc 0
 
-REM :: Никогда не уходить в режим ожидания при питании от сети
-REM powercfg /CHANGE -standby-timeout-dc 0
+:: :: Никогда не уходить в режим ожидания при питании от сети
+:: powercfg /CHANGE -standby-timeout-dc 0
 
-REM :: Никогда не уходить в режим сна при питании от сети
-REM powercfg /CHANGE -hibernate-timeout-dc 0
+:: :: Никогда не уходить в режим сна при питании от сети
+:: powercfg /CHANGE -hibernate-timeout-dc 0
 
-REM :: отключаем спящий режим
-REM powercfg -hibernate off
-REM reg ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power /v HiberFileSizePercent /t REG_DWORD /d 0 /f
-REM reg ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0 /f
+:: :: отключаем спящий режим
+:: powercfg -hibernate off
+:: reg ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power /v HiberFileSizePercent /t REG_DWORD /d 0 /f
+:: reg ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power /v HibernateEnabled /t REG_DWORD /d 0 /f
 
 echo Настройка параметров электропитания...
 echo.

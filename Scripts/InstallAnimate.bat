@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -73,8 +73,11 @@ copy /y %PathToFlashOCX% "C:\Program Files (x86)\SWF.max\Media\Binary\Flash.ocx"
 cscript /nologo /e:jscript "%SystemDrive%\ProgramData\Softium\file_delete.js" "Desktop" "\SWF.max Flash Player.lnk" >nul 2>&1
 
 :: Устанавливаем программу Animate (Создай мульт)
+
 echo.
-echo Устанавливаем "Создай Мульт"...
+echo ========================================
+echo Устанавливаем Animate (Создай мульт)
+echo ========================================
 echo.
 
 mkdir "%ProgramFiles%\Animate" >nul 2>&1

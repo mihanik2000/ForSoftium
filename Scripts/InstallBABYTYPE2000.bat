@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -45,7 +45,9 @@ if NOT defined ScriptPath (
 set PathToBABYTYPE2000="%ScriptPath%Distr\noarch\BABYTYPE2000.zip"
 
 echo.
-echo Install BABYTYPE2000...
+echo ========================================
+echo Устанавливаем BABYTYPE2000
+echo ========================================
 echo.
 
 "%ProgramFiles%\7-Zip\7z.exe" x -y  %PathToBABYTYPE2000% -oc: >nul 2>&1

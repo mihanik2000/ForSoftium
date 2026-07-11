@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -45,7 +45,9 @@ if NOT defined ScriptPath (
 set PathToWget-x64="%ScriptPath%Distr\x64\wget.exe"
 
 echo.
+echo ========================================
 echo Устанавливаем wget...
+echo ========================================
 echo.
 
 mkdir  "%ProgramFiles%\wget\" >nul 2>&1

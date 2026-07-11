@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,13 +42,13 @@ if NOT defined ScriptPath (
 :: Устанавливаем ActivePresenter
 :: ****************************************************************************************
 
-set PathToActivePresenter="%ScriptPath%Distr\noarch\ActivePresenter_v9.1.4_setup.exe"
+set "PathToActivePresenter=%ScriptPath%Distr\noarch\ActivePresenter_v9.1.4_setup.exe"
 
 echo.
 echo Устанавливаем ActivePresenter...
 echo.
 
-start "ActivePresenter" /wait %PathToActivePresenter% /VERYSILENT /NORESTART
+start "ActivePresenter" /wait "%PathToActivePresenter%" /VERYSILENT /NORESTART
 
 :ENDSUB
 

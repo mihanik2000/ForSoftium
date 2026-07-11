@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,14 +42,15 @@ if NOT defined ScriptPath (
 :: Устанавливаем программу-архиватор 7zip
 :: ****************************************************************************************
 
-set PathTo7Zip-x64="%ScriptPath%Distr\x64\7z2501-x64.msi"
+set "PathTo7Zip-x64=%ScriptPath%Distr\x64\7z2501-x64.msi"
 
 echo.
-echo Устанавливаем 7-Zip...
+echo ========================================
+echo  Установка 7-Zip
+echo ========================================
 echo.
 
-start "Title" /wait %PathTo7Zip-x64% /passive /norestart
-
+msiexec.exe /i "%PathTo7Zip-x64%" /passive /norestart
 
 :ENDSUB
 

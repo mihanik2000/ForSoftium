@@ -24,7 +24,7 @@ FOR /F %%i IN ('WHOAMI /PRIV /NH') DO (
 	IF "%%i"=="SeTakeOwnershipPrivilege" SET HasAdminRights=1
 )
 
-IF NOT %HasAdminRights%==1 (
+IF /I NOT "%HasAdminRights%"=="1" (
 	echo.
 	echo Вам нужны права администратора для запуска этого скрипта!
 	echo.
@@ -42,19 +42,21 @@ if NOT defined ScriptPath (
 :: Устанавливаем SetuserFTA
 :: ****************************************************************************************
 
-set PathToSetuserFTA="%ScriptPath%Distr\noarch\SetUserFTA\*"
+echo.
+echo ========================================
+echo Устанавливаем SetuserFTA
+echo ========================================
+echo.
+
+set "PathToSetuserFTA=%ScriptPath%Distr\noarch\SetUserFTA\*"
 
 :: SetuserFTA - Программа для управления защищёнными настройками Windows 10.
 :: Сайт разработчика: http://kolbi.cz/blog/2017/10/25/setuserfta-userchoice-hash-defeated-set-file-type-associations-per-user/
 :: По русски: https://ru.desktopsupportpanel.com/izmenit-prilozheniya-po-umolchaniyu-brauzer-ili-sopostavleni
 
-echo.
-echo Устанавливаем SetuserFTA...
-echo.
-
 mkdir  "%ProgramFiles%\SetuserFTA\" >nul 2>&1
 
-copy /y %PathToSetuserFTA% "%ProgramFiles%\SetuserFTA\" >nul 2>&1
+copy /y "%PathToSetuserFTA%" "%ProgramFiles%\SetuserFTA\" >nul 2>&1
 
 :: подробности тут: https://kolbi.cz/blog/2024/04/03/userchoice-protection-driver-ucpd-sys/
 
